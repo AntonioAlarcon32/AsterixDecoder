@@ -1,0 +1,10 @@
+C:\Users\antonioalarcon\source\repos\AsterixDecoder\testing\bin\Debug\testing.exe.config
+C:\Users\antonioalarcon\source\repos\AsterixDecoder\testing\bin\Debug\testing.exe
+C:\Users\antonioalarcon\source\repos\AsterixDecoder\testing\bin\Debug\testing.pdb
+C:\Users\antonioalarcon\source\repos\AsterixDecoder\testing\bin\Debug\ClassLibrary.dll
+C:\Users\antonioalarcon\source\repos\AsterixDecoder\testing\bin\Debug\ClassLibrary.pdb
+C:\Users\antonioalarcon\source\repos\AsterixDecoder\testing\obj\Debug\testing.csprojAssemblyReference.cache
+C:\Users\antonioalarcon\source\repos\AsterixDecoder\testing\obj\Debug\testing.csproj.CoreCompileInputs.cache
+C:\Users\antonioalarcon\source\repos\AsterixDecoder\testing\obj\Debug\testing.csproj.CopyComplete
+C:\Users\antonioalarcon\source\repos\AsterixDecoder\testing\obj\Debug\testing.exe
+C:\Users\antonioalarcon\source\repos\AsterixDecoder\testing\obj\Debug\testing.pdb
