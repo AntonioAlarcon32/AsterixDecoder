@@ -34,7 +34,10 @@ namespace ClassLibrary
                         if (Convert.ToInt16(category) == 10) {
                             CAT10 dataBlock = new CAT10(length);
                             byte[] data = fileReader.ReadBytes(length - 3);
+                            dataBlock.SetMessage(data);
+                            dataBlock.GetFSPEC(data);
                             this.cat10DataBlocks.Add(dataBlock);
+                        
                         }
                         else { 
 
