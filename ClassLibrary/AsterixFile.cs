@@ -22,6 +22,7 @@ namespace ClassLibrary
             {
                 try
                 {
+                    int c = 1;
                     this.fileReader = new BinaryReader(File.Open(path, FileMode.Open));
 
                     while (fileReader.BaseStream.Position != fileReader.BaseStream.Length) {
@@ -32,8 +33,9 @@ namespace ClassLibrary
                             Array.Reverse(lengthBytes);
                         int length = BitConverter.ToInt16(lengthBytes, 0);
                         if (Convert.ToInt16(category) == 10) {
-                            CAT10 dataBlock = new CAT10(length);
+                            
                             byte[] data = fileReader.ReadBytes(length - 3);
+                            CAT10 dataBlock = new CAT10(length,data);
                             this.cat10DataBlocks.Add(dataBlock);
                         }
                         else { 

@@ -9,11 +9,14 @@ namespace ClassLibrary
     public class CAT10
     {
         int length;
+        byte[] data;
 
 
-        public CAT10(int lenght)
+        public CAT10(int lenght,byte[] data)
         {
             this.length = lenght;
+            this.data=data;
+
         }
     }
 
