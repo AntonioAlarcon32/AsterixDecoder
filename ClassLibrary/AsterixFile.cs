@@ -33,9 +33,10 @@ namespace ClassLibrary
                         int length = BitConverter.ToInt16(lengthBytes, 0);
                         if (Convert.ToInt16(category) == 10) {
                             CAT10 dataBlock = new CAT10(length);
-                            byte[] data = fileReader.ReadBytes(length - 3);
+                            List<byte> data = fileReader.ReadBytes(length - 3).ToList<byte>();
                             dataBlock.SetMessage(data);
                             dataBlock.GetFSPEC(data);
+                            dataBlock.fullDecode();
                             this.cat10DataBlocks.Add(dataBlock);
                         
                         }
@@ -55,7 +56,6 @@ namespace ClassLibrary
                 return -2;
             }
         }
-
         public List<CAT10> GetCAT10Blocks() {
             return this.cat10DataBlocks;
         }

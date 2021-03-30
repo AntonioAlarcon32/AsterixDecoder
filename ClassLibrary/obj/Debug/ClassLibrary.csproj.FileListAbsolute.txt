@@ -4,3 +4,9 @@ C:\Users\antonioalarcon\source\repos\AsterixDecoder\ClassLibrary\obj\Debug\Class
 C:\Users\antonioalarcon\source\repos\AsterixDecoder\ClassLibrary\obj\Debug\ClassLibrary.csproj.CoreCompileInputs.cache
 C:\Users\antonioalarcon\source\repos\AsterixDecoder\ClassLibrary\obj\Debug\ClassLibrary.dll
 C:\Users\antonioalarcon\source\repos\AsterixDecoder\ClassLibrary\obj\Debug\ClassLibrary.pdb
+\\Mac\Home\Desktop\Windows\AsterixDecoder\ClassLibrary\bin\Debug\ClassLibrary.dll
+\\Mac\Home\Desktop\Windows\AsterixDecoder\ClassLibrary\bin\Debug\ClassLibrary.pdb
+\\Mac\Home\Desktop\Windows\AsterixDecoder\ClassLibrary\obj\Debug\ClassLibrary.csprojAssemblyReference.cache
+\\Mac\Home\Desktop\Windows\AsterixDecoder\ClassLibrary\obj\Debug\ClassLibrary.csproj.CoreCompileInputs.cache
+\\Mac\Home\Desktop\Windows\AsterixDecoder\ClassLibrary\obj\Debug\ClassLibrary.dll
+\\Mac\Home\Desktop\Windows\AsterixDecoder\ClassLibrary\obj\Debug\ClassLibrary.pdb
