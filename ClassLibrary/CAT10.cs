@@ -28,6 +28,10 @@ namespace ClassLibrary
         string loopStatus;
         string aircraftType;
         string specialPosition;
+        int polarRho;
+        double polarTheta;
+        double cartesianX;
+        double cartesianY;
 
 
         public CAT10(int lenght)
@@ -51,6 +55,8 @@ namespace ClassLibrary
             this.loopStatus = "N/A";
             this.aircraftType = "N/A";
             this.specialPosition = "N/A";
+            this.polarRho = -1;
+            this.polarTheta = -1;
 
         }
 
@@ -122,8 +128,56 @@ namespace ClassLibrary
                     byte[] data = dataItem.ToArray();
                     DecodeTargetReportDescriptor(data);
                 }
+                if (boolFSPEC[4] == true) // Time of Day
+                {
+                    byte[] dataItem = new byte[3];
+                    dataItem[0] = message[0];
+                    dataItem[1] = message[1];
+                    dataItem[2] = message[2];
+                    message.RemoveAt(0);
+                    message.RemoveAt(0);
+                    message.RemoveAt(0);
+                    DecodeTimeOfDay(dataItem);
+                }
+                if (boolFSPEC[3] == true) // Position in WGS84 Coordinates
+                {
+                    int i = 0;
+                    byte[] dataItem = new byte[8];
 
+                    while (i < 8)
+                    {
+                        dataItem[i] = message[0];
+                        message.RemoveAt(0);
+                        i++;
+                    }
+                    DecodeWGS84Coordinates(dataItem);
+                }
+                if (boolFSPEC[2] == true) // Position in polar coordinates
+                {
+                    int i = 0;
+                    byte[] dataItem = new byte[4];
 
+                    while (i < 4)
+                    {
+                        dataItem[i] = message[0];
+                        message.RemoveAt(0);
+                        i++;
+                    }
+                    DecodePolarCoordinatesPosition(dataItem);
+                }
+                if (boolFSPEC[1] == true) // Position in Cartesian coordinates
+                {
+                    int i = 0;
+                    byte[] dataItem = new byte[4];
+
+                    while (i < 4)
+                    {
+                        dataItem[i] = message[0];
+                        message.RemoveAt(0);
+                        i++;
+                    }
+                    DecodeCartesianCoordinatesPosition(dataItem);
+                }
             }
         }
 
@@ -307,5 +361,55 @@ namespace ClassLibrary
                     this.specialPosition = "Special Position Identification";
             }
         }
+
+
+        public void DecodeTimeOfDay(byte[] dataItem)
+        {
+            int c = 0;
+        }
+
+        public void DecodeWGS84Coordinates(byte[] dataItem)
+        {
+            int c = 0;
+        }
+
+        public void DecodePolarCoordinatesPosition(byte[] dataItem)
+        {
+            int firstByte = dataItem[0] * 256;
+            int secondByte = dataItem[1] * 1;
+            this.polarRho = firstByte + secondByte;
+            int thirdByte = dataItem[2] * 256;
+            int fourthByte = dataItem[3] * 1;
+            double resolution = (360 / Math.Pow(2, 16));
+            this.polarTheta = (thirdByte + fourthByte) *resolution;
+        }
+        public void DecodeCartesianCoordinatesPosition(byte[] dataItem)
+        {
+            byte mask = 127;
+            bool negative = false;
+            if (dataItem[0] > 127)
+                negative = true;
+            byte noSign = (byte) (dataItem[0] & mask);
+            int firstByte = noSign * 256;
+            int secondByte = dataItem[1] * 1;
+            double x = firstByte + secondByte;
+            if (negative)
+                x = x - Math.Pow(2,15);
+            this.cartesianX = x;
+
+            negative = false;
+            if (dataItem[2] > 127)
+                negative = true;
+            noSign = (byte)(dataItem[2] & mask);
+            int thirdByte = noSign * 256;
+            int fourthByte = dataItem[3] * 1;
+            double y = thirdByte + fourthByte;
+            if (negative)
+                y = y - Math.Pow(2, 15);
+            this.cartesianY = y;
+        }
+
     }
+
+    
 }
