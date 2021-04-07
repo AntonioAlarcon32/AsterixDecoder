@@ -22,7 +22,7 @@ namespace ClassLibrary
             return instance;
         }
 
-        public byte[] GetDataItem(List<byte> message, int length)
+        public byte[] GetFixedLengthDataItem(List<byte> message, int length)
         {
             int i = 0;
             byte[] dataItem = new byte[length];

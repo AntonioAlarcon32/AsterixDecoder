@@ -105,18 +105,12 @@ namespace ClassLibrary
             {
                 if (boolFSPEC[7] == true) // Data Source Identifier
                 {
-                    byte[] dataItem = new byte[2];
-                    dataItem[0] = message[0];
-                    dataItem[1] = message[1];
-                    message.RemoveAt(0);
-                    message.RemoveAt(0);
+                    byte[] dataItem = utilities.GetFixedLengthDataItem(message, 2);
                     DecodeDataSourceIdentifier(dataItem);
                 }
                 if (boolFSPEC[6] == true) // Message Type
                 {
-                    byte[] dataItem = new byte[1];
-                    dataItem[0] = message[0];
-                    message.RemoveAt(0);
+                    byte[] dataItem = utilities.GetFixedLengthDataItem(message, 1);
                     DecodeMessageType(dataItem);
                 }
                 if (boolFSPEC[5] == true) // Target Report Descriptor
@@ -140,52 +134,22 @@ namespace ClassLibrary
                 }
                 if (boolFSPEC[4] == true) // Time of Day
                 {
-                    byte[] dataItem = new byte[3];
-                    dataItem[0] = message[0];
-                    dataItem[1] = message[1];
-                    dataItem[2] = message[2];
-                    message.RemoveAt(0);
-                    message.RemoveAt(0);
-                    message.RemoveAt(0);
+                    byte[] dataItem = utilities.GetFixedLengthDataItem(message, 3);
                     DecodeTimeOfDay(dataItem);
                 }
                 if (boolFSPEC[3] == true) // Position in WGS84 Coordinates
                 {
-                    int i = 0;
-                    byte[] dataItem = new byte[8];
-
-                    while (i < 8)
-                    {
-                        dataItem[i] = message[0];
-                        message.RemoveAt(0);
-                        i++;
-                    }
+                    byte[] dataItem = utilities.GetFixedLengthDataItem(message, 8);
                     DecodeWGS84Coordinates(dataItem);
                 }
                 if (boolFSPEC[2] == true) // Position in polar coordinates
                 {
-                    int i = 0;
-                    byte[] dataItem = new byte[4];
-
-                    while (i < 4)
-                    {
-                        dataItem[i] = message[0];
-                        message.RemoveAt(0);
-                        i++;
-                    }
+                    byte[] dataItem = utilities.GetFixedLengthDataItem(message, 4);
                     DecodePolarCoordinatesPosition(dataItem);
                 }
                 if (boolFSPEC[1] == true) // Position in Cartesian coordinates
                 {
-                    int i = 0;
-                    byte[] dataItem = new byte[4];
-
-                    while (i < 4)
-                    {
-                        dataItem[i] = message[0];
-                        message.RemoveAt(0);
-                        i++;
-                    }
+                    byte[] dataItem = utilities.GetFixedLengthDataItem(message, 4);
                     DecodeCartesianCoordinatesPosition(dataItem);
                 }
 
@@ -194,34 +158,13 @@ namespace ClassLibrary
             {
                 if (boolFSPEC[15] == true)//Calculated Track Velocity in Polar Co-ordinates
                 {
-                    int i = 0;
-                    byte[] dataItem = new byte[4];
-
-                    while (i < 4)
-                    {
-                        dataItem[i] = message[0];
-                        message.RemoveAt(0);
-                        i++;
-                    }
-
+                    byte[] dataItem = utilities.GetFixedLengthDataItem(message, 4);
                     DecodeCalculatedTrackVelocityInPolarCoordinates(dataItem);
-
                 }
                 if (boolFSPEC[14] == true)//Calculated Track Velocity in Cartesian Coord.
                 {
-                    int i = 0;
-                    byte[] dataItem = new byte[4];
-
-                    while (i < 4)
-                    {
-                        dataItem[i] = message[0];
-                        message.RemoveAt(0);
-                        i++;
-                    }
-
+                    byte[] dataItem = utilities.GetFixedLengthDataItem(message, 4);
                     DecodeCalculatedTrackVelocityInCartesianCoordinates(dataItem);
-
-
                 }
 
                 if (boolFSPEC[13] == true)//Track Number
