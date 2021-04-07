@@ -32,6 +32,11 @@ namespace ClassLibrary
         double polarTheta;
         double cartesianX;
         double cartesianY;
+        double GroundspeedInPolar;
+        double TrackAngleInPolar;
+        double GroundspeedInCartesian;
+        double TrackAngleInCartesian;
+
 
 
         public CAT10(int lenght)
@@ -57,6 +62,15 @@ namespace ClassLibrary
             this.specialPosition = "N/A";
             this.polarRho = -1;
             this.polarTheta = -1;
+            this.GroundspeedInPolar = -1;
+            this.TrackAngleInPolar = -1;
+            this.GroundspeedInCartesian = -1;
+            this.TrackAngleInCartesian = -1;
+
+
+
+
+
 
         }
 
@@ -178,10 +192,71 @@ namespace ClassLibrary
                     }
                     DecodeCartesianCoordinatesPosition(dataItem);
                 }
+                if (boolFSPEC[15] == true)//Calculated Track Velocity in Polar Co-ordinates
+                {
+                    int i = 0;
+                    byte[] dataItem = new byte[4];
+
+                    while (i < 4)
+                    {
+                        dataItem[i] = message[0];
+                        message.RemoveAt(0);
+                        i++;
+                    }
+
+                    DecodeCalculatedTrackVelocityinPolarCoordinates(dataItem);
+
+                }
+                if (boolFSPEC[14] == true)//Calculated Track Velocity in Cartesian Coord.
+                {
+                    int i = 0;
+                    byte[] dataItem = new byte[4];
+
+                    while (i < 4)
+                    {
+                        dataItem[i] = message[0];
+                        message.RemoveAt(0);
+                        i++;
+                    }
+
+                    DecodeCalculatedTrackVelocityinCartesianCoordinates(dataItem);
+
+
+                }
+
+                if (boolFSPEC[13] == true)//Track Number
+                {
+
+                }
+
+                if (boolFSPEC[12] == true)//Track Status
+                {
+
+                }
+
+                if (boolFSPEC[11] == true)//Mode-3/A Code in Octal Representation
+                {
+
+                }
+
+                if (boolFSPEC[10] == true)//Target Address
+                {
+
+                }
+
+                if (boolFSPEC[9] == true)//Target Identification
+                {
+
+                }
+
+                
             }
         }
 
-
+        
+        
+        
+        ///DECODING FUNCTIONS
         public void DecodeDataSourceIdentifier(byte[] dataItem)
         {
             this.systemIdentificationCode = dataItem[1];
@@ -408,6 +483,37 @@ namespace ClassLibrary
                 y = y - Math.Pow(2, 15);
             this.cartesianY = y;
         }
+        public void DecodeCalculatedTrackVelocityinPolarCoordinates(byte[] DataItem) {
+            byte[] GroundSpeed = { DataItem[0], DataItem[1] };
+            byte[] TrackAngle = { DataItem[2], DataItem[3] };
+
+            int groundSpeed = BitConverter.ToInt16(GroundSpeed, 0);
+            int trackangle = BitConverter.ToInt16(TrackAngle, 0);
+
+            double Gs = groundSpeed * (1 / (2 ^ 14));
+            double Ta = trackangle * (360 / (2 ^ 16));
+            this.GroundspeedInPolar = Gs;
+            this.TrackAngleInPolar = Ta;
+
+
+
+
+        }
+        public void DecodeCalculatedTrackVelocityinCartesianCoordinates(byte[] DataItem) 
+        {
+            byte[] VX = { DataItem[0], DataItem[1] };
+            byte[] VY = { DataItem[2], DataItem[3] };
+
+            int vX = BitConverter.ToInt16(VX, 0);
+            int vY = BitConverter.ToInt16(VY, 0);
+
+            double vx = vX * (0.25);
+            double vy = vY* (0.25);
+            this.GroundspeedInPolar = vx;
+            this.TrackAngleInPolar = vy;
+
+        }
+
 
     }
 

@@ -18,3 +18,13 @@ C:\Users\antonioalarcon\source\repos\AsterixDecoder\testing\obj\Debug\testing.pd
 \\Mac\Home\Desktop\Windows\AsterixDecoder\testing\obj\Debug\testing.csproj.CopyComplete
 \\Mac\Home\Desktop\Windows\AsterixDecoder\testing\obj\Debug\testing.exe
 \\Mac\Home\Desktop\Windows\AsterixDecoder\testing\obj\Debug\testing.pdb
+C:\Users\Usuario\Documents\GitHub\AsterixDecoder\testing\bin\Debug\testing.exe.config
+C:\Users\Usuario\Documents\GitHub\AsterixDecoder\testing\bin\Debug\testing.exe
+C:\Users\Usuario\Documents\GitHub\AsterixDecoder\testing\bin\Debug\testing.pdb
+C:\Users\Usuario\Documents\GitHub\AsterixDecoder\testing\bin\Debug\ClassLibrary.dll
+C:\Users\Usuario\Documents\GitHub\AsterixDecoder\testing\bin\Debug\ClassLibrary.pdb
+C:\Users\Usuario\Documents\GitHub\AsterixDecoder\testing\obj\Debug\testing.csprojAssemblyReference.cache
+C:\Users\Usuario\Documents\GitHub\AsterixDecoder\testing\obj\Debug\testing.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\Documents\GitHub\AsterixDecoder\testing\obj\Debug\testing.csproj.CopyComplete
+C:\Users\Usuario\Documents\GitHub\AsterixDecoder\testing\obj\Debug\testing.exe
+C:\Users\Usuario\Documents\GitHub\AsterixDecoder\testing\obj\Debug\testing.pdb
