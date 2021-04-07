@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace ClassLibrary
 {
     public class CAT10
     {
+        public Utilities utilities;
+
+
         //Data Block Parameters
         int length;
         List<byte> message;
@@ -28,14 +28,14 @@ namespace ClassLibrary
         string loopStatus;
         string aircraftType;
         string specialPosition;
-        int polarRho;
+        double polarRho;
         double polarTheta;
         double cartesianX;
         double cartesianY;
-        double GroundspeedInPolar;
-        double TrackAngleInPolar;
-        double GroundspeedInCartesian;
-        double TrackAngleInCartesian;
+        double polarGroundSpeed;
+        double polarTrackAngle;
+        double cartesianVx;
+        double cartesianVy;
 
 
 
@@ -62,15 +62,11 @@ namespace ClassLibrary
             this.specialPosition = "N/A";
             this.polarRho = -1;
             this.polarTheta = -1;
-            this.GroundspeedInPolar = -1;
-            this.TrackAngleInPolar = -1;
-            this.GroundspeedInCartesian = -1;
-            this.TrackAngleInCartesian = -1;
-
-
-
-
-
+            this.polarGroundSpeed = -1;
+            this.polarTrackAngle = -1;
+            this.cartesianVx = -1;
+            this.cartesianVy = -1;
+            this.utilities = Utilities.GetInstance();
 
         }
 
@@ -192,6 +188,10 @@ namespace ClassLibrary
                     }
                     DecodeCartesianCoordinatesPosition(dataItem);
                 }
+
+            }
+            if (FSPEC.Length >= 2)
+            {
                 if (boolFSPEC[15] == true)//Calculated Track Velocity in Polar Co-ordinates
                 {
                     int i = 0;
@@ -204,7 +204,7 @@ namespace ClassLibrary
                         i++;
                     }
 
-                    DecodeCalculatedTrackVelocityinPolarCoordinates(dataItem);
+                    DecodeCalculatedTrackVelocityInPolarCoordinates(dataItem);
 
                 }
                 if (boolFSPEC[14] == true)//Calculated Track Velocity in Cartesian Coord.
@@ -219,7 +219,7 @@ namespace ClassLibrary
                         i++;
                     }
 
-                    DecodeCalculatedTrackVelocityinCartesianCoordinates(dataItem);
+                    DecodeCalculatedTrackVelocityInCartesianCoordinates(dataItem);
 
 
                 }
@@ -249,13 +249,13 @@ namespace ClassLibrary
 
                 }
 
-                
+
             }
         }
 
-        
-        
-        
+
+
+
         ///DECODING FUNCTIONS
         public void DecodeDataSourceIdentifier(byte[] dataItem)
         {
@@ -428,7 +428,7 @@ namespace ClassLibrary
                         break;
                 }
             }
-            if (dataItem.Length >= 3) 
+            if (dataItem.Length >= 3)
             {
                 if (dataItem[2] == 0)
                     this.specialPosition = "Absence of PSI";
@@ -450,72 +450,41 @@ namespace ClassLibrary
 
         public void DecodePolarCoordinatesPosition(byte[] dataItem)
         {
-            int firstByte = dataItem[0] * 256;
-            int secondByte = dataItem[1] * 1;
-            this.polarRho = firstByte + secondByte;
-            int thirdByte = dataItem[2] * 256;
-            int fourthByte = dataItem[3] * 1;
-            double resolution = (360 / Math.Pow(2, 16));
-            this.polarTheta = (thirdByte + fourthByte) *resolution;
+            byte[] rhoBytes = { dataItem[0], dataItem[1] };
+            double rhoResolution = 1;
+            this.polarRho = utilities.DecodeUnsignedByteToDouble(rhoBytes, rhoResolution);
+            byte[] thetaBytes = { dataItem[2], dataItem[3] };
+            double thetaResolution = 360 / Math.Pow(2, 16);
+            this.polarTheta = utilities.DecodeUnsignedByteToDouble(thetaBytes, thetaResolution);
         }
         public void DecodeCartesianCoordinatesPosition(byte[] dataItem)
         {
-            byte mask = 127;
-            bool negative = false;
-            if (dataItem[0] > 127)
-                negative = true;
-            byte noSign = (byte) (dataItem[0] & mask);
-            int firstByte = noSign * 256;
-            int secondByte = dataItem[1] * 1;
-            double x = firstByte + secondByte;
-            if (negative)
-                x = x - Math.Pow(2,15);
-            this.cartesianX = x;
-
-            negative = false;
-            if (dataItem[2] > 127)
-                negative = true;
-            noSign = (byte)(dataItem[2] & mask);
-            int thirdByte = noSign * 256;
-            int fourthByte = dataItem[3] * 1;
-            double y = thirdByte + fourthByte;
-            if (negative)
-                y = y - Math.Pow(2, 15);
-            this.cartesianY = y;
+            byte[] xBytes = { dataItem[0], dataItem[1] };
+            double xResolution = 1;
+            this.cartesianX = utilities.DecodeTwosComplementToDouble(xBytes, xResolution);
+            byte[] yBytes = { dataItem[2], dataItem[3] };
+            double yResolution = 1;
+            this.cartesianY = utilities.DecodeTwosComplementToDouble(yBytes, yResolution);
         }
-        public void DecodeCalculatedTrackVelocityinPolarCoordinates(byte[] DataItem) {
-            byte[] GroundSpeed = { DataItem[0], DataItem[1] };
-            byte[] TrackAngle = { DataItem[2], DataItem[3] };
-
-            int groundSpeed = BitConverter.ToInt16(GroundSpeed, 0);
-            int trackangle = BitConverter.ToInt16(TrackAngle, 0);
-
-            double Gs = groundSpeed * (1 / (2 ^ 14));
-            double Ta = trackangle * (360 / (2 ^ 16));
-            this.GroundspeedInPolar = Gs;
-            this.TrackAngleInPolar = Ta;
-
-
-
-
-        }
-        public void DecodeCalculatedTrackVelocityinCartesianCoordinates(byte[] DataItem) 
+        public void DecodeCalculatedTrackVelocityInPolarCoordinates(byte[] dataItem)
         {
-            byte[] VX = { DataItem[0], DataItem[1] };
-            byte[] VY = { DataItem[2], DataItem[3] };
-
-            int vX = BitConverter.ToInt16(VX, 0);
-            int vY = BitConverter.ToInt16(VY, 0);
-
-            double vx = vX * (0.25);
-            double vy = vY* (0.25);
-            this.GroundspeedInPolar = vx;
-            this.TrackAngleInPolar = vy;
-
+            byte[] speedBytes = { dataItem[0], dataItem[1] };
+            double speedResolution = Math.Pow(2, -14) * 3600;
+            this.polarGroundSpeed = utilities.DecodeUnsignedByteToDouble(speedBytes, speedResolution);
+            byte[] trackAngleBytes = { dataItem[2], dataItem[3] };
+            double trackAngleResolution = (360 / Math.Pow(2, 16));
+            this.polarTrackAngle = utilities.DecodeUnsignedByteToDouble(trackAngleBytes, trackAngleResolution);
         }
-
-
+        public void DecodeCalculatedTrackVelocityInCartesianCoordinates(byte[] dataItem)
+        {
+            byte[] xBytes = { dataItem[0], dataItem[1] };
+            double xResolution = 0.25;
+            this.cartesianVx = utilities.DecodeTwosComplementToDouble(xBytes, xResolution);
+            byte[] yBytes = { dataItem[2], dataItem[3] };
+            double yResolution = 0.25;
+            this.cartesianVy = utilities.DecodeTwosComplementToDouble(yBytes, yResolution);
+        }
     }
 
-    
+
 }
