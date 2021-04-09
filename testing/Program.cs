@@ -13,7 +13,7 @@ namespace testing
         {
             Console.WriteLine("Hello");
             AsterixFile asterixFile = new AsterixFile();
-            asterixFile.ReadFile(@"//mac/Home/Desktop/Windows/file1.ast");
+            asterixFile.ReadFile(@"//mac/Home/Desktop/Windows/file2.ast");
             Console.WriteLine();
             List<CAT10> cat10list = asterixFile.GetCAT10Blocks();
             Console.ReadLine();

@@ -42,6 +42,14 @@ namespace ClassLibrary
         double cartesianX;
         double cartesianY;
 
+        string M3AValidated;
+        string M3AGarbled;
+        string M3ACode;
+
+        string targetAddress;
+
+        string targetIdentification;
+
         double polarGroundSpeed;
         double polarTrackAngle;
 
@@ -61,6 +69,11 @@ namespace ClassLibrary
         string tsMRS;
         string tsGHO;
 
+
+        string flValidated;
+        string flGarbled;
+        double flFlightLevel;
+
         double targetLength;
         double targetOrientation;
         double targetWidth;
@@ -73,6 +86,7 @@ namespace ClassLibrary
         string ssTSV;
         string ssDIV;
         string ssTTF;
+
         public CAT10(int lenght)
         {
             this.length = lenght;
@@ -103,6 +117,17 @@ namespace ClassLibrary
 
             this.polarRho = double.NaN;
             this.polarTheta = double.NaN;
+
+            this.cartesianX = double.NaN;
+            this.cartesianY = double.NaN;
+
+            this.M3AValidated = "N/A";
+            this.M3AGarbled = "N/A";
+            this.M3ACode = "N/A";
+
+            this.targetAddress = "N/A";
+
+            this.targetIdentification = "N/A";
 
             this.polarGroundSpeed = double.NaN;
             this.polarTrackAngle = double.NaN;
@@ -136,6 +161,9 @@ namespace ClassLibrary
             this.ssDIV = "N/A";
             this.ssTTF = "N/A";
 
+            this.flFlightLevel = double.NaN;
+            this.flGarbled = "N/A";
+            this.flValidated = "N/A";
 
             this.utilities = Utilities.GetInstance();
 
@@ -256,7 +284,7 @@ namespace ClassLibrary
             }
             if (FSPEC.Length >= 3)
             {
-                if (boolFSPEC[23] == true)//Mode S MB Datat
+                if (boolFSPEC[23] == true)//Mode S MB Data
                 {
 
                 }
@@ -740,16 +768,60 @@ namespace ClassLibrary
             }
         }
         public void DecodeMode3A(byte[] dataItem)
-        { 
+        {
+            byte vMask = 128;
+            byte gMask = 64;
+            byte m3aMask = 15;
 
+            int validated = (vMask & dataItem[0]);
+            int garbled = (gMask & dataItem[0]);
+            int firstByte = (byte)((m3aMask & dataItem[0]));
+
+            int A = (byte)(firstByte >> 1);
+            byte B4 = (byte)((firstByte & 1) << 2);
+            byte B21 = (byte)((dataItem[1] & 192) >> 6);
+            int B = (int)(B4 + B21);
+            int C = (int)((dataItem[1] & 56) >> 3);
+            int D = (int)(dataItem[1] & 7);
+
+            this.M3ACode = (A * 1000 + B * 100 + C * 10 + D).ToString();
+            switch (validated)
+            {
+                case 0:
+                    this.M3AValidated = "Code Validated";
+                    break;
+                case 1:
+                    this.M3AValidated = "Code Not Validated";
+                    break;
+            }
+            switch (garbled)
+            {
+                case 0:
+                    this.M3AValidated = "Default";
+                    break;
+                case 1:
+                    this.M3AValidated = "Garbled Code";
+                    break;
+            }
         }
         public void DecodeTargetAddress(byte[] dataItem)
         {
-
+            this.targetAddress ="0x" + BitConverter.ToString(dataItem).Replace("-", string.Empty);
         }
         public void DecodeTargetIdentification(byte[] dataItem)
         {
+            byte char8 = (byte)((dataItem[6] & 63));
+            byte char7 = (byte)(((dataItem[6] & 192) >> 6) + ((dataItem[5] & 15) << 2));
+            byte char6 = (byte)(((dataItem[5] & 240) >> 4) + ((dataItem[4] & 3)<< 4));
+            byte char5 = (byte)((dataItem[4] & 252) >> 2);
+            byte char4 = (byte)((dataItem[3] & 63));
+            byte char3 = (byte)(((dataItem[3] & 192) >> 6) + ((dataItem[2] & 15) << 2));
+            byte char2 = (byte)(((dataItem[2] & 240) >> 4) + ((dataItem[1] & 3) << 4));
+            byte char1 = (byte)((dataItem[1] & 252) >> 2);
 
+
+            byte[] chars = {char1, char2, char3, char4, char5, char6, char7, char8 };
+            this.targetIdentification = utilities.GetAircraftIdFromBytes(chars);
         }
         public void DecodeModeSMBData(byte[] data)
         {
@@ -761,7 +833,36 @@ namespace ClassLibrary
         }
         public void DecodeFlightLevel(byte[] dataItem)
         {
+            byte vMask = 128;
+            byte gMask = 64;
+            byte flFirstByteMask = 63;
 
+            int validated = ((dataItem[0] & vMask) >> 7);
+            int garbled = ((dataItem[0] & gMask) >> 6);
+            byte flFirstByte = (byte)(dataItem[0] & flFirstByteMask);
+
+            byte[] flightLevel = { flFirstByte, dataItem[1] };
+            double resolution = 1.0/4.0;
+            this.flFlightLevel= utilities.DecodeUnsignedByteToDouble(flightLevel, resolution);
+
+            switch (validated)
+            {
+                case 0:
+                    this.flValidated = "Code Validated";
+                    break;
+                case 1:
+                    this.flValidated = "Code not Validated";
+                    break;
+            }
+            switch (garbled)
+            {
+                case 0:
+                    this.flGarbled = "Default";
+                    break;
+                case 1:
+                    this.flGarbled = "Garbled Code";
+                    break;
+            }
         }
         public void DecodeMeasuredHeight(byte[] dataItem)
         {

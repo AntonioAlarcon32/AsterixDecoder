@@ -8,9 +8,18 @@ namespace ClassLibrary
 
         private Utilities()
         {
+            this.targetIdentification = new Dictionary<byte, char>
+            {
+                {0,' '},{1,'A'},{2,'B'}, {3,'C'},{4,'D'},{5,'E'},{6,'F'},{7,'G'},{8,'H'},{9,'I'},{10,'J'},
+                {11,'K'},{12,'L'},{13,'M'},{14,'N'},{15,'O'},{16,'P'},{17,'Q'},{18,'R'},{19,'S'},{20,'T'},
+                {21,'U'},{22,'V'},{23,'W'},{24,'X'},{25,'Y'},{26,'Z'},
+                {32,' '},{48,'0'},{49,'1'},{50,'2'},{51,'3'},{52,'4'},{53,'5'},{54,'6'},{55,'7'},{56,'8'},
+                {57,'9'},
+            };
         }
 
         private static Utilities instance;
+        private Dictionary<byte, char> targetIdentification;
 
 
         public static Utilities GetInstance()
@@ -88,6 +97,21 @@ namespace ClassLibrary
                 bytesValue = bytesValue - Math.Pow(2, (dataItem.Length * 8) - 1);
 
             return bytesValue * resolution;
+        }
+
+        public string GetAircraftIdFromBytes(byte[] chars)
+        {
+            int i = 0;
+            bool exists = true;
+            string result = "";
+            while (i < chars.Length)
+            {
+                if (exists == false)
+                    return null;
+                result += targetIdentification[chars[i]];
+                i++;
+            }
+            return result;
         }
     }
 }
