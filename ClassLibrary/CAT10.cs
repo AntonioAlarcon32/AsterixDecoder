@@ -16,26 +16,50 @@ namespace ClassLibrary
 
         int systemAreaCode;
         int systemIdentificationCode;
+
         string messageType;
-        string typeOfData;
-        string differentialCorrection;
-        string chain;
-        string groundTransponder;
-        string corruptedReplies;
-        string simulatedTarget;
-        string testTarget;
-        string reportType;
-        string loopStatus;
-        string aircraftType;
-        string specialPosition;
+
+        string trTYP;
+        string trDCR;
+        string trCHN;
+        string trGBS;
+        string trCRT;
+        string trSIM;
+        string trTST;
+        string trRAB;
+        string trLOP;
+        string trTOT;
+        string trSPI;
+
+        TimeSpan timeOfDay;
+
+        double wgs84latitude;
+        double wgs84longitude;
+
         double polarRho;
         double polarTheta;
+
         double cartesianX;
         double cartesianY;
+
         double polarGroundSpeed;
         double polarTrackAngle;
+
         double cartesianVx;
         double cartesianVy;
+
+        int trackNumber;
+
+        string tsCNF;
+        string tsTRE;
+        string tsCST;
+        string tsMAH;
+        string tsTCC;
+        string tsSTH;
+        string tsTOM;
+        string tsDOU;
+        string tsMRS;
+        string tsGHO;
 
 
 
@@ -47,25 +71,48 @@ namespace ClassLibrary
 
             this.systemAreaCode = -1;
             this.systemIdentificationCode = -1;
+
             this.messageType = "N/A";
 
-            this.typeOfData = "N/A";
-            this.differentialCorrection = "N/A";
-            this.chain = "N/A";
-            this.groundTransponder = "N/A";
-            this.corruptedReplies = "N/A";
-            this.simulatedTarget = "N/A";
-            this.testTarget = "N/A";
-            this.reportType = "N/A";
-            this.loopStatus = "N/A";
-            this.aircraftType = "N/A";
-            this.specialPosition = "N/A";
+            this.trTYP = "N/A";
+            this.trDCR = "N/A";
+            this.trCHN = "N/A";
+            this.trGBS = "N/A";
+            this.trCRT = "N/A";
+            this.trSIM = "N/A";
+            this.trTST = "N/A";
+            this.trRAB = "N/A";
+            this.trLOP = "N/A";
+            this.trTOT = "N/A";
+            this.trSPI = "N/A";
+
+            this.timeOfDay = new TimeSpan();
+
+            this.wgs84latitude = -1;
+            this.wgs84longitude = -1;
+
             this.polarRho = -1;
             this.polarTheta = -1;
+
             this.polarGroundSpeed = -1;
             this.polarTrackAngle = -1;
+
             this.cartesianVx = -1;
             this.cartesianVy = -1;
+
+            this.trackNumber = -1;
+
+            this.tsCNF = "N/A";
+            this.tsTRE = "N/A";
+            this.tsCST = "N/A";
+            this.tsMAH = "N/A";
+            this.tsTCC = "N/A";
+            this.tsSTH = "N/A";
+            this.tsTOM = "N/A";
+            this.tsDOU = "N/A";
+            this.tsMRS = "N/A";
+            this.tsGHO = "N/A";
+
             this.utilities = Utilities.GetInstance();
 
         }
@@ -169,12 +216,28 @@ namespace ClassLibrary
 
                 if (boolFSPEC[13] == true)//Track Number
                 {
-
+                    byte[] dataItem = utilities.GetFixedLengthDataItem(message, 2);
+                    DecodeTrackNumber(dataItem);
                 }
 
                 if (boolFSPEC[12] == true)//Track Status
                 {
-
+                    byte mask = 1;
+                    List<byte> dataItem = new List<byte>();
+                    dataItem.Add(message[0]);
+                    message.RemoveAt(0);
+                    if ((dataItem[0] & mask) == 1)
+                    {
+                        dataItem.Add(message[0]);
+                        message.RemoveAt(0);
+                        if ((dataItem[1] & mask) == 1)
+                        {
+                            dataItem.Add(message[0]);
+                            message.RemoveAt(0);
+                        }
+                    }
+                    byte[] data = dataItem.ToArray();
+                    DecodeTrackStatus(data);
                 }
 
                 if (boolFSPEC[11] == true)//Mode-3/A Code in Octal Representation
@@ -191,11 +254,80 @@ namespace ClassLibrary
                 {
 
                 }
+            }
+            if (FSPEC.Length >= 3)
+            {
+                if (boolFSPEC[23] == true)//Mode S MB Datat
+                {
 
+                }
 
+                if (boolFSPEC[22] == true)//Vehicle Fleet Identification
+                {
+
+                }
+
+                if (boolFSPEC[21] == true)//Flight Level in Binary Representation
+                {
+
+                }
+                if (boolFSPEC[20] == true)//Measured Height
+                {
+
+                }
+
+                if (boolFSPEC[19] == true)//Target Size & Orientation
+                {
+
+                }
+
+                if (boolFSPEC[18] == true)//System Status
+                {
+
+                }
+
+                if (boolFSPEC[17] == true)//Pre-Programmed Message
+                {
+
+                }
+            }
+            if (FSPEC.Length >= 4)
+            {
+                if (boolFSPEC[31] == true)//Standard Deviation of Position
+                {
+
+                }
+
+                if (boolFSPEC[30] == true)//Presence
+                {
+
+                }
+
+                if (boolFSPEC[29] == true)//Amplitude of Primary Plot
+                {
+
+                }
+                if (boolFSPEC[28] == true)//Calculated Acceleration
+                {
+
+                }
+
+                if (boolFSPEC[27] == true) //Spare
+                {
+
+                }
+
+                if (boolFSPEC[26] == true)//Special Purpose Field
+                {
+
+                }
+
+                if (boolFSPEC[25] == true)//Reserve Expansion Field
+                {
+
+                }
             }
         }
-
 
 
 
@@ -243,64 +375,64 @@ namespace ClassLibrary
             switch (typ)
             {
                 case 0:
-                    this.typeOfData = "SSR multilateration";
+                    this.trTYP = "SSR multilateration";
                     break;
                 case 1:
-                    this.typeOfData = "Mode S multilateration";
+                    this.trTYP = "Mode S multilateration";
                     break;
                 case 2:
-                    this.typeOfData = "ADS-B";
+                    this.trTYP = "ADS-B";
                     break;
                 case 3:
-                    this.typeOfData = "PSR";
+                    this.trTYP = "PSR";
                     break;
                 case 4:
-                    this.typeOfData = "Magnetic Loop System";
+                    this.trTYP = "Magnetic Loop System";
                     break;
                 case 5:
-                    this.typeOfData = "HF multilateration";
+                    this.trTYP = "HF multilateration";
                     break;
                 case 6:
-                    this.typeOfData = "Not defined";
+                    this.trTYP = "Not defined";
                     break;
                 case 7:
-                    this.typeOfData = "Other types";
+                    this.trTYP = "Other types";
                     break;
             }
             switch (dcr)
             {
                 case 0:
-                    this.differentialCorrection = "No differential correction";
+                    this.trDCR = "No differential correction";
                     break;
                 case 1:
-                    this.typeOfData = "Differential correction";
+                    this.trDCR = "Differential correction";
                     break;
             }
             switch (chn)
             {
                 case 0:
-                    this.chain = "Chain 1";
+                    this.trCHN = "Chain 1";
                     break;
                 case 1:
-                    this.typeOfData = "Chain 2";
+                    this.trCHN = "Chain 2";
                     break;
             }
             switch (gbs)
             {
                 case 0:
-                    this.groundTransponder = "Transponder Ground bit not set";
+                    this.trGBS = "Transponder Ground bit not set";
                     break;
                 case 1:
-                    this.groundTransponder = "Transponder Ground bit set";
+                    this.trGBS = "Transponder Ground bit set";
                     break;
             }
             switch (crt)
             {
                 case 0:
-                    this.corruptedReplies = "No Corrupted reply in multilateration";
+                    this.trCRT = "No Corrupted reply in multilateration";
                     break;
                 case 1:
-                    this.corruptedReplies = "Corrupted replies in multilateration";
+                    this.trCRT = "Corrupted replies in multilateration";
                     break;
             }
 
@@ -319,76 +451,93 @@ namespace ClassLibrary
                 switch (sim)
                 {
                     case 0:
-                        this.simulatedTarget = "Actual target report";
+                        this.trSIM = "Actual target report";
                         break;
                     case 1:
-                        this.simulatedTarget = "Simulated target report";
+                        this.trSIM = "Simulated target report";
                         break;
                 }
                 switch (tst)
                 {
                     case 0:
-                        this.testTarget = "Default";
+                        this.trTST = "Default";
                         break;
                     case 1:
-                        this.testTarget = "Test Target";
+                        this.trTST = "Test Target";
                         break;
                 }
                 switch (rab)
                 {
                     case 0:
-                        this.reportType = "Report from target transponder";
+                        this.trRAB = "Report from target transponder";
                         break;
                     case 1:
-                        this.reportType = "Report from field monitor (fixed transponder)";
+                        this.trRAB = "Report from field monitor (fixed transponder)";
                         break;
                 }
                 switch (lop)
                 {
                     case 0:
-                        this.loopStatus = "Undetermined";
+                        this.trLOP = "Undetermined";
                         break;
                     case 1:
-                        this.loopStatus = "Loop Start";
+                        this.trLOP = "Loop Start";
                         break;
                     case 2:
-                        this.loopStatus = "Loop Finish";
+                        this.trLOP = "Loop Finish";
                         break;
                 }
                 switch (tot)
                 {
                     case 0:
-                        this.loopStatus = "Undetermined";
+                        this.trTOT = "Undetermined";
                         break;
                     case 1:
-                        this.loopStatus = "Aircraft";
+                        this.trTOT = "Aircraft";
                         break;
                     case 2:
-                        this.loopStatus = "Ground Vehicle";
+                        this.trTOT = "Ground Vehicle";
                         break;
                     case 3:
-                        this.loopStatus = "Helicopter";
+                        this.trTOT = "Helicopter";
                         break;
                 }
             }
             if (dataItem.Length >= 3)
             {
                 if (dataItem[2] == 0)
-                    this.specialPosition = "Absence of PSI";
+                    this.trSPI = "Absence of PSI";
                 else if (dataItem[2] > 0)
-                    this.specialPosition = "Special Position Identification";
+                    this.trSPI = "Special Position Identification";
             }
         }
 
 
         public void DecodeTimeOfDay(byte[] dataItem)
         {
-            int c = 0;
+            byte[] timeBytes = { dataItem[0], dataItem[1], dataItem[2] };
+            double timeResolution = Math.Pow(2,-7);
+            double seconds = utilities.DecodeUnsignedByteToDouble(timeBytes, timeResolution);
+            this.timeOfDay = TimeSpan.FromSeconds(seconds);
+            int c = 1;
         }
 
         public void DecodeWGS84Coordinates(byte[] dataItem)
         {
-            int c = 0;
+            int i = 0;
+            byte[] latitudeBytes = new byte[4];
+            byte[] longitudeBytes = new byte[4];
+            while (i < dataItem.Length)
+            {
+                if (i <= 3)
+                    latitudeBytes[i] = dataItem[i];
+                else if (i > 3)
+                    longitudeBytes[i - 4] = dataItem[i];
+                i++;
+            }
+            double resolution = 180 / Math.Pow(2,31);
+            this.wgs84latitude = utilities.DecodeTwosComplementToDouble(latitudeBytes, resolution);
+            this.wgs84longitude = utilities.DecodeTwosComplementToDouble(longitudeBytes, resolution);
         }
 
         public void DecodePolarCoordinatesPosition(byte[] dataItem)
@@ -427,7 +576,217 @@ namespace ClassLibrary
             double yResolution = 0.25;
             this.cartesianVy = utilities.DecodeTwosComplementToDouble(yBytes, yResolution);
         }
+
+        public void DecodeTrackNumber(byte[] dataItem)
+        {
+            byte[] trackBytes = { dataItem[0], dataItem[1] };
+            double resolution = 1;
+            double number = utilities.DecodeUnsignedByteToDouble(trackBytes, resolution);
+            this.trackNumber = (int)number;
+        }
+
+        public void DecodeTrackStatus(byte[] dataItem)
+        {
+            byte cnfMask = 128;
+            byte treMask = 64;
+            byte cstMask = 48;
+            byte mahMask = 8;
+            byte tccMask = 4;
+            byte sthMask = 2;
+            int cnf = ((dataItem[0] & cnfMask) >> 7);
+            int tre = ((dataItem[0] & treMask) >> 6);
+            int cst = ((dataItem[0] & cstMask) >> 4);
+            int mah = ((dataItem[0] & mahMask) >> 3);
+            int tcc = ((dataItem[0] & tccMask) >> 2);
+            int sth = ((dataItem[0] & sthMask) >> 1);
+
+            switch (cnf)
+            {
+                case 0:
+                    this.tsCNF = "Confirmed Track";
+                    break;
+                case 1:
+                    this.tsCNF = "Track in Initialization Phase";
+                    break;
+            }
+            switch (tre)
+            {
+                case 0:
+                    this.tsTRE = "Default";
+                    break;
+                case 1:
+                    this.tsTRE = "Last Report for a Track";
+                    break;
+            }
+            switch (cst)
+            {
+                case 0:
+                    this.tsCST = "No extrapolation";
+                    break;
+                case 1:
+                    this.tsCST = "Predictable extrapolation due to sensor refresh period";
+                    break;
+                case 2:
+                    this.tsCST = "Predictable extrapolation in masked area";
+                    break;
+                case 3:
+                    this.tsCST = "Extrapolation due to unpredictable absence of detection";
+                    break;
+            }
+            switch (mah)
+            {
+                case 0:
+                    this.tsMAH = "Default";
+                    break;
+                case 1:
+                    this.tsMAH = "Horizontal manoeuvre";
+                    break;
+            }
+            switch (tcc)
+            {
+                case 0:
+                    this.tsTCC = "Tracking performed in 'Sensor Plane'";
+                    break;
+                case 1:
+                    this.tsTCC = "Slant range correction";
+                    break;
+            }
+            switch (sth)
+            {
+                case 0:
+                    this.tsSTH = "Measured position";
+                    break;
+                case 1:
+                    this.tsSTH = "Smoothed position";
+                    break;
+            }
+            if (dataItem.Length >= 2)
+            {
+                byte tomMask = 192;
+                byte douMask = 56;
+                byte mrsMask = 6;
+                int tom = ((dataItem[1] & tomMask) >> 6);
+                int dou = ((dataItem[1] & douMask) >> 3);
+                int mrs = ((dataItem[1] & mrsMask) >> 1);
+                switch (tom)
+                {
+                    case 0:
+                        this.tsTOM = "Unknown type of movement";
+                        break;
+                    case 1:
+                        this.tsTOM = "Taking-off";
+                        break;
+                    case 2:
+                        this.tsTOM = "Landing";
+                        break;
+                    case 3:
+                        this.tsTOM = "Other types of movement";
+                        break;
+                }
+                switch (dou)
+                {
+                    case 0:
+                        this.tsDOU = "No doubt";
+                        break;
+                    case 1:
+                        this.tsDOU = "Doubtful correlation (undetermined reason)";
+                        break;
+                    case 2:
+                        this.tsDOU = "Doubtful correlation in clutter";
+                        break;
+                    case 3:
+                        this.tsDOU = "Loss of accuracy";
+                        break;
+                    case 4:
+                        this.tsDOU = "Loss of accuracy in clutter";
+                        break;
+                    case 5:
+                        this.tsDOU = "Unstable track";
+                        break;
+                    case 6:
+                        this.tsDOU = "Previously coasted";
+                        break;
+                }
+                switch (mrs)
+                {
+                    case 0:
+                        this.tsMRS = "Merge or split indication undetermined";
+                        break;
+                    case 1:
+                        this.tsMRS = "Track merged by association to plot";
+                        break;
+                    case 2:
+                        this.tsMRS = "Track merged by non-association to plot";
+                        break;
+                    case 3:
+                        this.tsMRS = "Splittrack";
+                        break;
+                }
+            }
+            if (dataItem.Length >= 3)
+            {
+                if (dataItem[2] == 0)
+                    this.tsGHO = "Default";
+                else if (dataItem[2] > 0)
+                    this.tsGHO = "Ghost track";
+            }
+        }
+        public void DecodeMode3A(byte[] data)
+        { 
+
+        }
+        public void DecodeTargetAddress(byte[] data)
+        {
+
+        }
+        public void DecodeTargetIdentification(byte[] data)
+        {
+
+        }
+        public void DecodeModeSMBData(byte[] data)
+        {
+
+        }
+        public void DecodeVehicleFleetIdentification(byte[] data)
+        {
+
+        }
+        public void DecodeFlightLevel(byte[] data)
+        {
+
+        }
+        public void DecodeMeasuredHeight(byte[] data)
+        {
+
+        }
+        public void DecodeTargetSizeAndOrientation(byte[] data)
+        {
+
+        }
+        public void DecodeSystemStatus(byte[] data)
+        {
+
+        }
+        public void DecodePreProgrammedMessage(byte[] data)
+        {
+
+        }
+        public void StandardDeviationOfPosition(byte[] data)
+        {
+
+        }
+        public void DecodePresence(byte[] data)
+        {
+
+        }
+        public void DecodeAmplitudeOfPrimaryPlot(byte[] data)
+        {
+
+        }
+        public void DecodeCalculatedAcceleration(byte[] data)
+        {
+
+        }
+
     }
-
-
 }
