@@ -61,8 +61,18 @@ namespace ClassLibrary
         string tsMRS;
         string tsGHO;
 
+        double targetLength;
+        double targetOrientation;
+        double targetWidth;
 
+        double calcAccelerationX;
+        double calcAccelerationY;
 
+        string ssNOGO;
+        string ssOVL;
+        string ssTSV;
+        string ssDIV;
+        string ssTTF;
         public CAT10(int lenght)
         {
             this.length = lenght;
@@ -88,17 +98,17 @@ namespace ClassLibrary
 
             this.timeOfDay = new TimeSpan();
 
-            this.wgs84latitude = -1;
-            this.wgs84longitude = -1;
+            this.wgs84latitude = double.NaN;
+            this.wgs84longitude = double.NaN;
 
-            this.polarRho = -1;
-            this.polarTheta = -1;
+            this.polarRho = double.NaN;
+            this.polarTheta = double.NaN;
 
-            this.polarGroundSpeed = -1;
-            this.polarTrackAngle = -1;
+            this.polarGroundSpeed = double.NaN;
+            this.polarTrackAngle = double.NaN;
 
-            this.cartesianVx = -1;
-            this.cartesianVy = -1;
+            this.cartesianVx = double.NaN;
+            this.cartesianVy = double.NaN;
 
             this.trackNumber = -1;
 
@@ -112,6 +122,20 @@ namespace ClassLibrary
             this.tsDOU = "N/A";
             this.tsMRS = "N/A";
             this.tsGHO = "N/A";
+
+            this.targetLength = double.NaN;
+            this.targetOrientation = double.NaN;
+            this.targetWidth = double.NaN;
+
+            this.calcAccelerationX = double.NaN;
+            this.calcAccelerationY = double.NaN;
+
+            this.ssNOGO = "N/A";
+            this.ssOVL = "N/A";
+            this.ssTSV = "N/A";
+            this.ssDIV = "N/A";
+            this.ssTTF = "N/A";
+
 
             this.utilities = Utilities.GetInstance();
 
@@ -162,22 +186,8 @@ namespace ClassLibrary
                 }
                 if (boolFSPEC[5] == true) // Target Report Descriptor
                 {
-                    byte mask = 1;
-                    List<byte> dataItem = new List<byte>();
-                    dataItem.Add(message[0]);
-                    message.RemoveAt(0);
-                    if ((dataItem[0] & mask) == 1)
-                    {
-                        dataItem.Add(message[0]);
-                        message.RemoveAt(0);
-                        if ((dataItem[1] & mask) == 1)
-                        {
-                            dataItem.Add(message[0]);
-                            message.RemoveAt(0);
-                        }
-                    }
-                    byte[] data = dataItem.ToArray();
-                    DecodeTargetReportDescriptor(data);
+                    byte[] dataItem = utilities.GetVariableLengthDataItem(message);
+                    DecodeTargetReportDescriptor(dataItem);
                 }
                 if (boolFSPEC[4] == true) // Time of Day
                 {
@@ -222,37 +232,26 @@ namespace ClassLibrary
 
                 if (boolFSPEC[12] == true)//Track Status
                 {
-                    byte mask = 1;
-                    List<byte> dataItem = new List<byte>();
-                    dataItem.Add(message[0]);
-                    message.RemoveAt(0);
-                    if ((dataItem[0] & mask) == 1)
-                    {
-                        dataItem.Add(message[0]);
-                        message.RemoveAt(0);
-                        if ((dataItem[1] & mask) == 1)
-                        {
-                            dataItem.Add(message[0]);
-                            message.RemoveAt(0);
-                        }
-                    }
-                    byte[] data = dataItem.ToArray();
-                    DecodeTrackStatus(data);
+                    byte[] dataItem =  utilities.GetVariableLengthDataItem(message);
+                    DecodeTrackStatus(dataItem);
                 }
 
                 if (boolFSPEC[11] == true)//Mode-3/A Code in Octal Representation
                 {
-
+                    byte[] dataItem = utilities.GetFixedLengthDataItem(message, 2);
+                    DecodeMode3A(dataItem);
                 }
 
                 if (boolFSPEC[10] == true)//Target Address
                 {
-
+                    byte[] dataItem = utilities.GetFixedLengthDataItem(message, 3);
+                    DecodeTargetAddress(dataItem);
                 }
 
                 if (boolFSPEC[9] == true)//Target Identification
                 {
-
+                    byte[] dataItem = utilities.GetFixedLengthDataItem(message, 7);
+                    DecodeTargetIdentification(dataItem);
                 }
             }
             if (FSPEC.Length >= 3)
@@ -264,38 +263,45 @@ namespace ClassLibrary
 
                 if (boolFSPEC[22] == true)//Vehicle Fleet Identification
                 {
-
+                    byte[] dataItem = utilities.GetFixedLengthDataItem(message, 1);
+                    DecodeVehicleFleetIdentification(dataItem);
                 }
 
                 if (boolFSPEC[21] == true)//Flight Level in Binary Representation
                 {
-
+                    byte[] dataItem = utilities.GetFixedLengthDataItem(message, 2);
+                    DecodeFlightLevel(dataItem);
                 }
                 if (boolFSPEC[20] == true)//Measured Height
                 {
-
+                    byte[] dataItem = utilities.GetFixedLengthDataItem(message, 2);
+                    DecodeMeasuredHeight(dataItem);
                 }
 
                 if (boolFSPEC[19] == true)//Target Size & Orientation
                 {
-
+                    byte[] dataItem = utilities.GetVariableLengthDataItem(message);
+                    DecodeTargetSizeAndOrientation(dataItem);
                 }
 
                 if (boolFSPEC[18] == true)//System Status
                 {
-
+                    byte[] dataItem = utilities.GetFixedLengthDataItem(message, 1);
+                    DecodeSystemStatus(dataItem);
                 }
 
                 if (boolFSPEC[17] == true)//Pre-Programmed Message
                 {
-
+                    byte[] dataItem = utilities.GetFixedLengthDataItem(message, 1);
+                    DecodePreProgrammedMessage(dataItem);
                 }
             }
             if (FSPEC.Length >= 4)
             {
                 if (boolFSPEC[31] == true)//Standard Deviation of Position
                 {
-
+                    byte[] dataItem = utilities.GetFixedLengthDataItem(message, 4);
+                    DecodeStandardDeviationOfPosition(dataItem);
                 }
 
                 if (boolFSPEC[30] == true)//Presence
@@ -305,11 +311,13 @@ namespace ClassLibrary
 
                 if (boolFSPEC[29] == true)//Amplitude of Primary Plot
                 {
-
+                    byte[] dataItem = utilities.GetFixedLengthDataItem(message, 1);
+                    DecodeTrackNumber(dataItem);
                 }
                 if (boolFSPEC[28] == true)//Calculated Acceleration
                 {
-
+                    byte[] dataItem = utilities.GetFixedLengthDataItem(message, 2);
+                    DecodeCalculatedAcceleration(dataItem);
                 }
 
                 if (boolFSPEC[27] == true) //Spare
@@ -731,15 +739,15 @@ namespace ClassLibrary
                     this.tsGHO = "Ghost track";
             }
         }
-        public void DecodeMode3A(byte[] data)
+        public void DecodeMode3A(byte[] dataItem)
         { 
 
         }
-        public void DecodeTargetAddress(byte[] data)
+        public void DecodeTargetAddress(byte[] dataItem)
         {
 
         }
-        public void DecodeTargetIdentification(byte[] data)
+        public void DecodeTargetIdentification(byte[] dataItem)
         {
 
         }
@@ -747,46 +755,131 @@ namespace ClassLibrary
         {
 
         }
-        public void DecodeVehicleFleetIdentification(byte[] data)
+        public void DecodeVehicleFleetIdentification(byte[] dataItem)
         {
 
         }
-        public void DecodeFlightLevel(byte[] data)
+        public void DecodeFlightLevel(byte[] dataItem)
         {
 
         }
-        public void DecodeMeasuredHeight(byte[] data)
+        public void DecodeMeasuredHeight(byte[] dataItem)
         {
 
         }
-        public void DecodeTargetSizeAndOrientation(byte[] data)
+        public void DecodeTargetSizeAndOrientation(byte[] dataItem)
+        {
+            byte lengthMask = 254;
+            byte orientationMask = 254;
+            byte widthMask = 254;
+            byte length = (byte)((dataItem[0] & lengthMask) >> 1);
+            byte[] lengthByte = { length };
+            double lengthResolution = 1;
+            this.targetLength = utilities.DecodeUnsignedByteToDouble(lengthByte, lengthResolution);
+
+            if (dataItem.Length >= 2)
+            {
+                byte orientation = (byte)((dataItem[1] & orientationMask) >> 1);
+                byte[] orientationByte = { orientation };
+                double orientationResolution = 360.0 / 128.0;
+                this.targetOrientation = utilities.DecodeUnsignedByteToDouble(orientationByte, orientationResolution);
+            }
+            if (dataItem.Length >= 3)
+            {
+                byte width = (byte)((dataItem[2] & widthMask) >> 1);
+                byte[] widthByte = { width };
+                double widthResolution = 1;
+                this.targetWidth = utilities.DecodeUnsignedByteToDouble(widthByte, widthResolution);
+            }
+        }
+        public void DecodeSystemStatus(byte[] dataItem)
+        {
+            byte nogoMask = 192;
+            byte ovlMask = 32;
+            byte tsvMask = 16;
+            byte divMask = 8;
+            byte ttfMask = 4;
+
+            int nogo = ((dataItem[0] & nogoMask) >> 6);
+            int ovl = ((dataItem[0] & ovlMask) >> 5);
+            int tsv = ((dataItem[0] & tsvMask) >> 4);
+            int div = ((dataItem[0] & divMask) >> 3);
+            int ttf = ((dataItem[0] & ttfMask) >> 2);
+
+            switch(nogo) 
+            {
+                case 0:
+                    this.ssNOGO = "Operational";
+                    break;
+                case 1:
+                    this.ssNOGO = "Degraded";
+                    break;
+
+                case 2:
+                    this.ssNOGO = "NOGO";
+                    break;
+            }
+            switch (ovl)
+            {
+                case 0:
+                    this.ssOVL = "No overload";
+                    break;
+                case 1:
+                    this.ssOVL = "Overload";
+                    break;
+            }
+            switch (tsv)
+            {
+                case 0:
+                    this.ssTSV = "valid";
+                    break;
+                case 1:
+                    this.ssTSV = "invalid";
+                    break;
+            }
+            switch (div)
+            {
+                case 0:
+                    this.ssDIV = "Normal Operation";
+                    break;
+                case 1:
+                    this.ssDIV = "Diversity degraded";
+                    break;
+            }
+            switch (ttf)
+            {
+                case 0:
+                    this.ssTTF = "Test Target Operative";
+                    break;
+                case 1:
+                    this.ssTTF = "Test Target Failure";
+                    break;
+            }
+        }
+        public void DecodePreProgrammedMessage(byte[] dataItem)
         {
 
         }
-        public void DecodeSystemStatus(byte[] data)
+        public void DecodeStandardDeviationOfPosition(byte[] dataItem)
         {
 
         }
-        public void DecodePreProgrammedMessage(byte[] data)
+        public void DecodePresence(byte[] dataItem)
         {
 
         }
-        public void StandardDeviationOfPosition(byte[] data)
+        public void DecodeAmplitudeOfPrimaryPlot(byte[] dataItem)
         {
 
         }
-        public void DecodePresence(byte[] data)
+        public void DecodeCalculatedAcceleration(byte[] dataItem)
         {
-
+            byte[] xBytes = { dataItem[0] };
+            double xResolution = 0.25;
+            this.calcAccelerationX = utilities.DecodeTwosComplementToDouble(xBytes, xResolution);
+            byte[] yBytes = { dataItem[1] };
+            double yResolution = 0.25;
+            this.calcAccelerationY = utilities.DecodeTwosComplementToDouble(yBytes, yResolution);
         }
-        public void DecodeAmplitudeOfPrimaryPlot(byte[] data)
-        {
-
-        }
-        public void DecodeCalculatedAcceleration(byte[] data)
-        {
-
-        }
-
     }
 }

@@ -36,6 +36,22 @@ namespace ClassLibrary
             return dataItem;
         }
 
+        public byte[] GetVariableLengthDataItem(List<byte> message) 
+        {
+            byte mask = 1;
+            List<byte> dataItem = new List<byte>();
+            dataItem.Add(message[0]);
+            message.RemoveAt(0);
+            int i = 0;
+            while ((dataItem[i] & mask) == 1)
+            {
+                dataItem.Add(message[0]);
+                message.RemoveAt(0);
+                i++;
+            }
+            return dataItem.ToArray();
+        }
+
         public double DecodeUnsignedByteToDouble(byte[] dataItem, double resolution)
         {
             double bytesValue = 0;
@@ -71,7 +87,7 @@ namespace ClassLibrary
             if (negative)
                 bytesValue = bytesValue - Math.Pow(2, (dataItem.Length * 8) - 1);
 
-            return bytesValue;
+            return bytesValue * resolution;
         }
     }
 }
