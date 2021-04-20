@@ -87,6 +87,14 @@ namespace ClassLibrary
         string ssDIV;
         string ssTTF;
 
+        string VehicleFleetId;
+        double MeasuredHeight;
+        string TRB;
+        string MSG;
+        double xstandarddeviation;
+        double ystandarddeviation;
+        double xystandarddeviation;
+        double amplitudeofprimaryplot;
         public CAT10(int lenght)
         {
             this.length = lenght;
@@ -164,6 +172,19 @@ namespace ClassLibrary
             this.flFlightLevel = double.NaN;
             this.flGarbled = "N/A";
             this.flValidated = "N/A";
+
+            this.VehicleFleetId= "N/A";
+            this.MeasuredHeight = double.NaN;
+            this.TRB = "N/A";
+            this.MSG= "N/A";
+            this.xstandarddeviation = double.NaN;
+            this.ystandarddeviation = double.NaN;
+            this.xystandarddeviation = double.NaN;
+            this.amplitudeofprimaryplot= double.NaN;
+
+
+
+
 
             this.utilities = Utilities.GetInstance();
 
@@ -829,6 +850,64 @@ namespace ClassLibrary
         }
         public void DecodeVehicleFleetIdentification(byte[] dataItem)
         {
+            int value = dataItem[0];
+            switch (value) {
+                case 0:
+                    this.VehicleFleetId= "Unknown";
+                    break;
+                case 1:
+                    this.VehicleFleetId = "ATC equipmet manteinance";
+                    break;
+                case 2:
+                    this.VehicleFleetId = "Airport manteinance";
+                    break;
+                case 3:
+                    this.VehicleFleetId = "Airport maintenance";
+                    break;
+                case 4:
+                    this.VehicleFleetId = "Bird scarer";
+                    break;
+                case 5:
+                    this.VehicleFleetId = "Snow plough";
+                    break;
+                case 6:
+                    this.VehicleFleetId = "Runaway Sweeper";
+                    break;
+                case 7:
+                    this.VehicleFleetId = "Emergency";
+                    break;
+                case 8:
+                    this.VehicleFleetId = "Police";
+                    break;
+                case 9:
+                    this.VehicleFleetId = "Bus";
+                    break;
+                case 10:
+                    this.VehicleFleetId = "Tug(push/tow)";
+                    break;
+                case 11:
+                    this.VehicleFleetId = "Grass cutter";
+                    break;
+                case 12:
+                    this.VehicleFleetId = "Fuel";
+                    break;
+                case 13:
+                    this.VehicleFleetId = "Baggage";
+                    break;
+                case 14:
+                    this.VehicleFleetId = "Catering";
+                    break;
+                case 15:
+                    this.VehicleFleetId = "Aircraft maintenance";
+                    break;
+                case 16:
+                    this.VehicleFleetId = "Flyco(follow me)";
+                    break;
+
+
+                    
+
+            }
 
         }
         public void DecodeFlightLevel(byte[] dataItem)
@@ -865,7 +944,8 @@ namespace ClassLibrary
             }
         }
         public void DecodeMeasuredHeight(byte[] dataItem)
-        {
+        {   double resolution = 6.25;
+            this.MeasuredHeight = utilities.DecodeUnsignedByteToDouble(dataItem, resolution);
 
         }
         public void DecodeTargetSizeAndOrientation(byte[] dataItem)
@@ -959,10 +1039,59 @@ namespace ClassLibrary
         }
         public void DecodePreProgrammedMessage(byte[] dataItem)
         {
+            byte octet= dataItem[0];
+            byte maskTrb = 128;
+            byte maskMsg = 127;
+            
+            
+           
+            int TRB = ((maskTrb & octet)>>7);
+            int MSG = ((maskMsg & octet));
+
+            switch (TRB)
+            {
+                case 0:
+                    this.TRB = "Default";
+                    break;
+                case 1:
+                    this.TRB = "In Trouble";
+                    break;
+            }
+
+            switch (MSG)
+            {
+                case 1:
+                    this.MSG = "Towing Aircraft";
+                    break;
+                case 2:
+                    this.MSG = "'Follow me' operation";
+                    break;
+                case 3:
+                    this.MSG = "Runway check";
+                    break;
+                case 4:
+                    this.MSG = "Emergency operation(fire,medical...)";
+                    break;
+                case 5:
+                    this.MSG = "Work in progress(maintenance,birds scarer,sweepers...)";
+                    break;
+            }
+
+
 
         }
         public void DecodeStandardDeviationOfPosition(byte[] dataItem)
         {
+            byte[] xstandarddeviation = { dataItem[0] };
+            byte[] ystandarddeviation = { dataItem[1] };
+            byte[] xystandardeviation = {dataItem[2],dataItem[3]};
+
+            this.xstandarddeviation = utilities.DecodeUnsignedByteToDouble(xstandarddeviation, 0.25);
+            this.ystandarddeviation= utilities.DecodeUnsignedByteToDouble(ystandarddeviation, 0.25);
+            this.xystandarddeviation= utilities.DecodeUnsignedByteToDouble(xystandardeviation, 0.25);
+           
+
+
 
         }
         public void DecodePresence(byte[] dataItem)
@@ -971,7 +1100,8 @@ namespace ClassLibrary
         }
         public void DecodeAmplitudeOfPrimaryPlot(byte[] dataItem)
         {
-
+            
+            this.amplitudeofprimaryplot = utilities.DecodeUnsignedByteToDouble(dataItem,0.255);
         }
         public void DecodeCalculatedAcceleration(byte[] dataItem)
         {

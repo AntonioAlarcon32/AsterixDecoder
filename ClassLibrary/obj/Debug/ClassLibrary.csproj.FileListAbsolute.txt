@@ -10,3 +10,9 @@ C:\Users\antonioalarcon\source\repos\AsterixDecoder\ClassLibrary\obj\Debug\Class
 \\Mac\Home\Desktop\Windows\AsterixDecoder\ClassLibrary\obj\Debug\ClassLibrary.csproj.CoreCompileInputs.cache
 \\Mac\Home\Desktop\Windows\AsterixDecoder\ClassLibrary\obj\Debug\ClassLibrary.dll
 \\Mac\Home\Desktop\Windows\AsterixDecoder\ClassLibrary\obj\Debug\ClassLibrary.pdb
+C:\Users\Usuario\Documents\GitHub\AsterixDecoder\ClassLibrary\obj\Debug\ClassLibrary.csprojAssemblyReference.cache
+C:\Users\Usuario\Documents\GitHub\AsterixDecoder\ClassLibrary\obj\Debug\ClassLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\Documents\GitHub\AsterixDecoder\ClassLibrary\obj\Debug\ClassLibrary.dll
+C:\Users\Usuario\Documents\GitHub\AsterixDecoder\ClassLibrary\obj\Debug\ClassLibrary.pdb
+C:\Users\Usuario\Documents\GitHub\AsterixDecoder\ClassLibrary\bin\Debug\ClassLibrary.dll
+C:\Users\Usuario\Documents\GitHub\AsterixDecoder\ClassLibrary\bin\Debug\ClassLibrary.pdb
