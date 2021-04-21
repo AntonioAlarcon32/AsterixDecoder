@@ -1,0 +1,13 @@
+\\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\obj\Debug\GUI.csprojAssemblyReference.cache
+\\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\obj\Debug\GUI.MainMenu.resources
+\\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\obj\Debug\GUI.Properties.Resources.resources
+\\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\obj\Debug\GUI.csproj.GenerateResource.cache
+\\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\obj\Debug\GUI.csproj.CoreCompileInputs.cache
+\\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\bin\Debug\GUI.exe.config
+\\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\bin\Debug\GUI.exe
+\\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\bin\Debug\GUI.pdb
+\\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\bin\Debug\ClassLibrary.dll
+\\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\bin\Debug\ClassLibrary.pdb
+\\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\obj\Debug\GUI.csproj.CopyComplete
+\\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\obj\Debug\GUI.exe
+\\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\obj\Debug\GUI.pdb

@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="AsterixFile.cs" />
     <Compile Include="CAT10.cs" />
+    <Compile Include="CAT21.cs" />
+    <Compile Include="DataBlock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities.cs" />
   </ItemGroup>
