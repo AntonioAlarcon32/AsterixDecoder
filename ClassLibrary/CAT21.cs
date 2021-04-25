@@ -17,6 +17,24 @@ namespace ClassLibrary
         int systemIdentificationCode;
 
         int trackNumber;
+        int ServiceIdentification;
+        TimeSpan TimeOfApplicabilityForPostion;
+
+        double wgs84latitude;
+        double wgs84longitude;
+        double wgs84latitudehigh;
+        double wgs84longitudehigh;
+
+        TimeSpan TimeOfApplicabilityForVelocity;
+        string RE;
+        string IM;
+        double TrueAirspeed;
+        double Airspeed;
+        int TargetAddress;
+        TimeSpan TimeOfMessageReceptionOfPosition;
+        string FSI;
+        TimeSpan TimeOfMessageReceptionOfPositionHighResolution;
+        TimeSpan TimeOfMessageReceptionOfVelocity;
 
 
         public CAT21(int length)
@@ -31,6 +49,29 @@ namespace ClassLibrary
             this.systemAreaCode = -1;
 
             this.trackNumber = -1;
+            this.ServiceIdentification = -1;
+            this.TimeOfApplicabilityForPostion = new TimeSpan();
+
+            this.wgs84latitude = double.NaN;
+            this.wgs84longitude = double.NaN;
+            this.wgs84latitudehigh = double.NaN;
+            this.wgs84longitudehigh = double.NaN;
+
+            this.TimeOfApplicabilityForVelocity = new TimeSpan();
+
+            this.RE = "N/A";
+            this.IM= "N/A";
+            this.TrueAirspeed = double.NaN;
+            this.Airspeed = double.NaN;
+            this.TargetAddress = -1;
+            this.TimeOfMessageReceptionOfPosition = new TimeSpan();
+            this.FSI= "N/A";
+            this.TimeOfMessageReceptionOfPositionHighResolution = new TimeSpan();
+            this.TimeOfMessageReceptionOfVelocity = new TimeSpan();
+
+
+
+
         }
 
         public void SetMessage(List<byte> message)
@@ -81,18 +122,22 @@ namespace ClassLibrary
                 if (boolFSPEC[4] == true) // Service Identification
                 {
                     byte[] dataItem = utilities.GetFixedLengthDataItem(message, 1);
+                    DecodeServiceIdentification(dataItem);
                 }
                 if (boolFSPEC[3] == true) //Time of Applicability for Position
                 {
                     byte[] dataItem = utilities.GetFixedLengthDataItem(message, 3);
+                    DecodeTimeOfApplicabilityForPostion(dataItem);
                 }
                 if (boolFSPEC[2] == true) // Position in WGS84 coordinates
                 {
                     byte[] dataItem = utilities.GetFixedLengthDataItem(message, 6);
+                    DecodePositionInWGS84Coordinates(dataItem);
                 }
                 if (boolFSPEC[1] == true) // Position in WGS84 coordinates, high resolution
                 {
                     byte[] dataItem = utilities.GetFixedLengthDataItem(message, 8);
+                    DecodeHighResolutionPostionInWGS84Coordinates(dataItem);
                 }
             }
             if (FSPEC.Length >= 2)
@@ -100,30 +145,37 @@ namespace ClassLibrary
                 if (boolFSPEC[15] == true) //Time of Applicability for Velocity
                 {
                     byte[] dataItem = utilities.GetFixedLengthDataItem(message, 3);
+                    DecodeTimeOfApplicabilityForVelocity(dataItem);
                 }
                 if (boolFSPEC[14] == true) //Air Speed
                 {
                     byte[] dataItem = utilities.GetFixedLengthDataItem(message, 2);
+                    DecodeAirspeed(dataItem);
+
                 }
 
                 if (boolFSPEC[13] == true) //True AirSpeed
                 {
                     byte[] dataItem = utilities.GetFixedLengthDataItem(message, 2);
+                    DecodeTrueAirspeed(dataItem);
                 }
 
                 if (boolFSPEC[12] == true) //Target Address
                 {
                     byte[] dataItem = utilities.GetFixedLengthDataItem(message, 3);
+                    DecodeTargetAddress(dataItem);
                 }
 
                 if (boolFSPEC[11] == true)//Time of Message Reception of Position
                 {
                     byte[] dataItem = utilities.GetFixedLengthDataItem(message, 3);
+                    DecodeTimeOfMessageReceptionOfPosition(dataItem);
                 }
 
                 if (boolFSPEC[10] == true)//Time of Message Reception of Position high res
                 {
                     byte[] dataItem = utilities.GetFixedLengthDataItem(message, 4);
+                    DecodeTimeOfMessageReceptionOfPositionHighResolution(dataItem);
                 }
 
                 if (boolFSPEC[9] == true)//Time of Message Reception of Velocity
@@ -132,7 +184,8 @@ namespace ClassLibrary
                 }
             }
 
-            if (FSPEC.Length >= 3) {
+            if (FSPEC.Length >= 3)
+            {
                 if (boolFSPEC[23] == true) //Time of Message Reception of Velocity-High Precision 
                 {
                     byte[] datItem = utilities.GetFixedLengthDataItem(message, 4);
@@ -153,7 +206,7 @@ namespace ClassLibrary
 
                 if (boolFSPEC[20] == true) //MOPS Version 
                 {
-                    byte[] datItem = utilities.GetFixedLengthDataItem(message,1);
+                    byte[] datItem = utilities.GetFixedLengthDataItem(message, 1);
 
                 }
 
@@ -222,7 +275,8 @@ namespace ClassLibrary
 
                 }
             }
-            if (FSPEC.Length >= 5) {
+            if (FSPEC.Length >= 5)
+            {
                 if (boolFSPEC[39] == true) //Target Identification
                 {
                     byte[] datItem = utilities.GetFixedLengthDataItem(message, 6);
@@ -310,19 +364,20 @@ namespace ClassLibrary
 
                 }
             }
-            if (FSPEC.Length >= 7) {
-                    if (boolFSPEC[50] == true) //Reserved expansion field
-                    {
-                        byte[] datItem = utilities.GetVariableLengthDataItem(message);
+            if (FSPEC.Length >= 7)
+            {
+                if (boolFSPEC[50] == true) //Reserved expansion field
+                {
+                    byte[] datItem = utilities.GetVariableLengthDataItem(message);
 
-                    }
+                }
 
-                    if (boolFSPEC[49] == true) //Special purpose field
-                    {
-                        byte[] datItem = utilities.GetVariableLengthDataItem(message);
-                    }
-                } 
+                if (boolFSPEC[49] == true) //Special purpose field
+                {
+                    byte[] datItem = utilities.GetVariableLengthDataItem(message);
+                }
             }
+        }
         public void DecodeDataSourceIdentifier(byte[] dataItem)
         {
             this.systemIdentificationCode = dataItem[1];
@@ -330,7 +385,7 @@ namespace ClassLibrary
         }
 
         public void DecodeTargetReportDescriptor(byte[] dataItem)
-        { 
+        {
         }
 
         public void DecodeTrackNumber(byte[] dataItem)
@@ -341,9 +396,314 @@ namespace ClassLibrary
             this.trackNumber = (int)number;
         }
 
-        public int GetLength() {
-            return this.length;
+        public void DecodeServiceIdentification(byte[] dataItem)
+        {
+            double resolution = 1;
+            double number = utilities.DecodeUnsignedByteToDouble(dataItem, resolution);
+            this.ServiceIdentification = (int)number;
+
         }
 
+        public void DecodeTimeOfApplicabilityForPostion(byte[] dataItem)
+        {
+            double resolution = (1 / 128);
+            double number = utilities.DecodeUnsignedByteToDouble(dataItem, resolution);
+            this.TimeOfApplicabilityForPostion = TimeSpan.FromSeconds(number);
+
+        }
+
+
+        public void DecodePositionInWGS84Coordinates(byte[] dataItem)
+        {
+            int i = 0;
+            byte[] latitudeBytes = new byte[3];
+            byte[] longitudeBytes = new byte[3];
+            while (i < dataItem.Length)
+            {
+                if (i <= 2)
+                    latitudeBytes[i] = dataItem[i];
+                else if (i > 2)
+                    longitudeBytes[i - 3] = dataItem[i];
+                i++;
+            }
+            double resolution = 180 / Math.Pow(2, 23);
+            this.wgs84latitude = utilities.DecodeTwosComplementToDouble(latitudeBytes, resolution);
+            this.wgs84longitude = utilities.DecodeTwosComplementToDouble(longitudeBytes, resolution);
+
+        }
+
+        public void DecodeHighResolutionPostionInWGS84Coordinates(byte[] dataItem)
+        {
+            int i = 0;
+            byte[] latitudeBytes = new byte[4];
+            byte[] longitudeBytes = new byte[4];
+            while (i < dataItem.Length)
+            {
+                if (i <= 3)
+                    latitudeBytes[i] = dataItem[i];
+                else if (i > 3)
+                    longitudeBytes[i - 4] = dataItem[i];
+                i++;
+            }
+            double resolution = 180 / Math.Pow(2, 30);
+            this.wgs84latitudehigh = utilities.DecodeTwosComplementToDouble(latitudeBytes, resolution);
+            this.wgs84longitudehigh = utilities.DecodeTwosComplementToDouble(longitudeBytes, resolution);
+        }
+
+        public void DecodeTimeOfApplicabilityForVelocity(byte[] dataItem)
+        {
+            double resolution = (1 / 128);
+            double number = utilities.DecodeUnsignedByteToDouble(dataItem, resolution);
+            this.TimeOfApplicabilityForVelocity = TimeSpan.FromSeconds(number);
+
+        }
+
+        public void DecodeAirspeed(byte[] dataItem)
+        {
+            double resolution = 1;
+            byte maskIM = 128;
+            byte secondmask = 127;
+            int IM = ((dataItem[0] & maskIM) >> 7);
+            byte firstbyte = (byte)(dataItem[0] & secondmask);
+            byte[] mybytes = { firstbyte, dataItem[1] };
+
+
+            if (IM == 1) { resolution = 0.001; }//mach
+            else if (IM == 0) { resolution = (2 ^ -14); }//NM/s
+            this.Airspeed = utilities.DecodeUnsignedByteToDouble(mybytes, resolution);
+
+
+            switch (IM)
+            {
+                case 0:
+                    this.IM = "IAS";
+                    break;
+                case 1:
+                    this.IM = "MACH";
+                    break;
+            }
+        }
+
+        public void DecodeTrueAirspeed(byte[] dataItem)
+        {
+            byte maskRE = 128;
+            byte secondmask = 127;
+            int RE = ((dataItem[0] & maskRE) >> 7);
+            byte firstbyte = (byte)(dataItem[0] & secondmask);
+            byte[] mybytes = { firstbyte, dataItem[1] };
+            double resolution = 1;//knots
+            this.TrueAirspeed = utilities.DecodeUnsignedByteToDouble(mybytes, resolution);
+
+
+            switch (RE)
+            {
+                case 0:
+                    this.RE = "Value in defined range";
+                    break;
+                case 1:
+                    this.RE = "Value exceeds defined range";
+                    break;
+            }
+
+        }
+
+        public void DecodeTargetAddress(byte[] dataItem) {
+           double resolution = 1;
+            this.TargetAddress = (int)utilities.DecodeUnsignedByteToDouble(dataItem, resolution);
+
+        }
+
+        public void DecodeTimeOfMessageReceptionOfPosition(byte[] dataItem)
+        {
+            double resolution = (1/128);
+            this.TimeOfMessageReceptionOfPosition = TimeSpan.FromSeconds(utilities.DecodeUnsignedByteToDouble(dataItem, resolution));
+
+        }
+
+        public void DecodeTimeOfMessageReceptionOfPositionHighResolution(byte[] dataItem)
+        {
+            byte maskFSI = 192;
+            byte secondmask = 63;
+            int FSI=((dataItem[0] & maskFSI) >>6 );
+            byte firstbyte = (byte)(dataItem[0] & secondmask);
+            byte[] mybytes = { firstbyte, dataItem[1],dataItem[2],dataItem[3] };
+            double resolution = (1/2^30);//seconds
+            this.TimeOfMessageReceptionOfPositionHighResolution = TimeSpan.FromSeconds(utilities.DecodeUnsignedByteToDouble(mybytes, resolution));
+
+
+            switch (FSI)
+            {
+                case 0:
+                    this.FSI = "TOMRp whole seconds=(1021/073) Whole seconds";
+                    break;
+                case 1:
+                    this.FSI = "TOMRp whole seconds = (1021 / 073) Whole seconds+1";
+                    break;
+                case 2:
+                    this.FSI = "TOMRp whole seconds = (1021 / 073) Whole seconds-1";
+                    break;
+                case 3:
+                    this.FSI= "Reserved";
+                    break;
+            }
+
+        }
+
+        public void DecodeTimeOfMessageReceptionOfVelocity(byte[] dataItem) 
+        {
+            double resolution = (1 / 128);
+            this.TimeOfMessageReceptionOfVelocity = TimeSpan.FromSeconds(utilities.DecodeUnsignedByteToDouble(dataItem, resolution));
+
+        }
+
+        public void Timeofmessagereceptionvelocityhighprecision(byte[] dataItem)
+        {
+           
+        }
+        public void Geometricheight (byte[] dataItem)
+        {
+
+        }
+        public void QualityIndicators(byte[] dataItem)
+        {
+
+        }
+        public void MOPSversion(byte[] dataItem)
+        {
+
+        }
+        public void Mode3Acode(byte[] dataItem)
+        {
+
+        }
+        public void Rollangle(byte[] dataItem)
+        {
+
+        }
+        public void FlightLevel(byte[] dataItem)
+        {
+
+        }
+        public void Magneticheading(byte[] dataItem)
+        {
+
+        }
+        public void Targetstatus(byte[] dataItem)
+        {
+
+        }
+
+        public void Barometricverticalrate(byte[] dataItem)
+        {
+
+        }
+        public void Geometricverticalrate(byte[] dataItem)
+        {
+
+        }
+        public void Airborngroundvector(byte[] dataItem)
+        {
+
+        }
+        public void Trackanglerate(byte[] dataItem)
+        {
+
+        }
+        public void Timeofreporttransmission(byte[] dataItem)
+        {
+
+        }
+        public void Targetidentification(byte[] dataItem)
+        {
+
+        }
+        public void Emittercategory(byte[] dataItem)
+        {
+
+        }
+        public void Metinformation(byte[] dataItem)
+        {
+
+        }
+        public void Selectedaltitude(byte[] dataItem)
+        {
+
+        }
+        public void Finalstateselectedaltitude(byte[] dataItem)
+        {
+
+        }
+        public void Trajectoryintent(byte[] dataItem)
+        {
+
+        }
+        public void ServiceManagement(byte[] dataItem)
+        {
+
+        }
+        public void Aircraftoperationalstatus(byte[] dataItem)
+        {
+
+        }
+        public void Surfacecapabilitiesandcharacteristics(byte[] dataItem)
+        {
+
+        }
+        public void Messageamplitude(byte[] dataItem)
+        {
+
+        }
+        public void ModeSMData(byte[] dataItem)
+        {
+
+        }
+        public void ACASResolutionadvisoryreport(byte[] dataItem)
+        {
+
+        }
+        public void Recieverid(byte[] dataItem)
+        {
+
+        }
+        public void Dataages(byte[] dataItem)
+        {
+
+        }
+        public void Reservedexpansionfield(byte[] dataItem)
+        {
+
+        }
+        public void Specialpurposefield(byte[] dataItem)
+        {
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public int GetLength()
+        {
+            return this.length;
+
+
+        }
     }
 }
