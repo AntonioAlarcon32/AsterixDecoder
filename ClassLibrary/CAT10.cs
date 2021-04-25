@@ -580,7 +580,6 @@ namespace ClassLibrary
             double timeResolution = Math.Pow(2,-7);
             double seconds = utilities.DecodeUnsignedByteToDouble(timeBytes, timeResolution);
             this.timeOfDay = TimeSpan.FromSeconds(seconds);
-            int c = 1;
         }
 
         public void DecodeWGS84Coordinates(byte[] dataItem)

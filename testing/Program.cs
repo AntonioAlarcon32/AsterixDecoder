@@ -16,7 +16,6 @@ namespace testing
             asterixFile.ReadFile(@"//mac/Home/Desktop/Windows/file3.ast");
             Console.WriteLine();
             List<DataBlock> dataBlockList = asterixFile.GetDataBlocks();
-            List<CAT21> cat21list = asterixFile.GetCAT21Blocks();
             Console.ReadLine();
         }
     }

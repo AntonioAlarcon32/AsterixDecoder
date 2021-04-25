@@ -17,24 +17,24 @@ namespace ClassLibrary
         int systemIdentificationCode;
 
         int trackNumber;
-        int ServiceIdentification;
-        TimeSpan TimeOfApplicabilityForPostion;
+        int serviceIdentification;
+        TimeSpan timeOfAppicabilityPosition;
 
         double wgs84latitude;
         double wgs84longitude;
         double wgs84latitudehigh;
         double wgs84longitudehigh;
 
-        TimeSpan TimeOfApplicabilityForVelocity;
+        TimeSpan timeOfApplicabilityVelocity;
         string RE;
         string IM;
-        double TrueAirspeed;
-        double Airspeed;
-        int TargetAddress;
-        TimeSpan TimeOfMessageReceptionOfPosition;
+        double trueAirSpeed;
+        double airSpeed;
+        int targetAddress;
+        TimeSpan timeOfMessageReceptionPosition;
         string FSI;
-        TimeSpan TimeOfMessageReceptionOfPositionHighResolution;
-        TimeSpan TimeOfMessageReceptionOfVelocity;
+        TimeSpan timeOfMessageReceptionPositionHighResolution;
+        TimeSpan timeOfMessageReceptionVelocity;
 
 
         public CAT21(int length)
@@ -49,29 +49,26 @@ namespace ClassLibrary
             this.systemAreaCode = -1;
 
             this.trackNumber = -1;
-            this.ServiceIdentification = -1;
-            this.TimeOfApplicabilityForPostion = new TimeSpan();
+            this.serviceIdentification = -1;
+            this.timeOfAppicabilityPosition = new TimeSpan();
 
             this.wgs84latitude = double.NaN;
             this.wgs84longitude = double.NaN;
             this.wgs84latitudehigh = double.NaN;
             this.wgs84longitudehigh = double.NaN;
 
-            this.TimeOfApplicabilityForVelocity = new TimeSpan();
+            this.timeOfApplicabilityVelocity = new TimeSpan();
 
             this.RE = "N/A";
             this.IM= "N/A";
-            this.TrueAirspeed = double.NaN;
-            this.Airspeed = double.NaN;
-            this.TargetAddress = -1;
-            this.TimeOfMessageReceptionOfPosition = new TimeSpan();
+            this.trueAirSpeed = double.NaN;
+            this.airSpeed = double.NaN;
+            this.targetAddress = -1;
+            this.timeOfMessageReceptionPosition = new TimeSpan();
             this.FSI= "N/A";
-            this.TimeOfMessageReceptionOfPositionHighResolution = new TimeSpan();
-            this.TimeOfMessageReceptionOfVelocity = new TimeSpan();
+            this.timeOfMessageReceptionPositionHighResolution = new TimeSpan();
 
-
-
-
+            this.timeOfMessageReceptionVelocity = new TimeSpan();
         }
 
         public void SetMessage(List<byte> message)
@@ -127,7 +124,7 @@ namespace ClassLibrary
                 if (boolFSPEC[3] == true) //Time of Applicability for Position
                 {
                     byte[] dataItem = utilities.GetFixedLengthDataItem(message, 3);
-                    DecodeTimeOfApplicabilityForPostion(dataItem);
+                    DecodeTimeOfApplicabilityForPosition(dataItem);
                 }
                 if (boolFSPEC[2] == true) // Position in WGS84 coordinates
                 {
@@ -181,6 +178,7 @@ namespace ClassLibrary
                 if (boolFSPEC[9] == true)//Time of Message Reception of Velocity
                 {
                     byte[] dataItem = utilities.GetFixedLengthDataItem(message, 3);
+                    DecodeTimeOfMessageReceptionOfVelocity(dataItem);
                 }
             }
 
@@ -400,16 +398,15 @@ namespace ClassLibrary
         {
             double resolution = 1;
             double number = utilities.DecodeUnsignedByteToDouble(dataItem, resolution);
-            this.ServiceIdentification = (int)number;
-
+            this.serviceIdentification = (int)number;
         }
 
-        public void DecodeTimeOfApplicabilityForPostion(byte[] dataItem)
+        public void DecodeTimeOfApplicabilityForPosition(byte[] dataItem)
         {
-            double resolution = (1 / 128);
+            double resolution = Math.Pow(2, -7);
             double number = utilities.DecodeUnsignedByteToDouble(dataItem, resolution);
-            this.TimeOfApplicabilityForPostion = TimeSpan.FromSeconds(number);
-
+            this.timeOfAppicabilityPosition = TimeSpan.FromSeconds(number);
+            int c = 1;
         }
 
 
@@ -452,10 +449,9 @@ namespace ClassLibrary
 
         public void DecodeTimeOfApplicabilityForVelocity(byte[] dataItem)
         {
-            double resolution = (1 / 128);
+            double resolution = Math.Pow(2, -7);
             double number = utilities.DecodeUnsignedByteToDouble(dataItem, resolution);
-            this.TimeOfApplicabilityForVelocity = TimeSpan.FromSeconds(number);
-
+            this.timeOfApplicabilityVelocity = TimeSpan.FromSeconds(number);
         }
 
         public void DecodeAirspeed(byte[] dataItem)
@@ -470,7 +466,7 @@ namespace ClassLibrary
 
             if (IM == 1) { resolution = 0.001; }//mach
             else if (IM == 0) { resolution = (2 ^ -14); }//NM/s
-            this.Airspeed = utilities.DecodeUnsignedByteToDouble(mybytes, resolution);
+            this.airSpeed = utilities.DecodeUnsignedByteToDouble(mybytes, resolution);
 
 
             switch (IM)
@@ -492,7 +488,7 @@ namespace ClassLibrary
             byte firstbyte = (byte)(dataItem[0] & secondmask);
             byte[] mybytes = { firstbyte, dataItem[1] };
             double resolution = 1;//knots
-            this.TrueAirspeed = utilities.DecodeUnsignedByteToDouble(mybytes, resolution);
+            this.trueAirSpeed = utilities.DecodeUnsignedByteToDouble(mybytes, resolution);
 
 
             switch (RE)
@@ -509,15 +505,15 @@ namespace ClassLibrary
 
         public void DecodeTargetAddress(byte[] dataItem) {
            double resolution = 1;
-            this.TargetAddress = (int)utilities.DecodeUnsignedByteToDouble(dataItem, resolution);
+            this.targetAddress = (int)utilities.DecodeUnsignedByteToDouble(dataItem, resolution);
 
         }
 
         public void DecodeTimeOfMessageReceptionOfPosition(byte[] dataItem)
         {
-            double resolution = (1/128);
-            this.TimeOfMessageReceptionOfPosition = TimeSpan.FromSeconds(utilities.DecodeUnsignedByteToDouble(dataItem, resolution));
-
+            double resolution = Math.Pow(2, -7);
+            double seconds = utilities.DecodeUnsignedByteToDouble(dataItem, resolution);
+            this.timeOfMessageReceptionPosition = TimeSpan.FromSeconds(seconds);
         }
 
         public void DecodeTimeOfMessageReceptionOfPositionHighResolution(byte[] dataItem)
@@ -527,8 +523,9 @@ namespace ClassLibrary
             int FSI=((dataItem[0] & maskFSI) >>6 );
             byte firstbyte = (byte)(dataItem[0] & secondmask);
             byte[] mybytes = { firstbyte, dataItem[1],dataItem[2],dataItem[3] };
-            double resolution = (1/2^30);//seconds
-            this.TimeOfMessageReceptionOfPositionHighResolution = TimeSpan.FromSeconds(utilities.DecodeUnsignedByteToDouble(mybytes, resolution));
+            double resolution = (1/Math.Pow(2,30));//seconds
+            double seconds = utilities.DecodeUnsignedByteToDouble(mybytes, resolution);
+            this.timeOfMessageReceptionPositionHighResolution = TimeSpan.FromSeconds(seconds);
 
 
             switch (FSI)
@@ -551,8 +548,9 @@ namespace ClassLibrary
 
         public void DecodeTimeOfMessageReceptionOfVelocity(byte[] dataItem) 
         {
-            double resolution = (1 / 128);
-            this.TimeOfMessageReceptionOfVelocity = TimeSpan.FromSeconds(utilities.DecodeUnsignedByteToDouble(dataItem, resolution));
+            double resolution = Math.Pow(2,-7);
+            double seconds = utilities.DecodeUnsignedByteToDouble(dataItem, resolution);
+            this.timeOfMessageReceptionVelocity = TimeSpan.FromSeconds(seconds);
 
         }
 
