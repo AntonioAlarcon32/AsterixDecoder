@@ -26,37 +26,39 @@ namespace ClassLibrary
         double wgs84longitudehigh;
 
         TimeSpan timeOfApplicabilityVelocity;
-        string rETrueAirspeed;
-        string iM;
+        string RETrueAirspeed;
+        string IM;
         double trueAirSpeed;
         double airSpeed;
         int targetAddress;
         TimeSpan timeOfMessageReceptionPosition;
-        string fSITimeofMessageReceptionPositionHighResolution;
-        string fSITimeofMessageReceptionVelocityhighprecision;
+        string FSITimeofMessageReceptionPositionHighResolution;
+        string FSITimeofMessageReceptionVelocityhighprecision;
         TimeSpan timeOfMessageReceptionPositionHighResolution;
         TimeSpan timeOfMessageReceptionVelocity;
         TimeSpan timeofmessagereceptionvelocityhighprecision;
 
         double geometricHeight;
 
-        string vn;
-        string vns;
-        string ltt;
+        string mopsVN;
+        string mopsVNS;
+        string mopsLTT;
         string m3ACode;
         double rollAngle;
         double flightLevel;
         double magneticHeading;
         double targetStatus;
         double barometricVerticalRate;
-        string rEbarometric;
+        string barometricRE;
         double geometricVerticalRate;
-        string rEgeometric;
-        string rEairbornegroundvector;
+        string geometricRE;
+        string airborneGroundVectorRE;
         double groundSpeed;
         double trackAngle;
         double trackAngleRate;
         TimeSpan timeOfAsterixReportTransmission;
+
+        string targetIdentification;
 
         public CAT21(int length)
         {
@@ -80,41 +82,38 @@ namespace ClassLibrary
 
             this.timeOfApplicabilityVelocity = new TimeSpan();
 
-            this.rETrueAirspeed = "N/A";
-            this.iM= "N/A";
+            this.RETrueAirspeed = "N/A";
+            this.IM= "N/A";
             this.trueAirSpeed = double.NaN;
             this.airSpeed = double.NaN;
             this.targetAddress = -1;
             this.timeOfMessageReceptionPosition = new TimeSpan();
-            this.fSITimeofMessageReceptionVelocityhighprecision= "N/A";
-            this.fSITimeofMessageReceptionPositionHighResolution = "N/A";
+            this.FSITimeofMessageReceptionVelocityhighprecision= "N/A";
+            this.FSITimeofMessageReceptionPositionHighResolution = "N/A";
             this.timeOfMessageReceptionPositionHighResolution = new TimeSpan();
 
             this.timeOfMessageReceptionVelocity = new TimeSpan();
             this.timeofmessagereceptionvelocityhighprecision = new TimeSpan();
             this.geometricHeight = double.NaN;
 
-            this.vn= "N/A";
-            this.vns = "N/A";
-            this.ltt = "N/A";
+            this.mopsVN= "N/A";
+            this.mopsVNS = "N/A";
+            this.mopsLTT = "N/A";
             this.m3ACode = "N/A";
             this.rollAngle = double.NaN;
             this.flightLevel = double.NaN;
             this.magneticHeading = double.NaN;
             this.targetStatus= double.NaN;
             this.barometricVerticalRate = double.NaN;
-            this.rEbarometric = "N/A";
+            this.barometricRE = "N/A";
             this.geometricVerticalRate = double.NaN;
-            this.rEgeometric = "N/A";
-            this.rEairbornegroundvector = "N/A";
+            this.geometricRE = "N/A";
+            this.airborneGroundVectorRE = "N/A";
             this.groundSpeed = double.NaN;
             this.trackAngle = double.NaN;
             this.trackAngleRate = double.NaN;
             this.timeOfAsterixReportTransmission = new TimeSpan();
-
-
-
-
+            this.targetIdentification = "N/A";
         }
 
         public void SetMessage(List<byte> message)
@@ -131,7 +130,6 @@ namespace ClassLibrary
         {
             byte lastBitCheck = 1;
             List<byte> FSPEC = new List<byte>();
-            int i = 0;
             int moreFSPEC = 1;
             while (moreFSPEC == 1)
             {
@@ -332,8 +330,8 @@ namespace ClassLibrary
             {
                 if (boolFSPEC[39] == true) //Target Identification
                 {
-                    byte[] datItem = utilities.GetFixedLengthDataItem(message, 6);
-
+                    byte[] dataItem = utilities.GetFixedLengthDataItem(message, 6);
+                    DecodeTargetIdentification(dataItem);
                 }
 
                 if (boolFSPEC[38] == true) //Emitter category
@@ -461,7 +459,6 @@ namespace ClassLibrary
             double resolution = Math.Pow(2, -7);
             double number = utilities.DecodeUnsignedByteToDouble(dataItem, resolution);
             this.timeOfAppicabilityPosition = TimeSpan.FromSeconds(number);
-            int c = 1;
         }
 
 
@@ -527,10 +524,10 @@ namespace ClassLibrary
             switch (IM)
             {
                 case 0:
-                    this.iM = "IAS";
+                    this.IM = "IAS";
                     break;
                 case 1:
-                    this.iM = "MACH";
+                    this.IM = "MACH";
                     break;
             }
         }
@@ -549,10 +546,10 @@ namespace ClassLibrary
             switch (RE)
             {
                 case 0:
-                    this.rETrueAirspeed = "Value in defined range";
+                    this.RETrueAirspeed = "Value in defined range";
                     break;
                 case 1:
-                    this.rETrueAirspeed = "Value exceeds defined range";
+                    this.RETrueAirspeed = "Value exceeds defined range";
                     break;
             }
 
@@ -586,16 +583,16 @@ namespace ClassLibrary
             switch (FSI)
             {
                 case 0:
-                    this.fSITimeofMessageReceptionPositionHighResolution = "TOMRp whole seconds=(1021/073) Whole seconds";
+                    this.FSITimeofMessageReceptionPositionHighResolution = "TOMRp whole seconds=(1021/073) Whole seconds";
                     break;
                 case 1:
-                    this.fSITimeofMessageReceptionPositionHighResolution = "TOMRp whole seconds = (1021 / 073) Whole seconds+1";
+                    this.FSITimeofMessageReceptionPositionHighResolution = "TOMRp whole seconds = (1021 / 073) Whole seconds+1";
                     break;
                 case 2:
-                    this.fSITimeofMessageReceptionPositionHighResolution = "TOMRp whole seconds = (1021 / 073) Whole seconds-1";
+                    this.FSITimeofMessageReceptionPositionHighResolution = "TOMRp whole seconds = (1021 / 073) Whole seconds-1";
                     break;
                 case 3:
-                    this.fSITimeofMessageReceptionPositionHighResolution = "Reserved";
+                    this.FSITimeofMessageReceptionPositionHighResolution = "Reserved";
                     break;
             }
 
@@ -624,16 +621,16 @@ namespace ClassLibrary
             switch (FSI)
             {
                 case 0:
-                    this.fSITimeofMessageReceptionVelocityhighprecision = "TOMRp whole seconds=(1021/073) Whole seconds";
+                    this.FSITimeofMessageReceptionVelocityhighprecision = "TOMRp whole seconds=(1021/073) Whole seconds";
                     break;
                 case 1:
-                    this.fSITimeofMessageReceptionVelocityhighprecision = "TOMRp whole seconds = (1021 / 073) Whole seconds+1";
+                    this.FSITimeofMessageReceptionVelocityhighprecision = "TOMRp whole seconds = (1021 / 073) Whole seconds+1";
                     break;
                 case 2:
-                    this.fSITimeofMessageReceptionVelocityhighprecision = "TOMRp whole seconds = (1021 / 073) Whole seconds-1";
+                    this.FSITimeofMessageReceptionVelocityhighprecision = "TOMRp whole seconds = (1021 / 073) Whole seconds-1";
                     break;
                 case 3:
-                    this.fSITimeofMessageReceptionVelocityhighprecision = "Reserved";
+                    this.FSITimeofMessageReceptionVelocityhighprecision = "Reserved";
                     break;
             }
         }
@@ -658,13 +655,13 @@ namespace ClassLibrary
             switch (vn)
             {
                 case 0:
-                    this.vn = "ED102/DO-260[Ref.8]";
+                    this.mopsVN = "ED102/DO-260[Ref.8]";
                     break;
                 case 1:
-                    this.vn = "DO-260A[Ref.9]";
+                    this.mopsVN = "DO-260A[Ref.9]";
                     break;
                 case 2:
-                    this.vn = "ED102A/DO-260B[Ref.11]";
+                    this.mopsVN = "ED102A/DO-260B[Ref.11]";
                     break;
 
             }
@@ -672,10 +669,10 @@ namespace ClassLibrary
             switch (vns)
             {
                 case 0:
-                    this.vns = "The MOPS Version is supported by the GS";
+                    this.mopsVNS = "The MOPS Version is supported by the GS";
                     break;
                 case 1:
-                    this.vns = "The MOPS Version is not supported by the GS";
+                    this.mopsVNS = "The MOPS Version is not supported by the GS";
                     break;
 
             }
@@ -683,30 +680,30 @@ namespace ClassLibrary
             switch (LTT)
             {
                 case 0:
-                    this.ltt = "Other";
+                    this.mopsLTT = "Other";
                     break;
                 case 1:
-                    this.ltt = "UAT";
+                    this.mopsLTT = "UAT";
                     break;
                    
                     
                 case 2:
-                    this.ltt = "1090 ES";
+                    this.mopsLTT = "1090 ES";
                     break;
                 case 3:
-                    this.ltt = "VDL 4";
+                    this.mopsLTT = "VDL 4";
                     break;
                 case 4:
-                    this.ltt = "Not assigned";
+                    this.mopsLTT = "Not assigned";
                     break;
                 case 5:
-                    this.ltt = "Not assigned";
+                    this.mopsLTT = "Not assigned";
                     break;
                 case 6:
-                    this.ltt = "Not assigned";
+                    this.mopsLTT = "Not assigned";
                     break;
                 case 7:
-                    this.ltt = "Not assigned";
+                    this.mopsLTT = "Not assigned";
                     break;
 
 
@@ -734,12 +731,12 @@ namespace ClassLibrary
         }
         public void DecodeFlightLevel(byte[] dataItem)
         {
-            double resolution = (1 / 4);
+            double resolution = (1.0 / 4.0);
             this.flightLevel = utilities.DecodeTwosComplementToDouble(dataItem, resolution);
         }
         public void DecodeMagneticHeading(byte[] dataItem)
         {
-            double resolution = (360 / 2 ^ 16);
+            double resolution = (360 / Math.Pow(2,16));
             this.magneticHeading = utilities.DecodeUnsignedByteToDouble(dataItem,resolution);
         }
         public void DecodeTargetStatus(byte[] dataItem)
@@ -759,10 +756,10 @@ namespace ClassLibrary
             switch (RE)
             {
                 case 0:
-                    this.rEbarometric = "Value in defined range";
+                    this.barometricRE = "Value in defined range";
                     break;
                 case 1:
-                    this.rEbarometric = "Value exceeds defined range";
+                    this.barometricRE = "Value exceeds defined range";
                     break;
             }
             this.barometricVerticalRate = utilities.DecodeTwosComplementToDouble(mybytes, resolution);
@@ -778,10 +775,10 @@ namespace ClassLibrary
             switch (RE)
             {
                 case 0:
-                    this.rEgeometric = "Value in defined range";
+                    this.geometricRE = "Value in defined range";
                     break;
                 case 1:
-                    this.rEgeometric = "Value exceeds defined range";
+                    this.geometricRE = "Value exceeds defined range";
                     break;
             }
             this.geometricVerticalRate = utilities.DecodeTwosComplementToDouble(mybytes, resolution);
@@ -789,8 +786,8 @@ namespace ClassLibrary
         }
         public void DecodeAirbornGroundVector(byte[] dataItem)
         {
-            double resolutiongroundspeed = (1/2^14);//NM/S
-            double resolutiontrackangle = (360 / 2 ^ 16);//degrees
+            double resolutiongroundspeed = (1/Math.Pow(2,14));//NM/S
+            double resolutiontrackangle = (360 / Math.Pow(2,16));//degrees
             byte REmask = 128;
             byte secondmask = 127;
             int RE = (int)((REmask & dataItem[0]) >> 7);
@@ -801,10 +798,10 @@ namespace ClassLibrary
             switch (RE)
             {
                 case 0:
-                    this.rEairbornegroundvector = "Value in defined range";
+                    this.airborneGroundVectorRE = "Value in defined range";
                     break;
                 case 1:
-                    this.rEairbornegroundvector = "Value exceeds defined range";
+                    this.airborneGroundVectorRE = "Value exceeds defined range";
                     break;
             }
             this.groundSpeed = utilities.DecodeUnsignedByteToDouble(groundspeed, resolutiongroundspeed);
@@ -829,17 +826,28 @@ namespace ClassLibrary
         }
         public void DecodeTargetIdentification(byte[] dataItem)
         {
+            byte char8 = (byte)((dataItem[5] & 63));
+            byte char7 = (byte)(((dataItem[5] & 192) >> 6) + ((dataItem[4] & 15) << 2));
+            byte char6 = (byte)(((dataItem[4] & 240) >> 4) + ((dataItem[3] & 3) << 4));
+            byte char5 = (byte)((dataItem[3] & 252) >> 2);
+            byte char4 = (byte)((dataItem[2] & 63));
+            byte char3 = (byte)(((dataItem[2] & 192) >> 6) + ((dataItem[1] & 15) << 2));
+            byte char2 = (byte)(((dataItem[1] & 240) >> 4) + ((dataItem[0] & 3) << 4));
+            byte char1 = (byte)((dataItem[0] & 252) >> 2);
 
+
+            byte[] chars = { char1, char2, char3, char4, char5, char6, char7, char8 };
+            this.targetIdentification = utilities.GetAircraftIdFromBytes(chars);
         }
         public void DecodeEmitterCategory(byte[] dataItem)
         {
 
         }
-        public void Metinformation(byte[] dataItem)
+        public void MetInformation(byte[] dataItem)
         {
 
         }
-        public void Selectedaltitude(byte[] dataItem)
+        public void SelectedAltitude(byte[] dataItem)
         {
 
         }
