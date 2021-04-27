@@ -26,35 +26,36 @@ namespace ClassLibrary
         double wgs84longitudehigh;
 
         TimeSpan timeOfApplicabilityVelocity;
-        string RE;
-        string IM;
+        string rETrueAirspeed;
+        string iM;
         double trueAirSpeed;
         double airSpeed;
         int targetAddress;
         TimeSpan timeOfMessageReceptionPosition;
-        string FSI;
+        string fSITimeofMessageReceptionPositionHighResolution;
+        string fSITimeofMessageReceptionVelocityhighprecision;
         TimeSpan timeOfMessageReceptionPositionHighResolution;
         TimeSpan timeOfMessageReceptionVelocity;
-        TimeSpan Timeofmessagereceptionvelocityhighprecision;
+        TimeSpan timeofmessagereceptionvelocityhighprecision;
 
-        double GeometricHeight;
+        double geometricHeight;
 
         string vn;
         string vns;
         string ltt;
-        string M3ACode;
-        double RollAngle;
-        double FlightLevel;
-        double MagneticHeading;
-        double TargetStatus;
-        double BarometricVerticalRate;
-        string REbarometric;
-        double GeometricVerticalRate;
-        string REgeometric;
-        string REairbornegroundvector;
-        double GroundSpeed;
-        double TrackAngle;
-        double TrackAngleRate;
+        string m3ACode;
+        double rollAngle;
+        double flightLevel;
+        double magneticHeading;
+        double targetStatus;
+        double barometricVerticalRate;
+        string rEbarometric;
+        double geometricVerticalRate;
+        string rEgeometric;
+        string rEairbornegroundvector;
+        double groundSpeed;
+        double trackAngle;
+        double trackAngleRate;
         TimeSpan timeOfAsterixReportTransmission;
 
         public CAT21(int length)
@@ -79,35 +80,36 @@ namespace ClassLibrary
 
             this.timeOfApplicabilityVelocity = new TimeSpan();
 
-            this.RE = "N/A";
-            this.IM= "N/A";
+            this.rETrueAirspeed = "N/A";
+            this.iM= "N/A";
             this.trueAirSpeed = double.NaN;
             this.airSpeed = double.NaN;
             this.targetAddress = -1;
             this.timeOfMessageReceptionPosition = new TimeSpan();
-            this.FSI= "N/A";
+            this.fSITimeofMessageReceptionVelocityhighprecision= "N/A";
+            this.fSITimeofMessageReceptionPositionHighResolution = "N/A";
             this.timeOfMessageReceptionPositionHighResolution = new TimeSpan();
 
             this.timeOfMessageReceptionVelocity = new TimeSpan();
-            this.Timeofmessagereceptionvelocityhighprecision = new TimeSpan();
-            this.GeometricHeight = double.NaN;
+            this.timeofmessagereceptionvelocityhighprecision = new TimeSpan();
+            this.geometricHeight = double.NaN;
 
             this.vn= "N/A";
             this.vns = "N/A";
             this.ltt = "N/A";
-            this.M3ACode = "N/A";
-            this.RollAngle = double.NaN;
-            this.FlightLevel = double.NaN;
-            this.MagneticHeading = double.NaN;
-            this.TargetStatus= double.NaN;
-            this.BarometricVerticalRate = double.NaN;
-            this.REbarometric = "N/A";
-            this.GeometricVerticalRate = double.NaN;
-            this.REgeometric = "N/A";
-            this.REairbornegroundvector = "N/A";
-            this.GroundSpeed = double.NaN;
-            this.TrackAngle = double.NaN;
-            this.TrackAngleRate = double.NaN;
+            this.m3ACode = "N/A";
+            this.rollAngle = double.NaN;
+            this.flightLevel = double.NaN;
+            this.magneticHeading = double.NaN;
+            this.targetStatus= double.NaN;
+            this.barometricVerticalRate = double.NaN;
+            this.rEbarometric = "N/A";
+            this.geometricVerticalRate = double.NaN;
+            this.rEgeometric = "N/A";
+            this.rEairbornegroundvector = "N/A";
+            this.groundSpeed = double.NaN;
+            this.trackAngle = double.NaN;
+            this.trackAngleRate = double.NaN;
             this.timeOfAsterixReportTransmission = new TimeSpan();
 
 
@@ -250,21 +252,21 @@ namespace ClassLibrary
                 if (boolFSPEC[20] == true) //MOPS Version 
                 {
                     byte[] datItem = utilities.GetFixedLengthDataItem(message, 1);
-                    DecodeMOPSversion(datItem);
+                    DecodeMOPSVersion(datItem);
 
                 }
 
                 if (boolFSPEC[19] == true) //Mode 3/A Code
                 {
                     byte[] datItem = utilities.GetFixedLengthDataItem(message, 2);
-                    DecodeMode3Acode(datItem);
+                    DecodeMode3ACode(datItem);
 
                 }
 
                 if (boolFSPEC[18] == true) //Roll Angle
                 {
                     byte[] datItem = utilities.GetFixedLengthDataItem(message, 2);
-                    DecodeRollangle(datItem);
+                    DecodeRollAngle(datItem);
 
                 }
 
@@ -283,46 +285,46 @@ namespace ClassLibrary
                 if (boolFSPEC[31] == true) //Magnetic heading
                 {
                     byte[] datItem = utilities.GetFixedLengthDataItem(message, 2);
-                    DecodeMagneticheading(datItem);
+                    DecodeMagneticHeading(datItem);
 
                 }
 
                 if (boolFSPEC[30] == true) //Target status
                 {
                     byte[] datItem = utilities.GetFixedLengthDataItem(message, 1);
-                    DecodeTargetstatus(datItem);
+                    DecodeTargetStatus(datItem);
                 }
 
                 if (boolFSPEC[29] == true) //Barometric vertical rate
                 {
                     byte[] datItem = utilities.GetFixedLengthDataItem(message, 2);
-                    DecodeBarometricverticalrate(datItem);
+                    DecodeBarometricVerticalRate(datItem);
                 }
 
                 if (boolFSPEC[28] == true) //Geometric vertical rate
                 {
                     byte[] datItem = utilities.GetFixedLengthDataItem(message, 2);
-                    DecodeGeometricverticalrate(datItem);
+                    DecodeGeometricVerticalRate(datItem);
                 }
 
                 if (boolFSPEC[27] == true) //Airborne Ground Vector
                 {
                     byte[] datItem = utilities.GetFixedLengthDataItem(message, 4);
-                    DecodeAirborngroundvector(datItem);
+                    DecodeAirbornGroundVector(datItem);
 
                 }
 
                 if (boolFSPEC[26] == true) //Track angle rate
                 {
                     byte[] datItem = utilities.GetFixedLengthDataItem(message, 2);
-                    DecodeTrackanglerate(datItem);
+                    DecodeTrackAngleRate(datItem);
 
                 }
 
                 if (boolFSPEC[25] == true) //Time of Report Transmission
                 {
                     byte[] datItem = utilities.GetFixedLengthDataItem(message, 3);
-                    DecodeTimeofreporttransmission(datItem);
+                    DecodeTimeOfReportTransmission(datItem);
 
                 }
             }
@@ -525,10 +527,10 @@ namespace ClassLibrary
             switch (IM)
             {
                 case 0:
-                    this.IM = "IAS";
+                    this.iM = "IAS";
                     break;
                 case 1:
-                    this.IM = "MACH";
+                    this.iM = "MACH";
                     break;
             }
         }
@@ -547,10 +549,10 @@ namespace ClassLibrary
             switch (RE)
             {
                 case 0:
-                    this.RE = "Value in defined range";
+                    this.rETrueAirspeed = "Value in defined range";
                     break;
                 case 1:
-                    this.RE = "Value exceeds defined range";
+                    this.rETrueAirspeed = "Value exceeds defined range";
                     break;
             }
 
@@ -584,16 +586,16 @@ namespace ClassLibrary
             switch (FSI)
             {
                 case 0:
-                    this.FSI = "TOMRp whole seconds=(1021/073) Whole seconds";
+                    this.fSITimeofMessageReceptionPositionHighResolution = "TOMRp whole seconds=(1021/073) Whole seconds";
                     break;
                 case 1:
-                    this.FSI = "TOMRp whole seconds = (1021 / 073) Whole seconds+1";
+                    this.fSITimeofMessageReceptionPositionHighResolution = "TOMRp whole seconds = (1021 / 073) Whole seconds+1";
                     break;
                 case 2:
-                    this.FSI = "TOMRp whole seconds = (1021 / 073) Whole seconds-1";
+                    this.fSITimeofMessageReceptionPositionHighResolution = "TOMRp whole seconds = (1021 / 073) Whole seconds-1";
                     break;
                 case 3:
-                    this.FSI= "Reserved";
+                    this.fSITimeofMessageReceptionPositionHighResolution = "Reserved";
                     break;
             }
 
@@ -616,35 +618,35 @@ namespace ClassLibrary
             byte[] mybytes = { firstbyte, dataItem[1], dataItem[2], dataItem[3] };
             double resolution = (1 / Math.Pow(2, 30));//seconds
             double seconds = utilities.DecodeUnsignedByteToDouble(mybytes, resolution);
-            this.Timeofmessagereceptionvelocityhighprecision = TimeSpan.FromSeconds(seconds);
+            this.timeofmessagereceptionvelocityhighprecision = TimeSpan.FromSeconds(seconds);
 
 
             switch (FSI)
             {
                 case 0:
-                    this.FSI = "TOMRp whole seconds=(1021/073) Whole seconds";
+                    this.fSITimeofMessageReceptionVelocityhighprecision = "TOMRp whole seconds=(1021/073) Whole seconds";
                     break;
                 case 1:
-                    this.FSI = "TOMRp whole seconds = (1021 / 073) Whole seconds+1";
+                    this.fSITimeofMessageReceptionVelocityhighprecision = "TOMRp whole seconds = (1021 / 073) Whole seconds+1";
                     break;
                 case 2:
-                    this.FSI = "TOMRp whole seconds = (1021 / 073) Whole seconds-1";
+                    this.fSITimeofMessageReceptionVelocityhighprecision = "TOMRp whole seconds = (1021 / 073) Whole seconds-1";
                     break;
                 case 3:
-                    this.FSI = "Reserved";
+                    this.fSITimeofMessageReceptionVelocityhighprecision = "Reserved";
                     break;
             }
         }
         public void DecodeGeometricheight (byte[] dataItem)
         {
             double resolution = 6.25;//ft
-            this.GeometricHeight = utilities.DecodeTwosComplementToDouble(dataItem, resolution);
+            this.geometricHeight = utilities.DecodeTwosComplementToDouble(dataItem, resolution);
         }
         public void QualityIndicators(byte[] dataItem)
         {
 
         }
-        public void DecodeMOPSversion(byte[] dataItem)
+        public void DecodeMOPSVersion(byte[] dataItem)
         {
             byte VNSmask = 64;
             byte VNmask = 56;
@@ -712,7 +714,7 @@ namespace ClassLibrary
         
 
         }
-        public void DecodeMode3Acode(byte[] dataItem)
+        public void DecodeMode3ACode(byte[] dataItem)
         {
             int firstByte = (byte)((dataItem[0]));
 
@@ -723,31 +725,31 @@ namespace ClassLibrary
             int C = (int)((dataItem[1] & 56) >> 3);
             int D = (int)(dataItem[1] & 7);
 
-            this.M3ACode = (A * 1000 + B * 100 + C * 10 + D).ToString();
+            this.m3ACode = (A * 1000 + B * 100 + C * 10 + D).ToString();
         }
-        public void DecodeRollangle(byte[] dataItem)
+        public void DecodeRollAngle(byte[] dataItem)
         {
             double resolution = 0.01;//degrees
-            this.RollAngle = utilities.DecodeTwosComplementToDouble(dataItem, resolution);
+            this.rollAngle = utilities.DecodeTwosComplementToDouble(dataItem, resolution);
         }
         public void DecodeFlightLevel(byte[] dataItem)
         {
             double resolution = (1 / 4);
-            this.FlightLevel = utilities.DecodeTwosComplementToDouble(dataItem, resolution);
+            this.flightLevel = utilities.DecodeTwosComplementToDouble(dataItem, resolution);
         }
-        public void DecodeMagneticheading(byte[] dataItem)
+        public void DecodeMagneticHeading(byte[] dataItem)
         {
             double resolution = (360 / 2 ^ 16);
-            this.MagneticHeading = utilities.DecodeUnsignedByteToDouble(dataItem,resolution);
+            this.magneticHeading = utilities.DecodeUnsignedByteToDouble(dataItem,resolution);
         }
-        public void DecodeTargetstatus(byte[] dataItem)
+        public void DecodeTargetStatus(byte[] dataItem)
         {
             double resolution = 0.1;//seconds
-            this.TargetStatus = utilities.DecodeUnsignedByteToDouble(dataItem, resolution);
+            this.targetStatus = utilities.DecodeUnsignedByteToDouble(dataItem, resolution);
 
         }
 
-        public void DecodeBarometricverticalrate(byte[] dataItem)
+        public void DecodeBarometricVerticalRate(byte[] dataItem)
         {   double resolution = 6.25;//ft/min
             byte REmask = 128;
             byte secondmask = 127;
@@ -757,15 +759,15 @@ namespace ClassLibrary
             switch (RE)
             {
                 case 0:
-                    this.REbarometric = "Value in defined range";
+                    this.rEbarometric = "Value in defined range";
                     break;
                 case 1:
-                    this.REbarometric = "Value exceeds defined range";
+                    this.rEbarometric = "Value exceeds defined range";
                     break;
             }
-            this.BarometricVerticalRate = utilities.DecodeTwosComplementToDouble(mybytes, resolution);
+            this.barometricVerticalRate = utilities.DecodeTwosComplementToDouble(mybytes, resolution);
         }
-        public void DecodeGeometricverticalrate(byte[] dataItem)
+        public void DecodeGeometricVerticalRate(byte[] dataItem)
         {
             double resolution = 6.25;//ft/min
             byte REmask = 128;
@@ -776,16 +778,16 @@ namespace ClassLibrary
             switch (RE)
             {
                 case 0:
-                    this.REgeometric = "Value in defined range";
+                    this.rEgeometric = "Value in defined range";
                     break;
                 case 1:
-                    this.REgeometric = "Value exceeds defined range";
+                    this.rEgeometric = "Value exceeds defined range";
                     break;
             }
-            this.GeometricVerticalRate = utilities.DecodeTwosComplementToDouble(mybytes, resolution);
+            this.geometricVerticalRate = utilities.DecodeTwosComplementToDouble(mybytes, resolution);
 
         }
-        public void DecodeAirborngroundvector(byte[] dataItem)
+        public void DecodeAirbornGroundVector(byte[] dataItem)
         {
             double resolutiongroundspeed = (1/2^14);//NM/S
             double resolutiontrackangle = (360 / 2 ^ 16);//degrees
@@ -799,16 +801,16 @@ namespace ClassLibrary
             switch (RE)
             {
                 case 0:
-                    this.REairbornegroundvector = "Value in defined range";
+                    this.rEairbornegroundvector = "Value in defined range";
                     break;
                 case 1:
-                    this.REairbornegroundvector = "Value exceeds defined range";
+                    this.rEairbornegroundvector = "Value exceeds defined range";
                     break;
             }
-            this.GroundSpeed = utilities.DecodeUnsignedByteToDouble(groundspeed, resolutiongroundspeed);
-            this.TrackAngle = utilities.DecodeUnsignedByteToDouble(trackangle, resolutiontrackangle);
+            this.groundSpeed = utilities.DecodeUnsignedByteToDouble(groundspeed, resolutiongroundspeed);
+            this.trackAngle = utilities.DecodeUnsignedByteToDouble(trackangle, resolutiontrackangle);
         }
-        public void DecodeTrackanglerate(byte[] dataItem)
+        public void DecodeTrackAngleRate(byte[] dataItem)
         {
             double resolution = (1/32);//deg/s
             
@@ -817,19 +819,19 @@ namespace ClassLibrary
             byte firstbyte = (byte)(secondmask & dataItem[0]);
             byte[] mybytes = { firstbyte, dataItem[1] };
            
-            this.TrackAngleRate = utilities.DecodeTwosComplementToDouble(mybytes, resolution);
+            this.trackAngleRate = utilities.DecodeTwosComplementToDouble(mybytes, resolution);
         }
-        public void DecodeTimeofreporttransmission(byte[] dataItem)
+        public void DecodeTimeOfReportTransmission(byte[] dataItem)
         {
             double resolution = Math.Pow(2, -7);
             double seconds = utilities.DecodeUnsignedByteToDouble(dataItem, resolution);
             this.timeOfAsterixReportTransmission = TimeSpan.FromSeconds(seconds);
         }
-        public void Targetidentification(byte[] dataItem)
+        public void DecodeTargetIdentification(byte[] dataItem)
         {
 
         }
-        public void Emittercategory(byte[] dataItem)
+        public void DecodeEmitterCategory(byte[] dataItem)
         {
 
         }
