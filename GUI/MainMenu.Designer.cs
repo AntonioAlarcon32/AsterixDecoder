@@ -34,11 +34,12 @@ namespace GUI
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabTable = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.packetGridView = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.moreInfoOfPacket = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabTable.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -53,13 +54,13 @@ namespace GUI
             // 
             // menuStrip1
             // 
-            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1399, 42);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
+            this.menuStrip1.Size = new System.Drawing.Size(851, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -69,33 +70,43 @@ namespace GUI
             this.abrirToolStripMenuItem,
             this.salirToolStripMenuItem});
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(115, 38);
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 22);
             this.archivoToolStripMenuItem.Text = "Archivo";
             // 
             // abrirToolStripMenuItem
             // 
             this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.abrirToolStripMenuItem.Text = "Abrir";
             this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
+            // 
+            // salirToolStripMenuItem
+            // 
+            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.salirToolStripMenuItem.Text = "Salir";
+            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
             // tabTable
             // 
             this.tabTable.Controls.Add(this.tabPage1);
             this.tabTable.Controls.Add(this.tabPage2);
-            this.tabTable.Location = new System.Drawing.Point(40, 56);
+            this.tabTable.Location = new System.Drawing.Point(11, 29);
+            this.tabTable.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabTable.Name = "tabTable";
             this.tabTable.SelectedIndex = 0;
-            this.tabTable.Size = new System.Drawing.Size(1328, 831);
+            this.tabTable.Size = new System.Drawing.Size(829, 555);
             this.tabTable.TabIndex = 2;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.moreInfoOfPacket);
             this.tabPage1.Controls.Add(this.packetGridView);
-            this.tabPage1.Location = new System.Drawing.Point(8, 39);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1312, 784);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage1.Size = new System.Drawing.Size(821, 529);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Packet Table";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -107,39 +118,47 @@ namespace GUI
             this.packetGridView.AllowUserToResizeColumns = false;
             this.packetGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.packetGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.packetGridView.Location = new System.Drawing.Point(6, 6);
+            this.packetGridView.Location = new System.Drawing.Point(3, 3);
+            this.packetGridView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.packetGridView.MultiSelect = false;
             this.packetGridView.Name = "packetGridView";
             this.packetGridView.RowHeadersWidth = 82;
             this.packetGridView.RowTemplate.Height = 33;
-            this.packetGridView.Size = new System.Drawing.Size(1300, 772);
+            this.packetGridView.Size = new System.Drawing.Size(809, 464);
             this.packetGridView.TabIndex = 0;
+            this.packetGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.packetGridView_CellClick);
             // 
             // tabPage2
             // 
-            this.tabPage2.Location = new System.Drawing.Point(8, 39);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1312, 784);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Size = new System.Drawing.Size(656, 406);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // salirToolStripMenuItem
+            // moreInfoOfPacket
             // 
-            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
-            this.salirToolStripMenuItem.Text = "Salir";
-            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
+            this.moreInfoOfPacket.Enabled = false;
+            this.moreInfoOfPacket.Location = new System.Drawing.Point(600, 477);
+            this.moreInfoOfPacket.Name = "moreInfoOfPacket";
+            this.moreInfoOfPacket.Size = new System.Drawing.Size(212, 47);
+            this.moreInfoOfPacket.TabIndex = 3;
+            this.moreInfoOfPacket.Text = "Show More Info Of Packet";
+            this.moreInfoOfPacket.UseVisualStyleBackColor = true;
+            this.moreInfoOfPacket.Click += new System.EventHandler(this.moreInfoOfPacket_Click);
             // 
             // MainMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1399, 899);
+            this.ClientSize = new System.Drawing.Size(851, 605);
             this.Controls.Add(this.tabTable);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "MainMenu";
             this.Text = "Form1";
             this.menuStrip1.ResumeLayout(false);
@@ -163,6 +182,7 @@ namespace GUI
         private System.Windows.Forms.DataGridView packetGridView;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
+        private System.Windows.Forms.Button moreInfoOfPacket;
     }
 }
 

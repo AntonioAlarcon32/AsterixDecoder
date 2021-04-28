@@ -9,5 +9,14 @@ namespace ClassLibrary
     public interface DataBlock
     {
         int GetLength();
+
+        int GetCategory();
+
+        TimeSpan GetTime();
+
+        string GetTypeOfMessage();
+
+        double[] GetWGS84Coordinates();
+
     }
 }

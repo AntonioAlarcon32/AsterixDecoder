@@ -33,22 +33,16 @@ namespace GUI
 
         private void setDataTable(DataGridView dataGrid)
         {
-            dataGrid.ColumnCount = 3;
+            dataGrid.ColumnCount = 5;
             dataGrid.Columns[0].Name = "Num";
             dataGrid.Columns[1].Name = "Category";
             dataGrid.Columns[2].Name = "Length";
+            dataGrid.Columns[3].Name = "Time";
+            dataGrid.Columns[4].Name = "Type Of Message";
             for (int i = 0; i < dataBlockList.Count; i++)
             {
-                if (dataBlockList[i].GetType() == typeof(CAT10))
-                {
-                    string[] row = new string[] { (i + 1).ToString(), "Cat 10", dataBlockList[i].GetLength().ToString() };
+                    string[] row = new string[] { (i + 1).ToString(),"Cat " + dataBlockList[i].GetCategory().ToString() , dataBlockList[i].GetLength().ToString(), dataBlockList[i].GetTime().ToString(), dataBlockList[i].GetTypeOfMessage()};
                     dataGrid.Rows.Add(row);
-                }
-                else if (dataBlockList[i].GetType() == typeof(CAT21))
-                {
-                    string[] row = new string[] { (i + 1).ToString(), "Cat 21", dataBlockList[i].GetLength().ToString() };
-                    dataGrid.Rows.Add(row);
-                }
             }
         }
 
@@ -75,6 +69,17 @@ namespace GUI
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void moreInfoOfPacket_Click(object sender, EventArgs e)
+        {
+            MoreInfoOfPacket newForm = new MoreInfoOfPacket();
+            newForm.Show();
+        }
+
+        private void packetGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            moreInfoOfPacket.Enabled = true;
         }
     }
 }

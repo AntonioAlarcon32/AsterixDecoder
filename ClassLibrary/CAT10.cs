@@ -1109,5 +1109,27 @@ namespace ClassLibrary
         {
             return this.length;
         }
+
+        public int GetCategory()
+        {
+            return 10;
+        }
+
+        public TimeSpan GetTime()
+        {
+            return this.timeOfDay;
+        }
+
+        public string GetTypeOfMessage()
+        {
+            return this.messageType;
+        }
+
+        public double[] GetWGS84Coordinates()
+        {
+            double[] wgs84 = { wgs84latitude, wgs84longitude };
+            return wgs84;
+        }
+        
     }
 }

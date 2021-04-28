@@ -52,6 +52,12 @@
     <Compile Include="MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="MoreInfoOfPacket.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MoreInfoOfPacket.Designer.cs">
+      <DependentUpon>MoreInfoOfPacket.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainMenu.resx">

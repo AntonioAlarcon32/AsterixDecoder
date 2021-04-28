@@ -1435,29 +1435,31 @@ namespace ClassLibrary
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         public int GetLength()
         {
             return this.length;
 
+        }
 
+        public int GetCategory()
+        {
+            return 21;
+        }
+
+        public TimeSpan GetTime()
+        {
+            return timeOfAppicabilityPosition;
+        }
+
+        public string GetTypeOfMessage()
+        {
+            return "N/A";
+        }
+
+        public double[] GetWGS84Coordinates()
+        {
+            double[] wgs84 = { this.wgs84latitude, this.wgs84longitude };
+            return wgs84;
         }
     }
 }
