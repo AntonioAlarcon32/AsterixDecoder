@@ -81,6 +81,18 @@ namespace ClassLibrary
         string trLdpj;
         string trRcf;
 
+        string eCat;
+
+        string mIws;
+        string mIwd;
+        string mItmp;
+        string mItrb;
+
+        double mIwindspeed;
+        double mIwinddirection;
+        double mItemperature;
+        int mIturbulence;
+
 
 
 
@@ -161,6 +173,19 @@ namespace ClassLibrary
             this.trCpr = "N/A";
             this.trLdpj = "N/A";
             this.trRcf = "N/A";
+
+            this.eCat = "N/A";
+
+            this.mIws = "N/A";
+            this.mIwd = "N/A";
+            this.mItmp = "N/A";
+            this.mItrb = "N/A";
+
+            this.mIwindspeed = double.NaN; ;
+            this.mIwinddirection = double.NaN; ;
+            this.mItemperature = double.NaN; ;
+            this.mIturbulence = -1;
+
         }
 
         public void SetMessage(List<byte> message)
@@ -385,13 +410,13 @@ namespace ClassLibrary
                 if (boolFSPEC[38] == true) //Emitter category
                 {
                     byte[] datItem = utilities.GetFixedLengthDataItem(message, 1);
-
+                    DecodeEmitterCategory(datItem);
                 }
 
                 if (boolFSPEC[37] == true) //Met information
                 {
                     byte[] datItem = utilities.GetVariableLengthDataItem(message);
-
+                    DecodeMetInformation(datItem);
                 }
 
                 if (boolFSPEC[36] == true) //Selected altitude
@@ -906,7 +931,18 @@ namespace ClassLibrary
             this.geometricHeight = utilities.DecodeTwosComplementToDouble(dataItem, resolution);
         }
         public void QualityIndicators(byte[] dataItem)
+
         {
+            byte nucrmask = 224;
+            byte nucpmask = 30;
+
+            int nucr = ((dataItem[0] & nucrmask) >> 5);
+            int nucp= ((dataItem[0] & nucpmask) >> 1);
+
+
+            if (dataItem.Length >= 2);
+            if(dataItem.Length >= 3);
+            if(dataItem.Length >= 4);
 
         }
         public void DecodeMOPSVersion(byte[] dataItem)
@@ -1178,10 +1214,169 @@ namespace ClassLibrary
         }
         public void DecodeEmitterCategory(byte[] dataItem)
         {
-
+            int ecat = (int)dataItem[0];
+            switch (ecat)
+            {
+                case 0:
+                    this.eCat = "No ADS-B Emitter Category Information";
+                    break;
+                case 1:
+                    this.eCat = "light aircraft<=15500 lbs";
+                    break;
+                case 2:
+                    this.eCat = "15500 lbs<small aircraft<300000 lbs";
+                    break;
+                case 3:
+                    this.eCat = "75000 lbs<medium a/c<300000 lbs";
+                    break;
+                case 4:
+                    this.eCat = "High vortex Large";
+                    break;
+                case 5:
+                    this.eCat = "300000lbs<=heavy aircraft";
+                    break;
+                case 6:
+                    this.eCat = "highly manouvrable(5g acceleration capability) and high speed(>400knots cruise)";
+                    break;
+                case 7:
+                    this.eCat = "reserved";
+                    break;
+                case 8:
+                    this.eCat = "reserved";
+                    break;
+                case 9:
+                    this.eCat = "reserved";
+                    break;
+                case 10:
+                    this.eCat = "rotorcraft";
+                    break;
+                case 11:
+                    this.eCat = "glider/sailplane";
+                    break;
+                case 12:
+                    this.eCat = "lighter than air";
+                    break;
+                case 13:
+                    this.eCat = "unmanned aerial vehicle";
+                    break;
+                case 14:
+                    this.eCat = "space/transarmospheric vehicle";
+                    break;
+                case 15:
+                    this.eCat = "ultralight/handglider/paraglider";
+                    break;
+                case 16:
+                    this.eCat = "parachutist/skydiver";
+                    break;
+                case 17:
+                    this.eCat = "reserved";
+                    break;
+                case 18:
+                    this.eCat = "reserved";
+                    break;
+                case 19:
+                    this.eCat = "reserved";
+                    break;
+                case 20:
+                    this.eCat = "surface emergency vehicle";
+                    break;
+                case 21:
+                    this.eCat = "surface service vehicle";
+                    break;
+                case 22:
+                    this.eCat = "fixed ground or tethered obstruction";
+                    break;
+                case 23:
+                    this.eCat = "cluster obstacle";
+                    break;
+                case 24:
+                    this.eCat = "line obstacle";
+                    break;
+            }
         }
-        public void MetInformation(byte[] dataItem)
+        public void DecodeMetInformation(byte[] dataItem)
         {
+            byte maskws = 128;
+            byte maskwd = 64;
+            byte masktmp = 32;
+            byte masktrb = 16;
+
+            int ws = ((dataItem[0] & maskws) >> 7);
+            int wd = ((dataItem[0] & maskwd) >> 6);
+            int tmp = ((dataItem[0] & masktmp) >> 5);
+            int trb = ((dataItem[0] & masktrb) >> 4);
+
+            switch (ws)
+            {
+                case 0:
+                    this.mIws = "Absence of Subfield #1";
+                    break;
+                case 1:
+                    this.mIws = "Presence of Subfield #1";
+                    break;
+
+
+            }
+            switch (wd)
+            {
+                case 0:
+                    this.mIwd = "Absence of Subfield #2";
+                    break;
+                case 1:
+                    this.mIwd = "Presence of Subfield #2";
+                    break;
+
+
+            }
+            switch (tmp)
+            {
+                case 0:
+                    this.mItmp = "Absence of Subfield #3";
+                    break;
+                case 1:
+                    this.mItmp = "Presence of Subfield #3";
+                    break;
+
+
+            }
+            switch (trb)
+            {
+                case 0:
+                    this.mItrb = "Absence of Subfield #4";
+                    break;
+                case 1:
+                    this.mItrb = "Presence of Subfield #4";
+                    break;
+
+
+            }
+            if (dataItem.Length >= 2)
+            {
+                double resolution = 1;//knots
+                byte[] mybytes = { dataItem[1], dataItem[2] };
+                this.mIwindspeed = utilities.DecodeUnsignedByteToDouble(mybytes, resolution);
+            }
+            if (dataItem.Length >= 4)
+            {
+                double resolution = 1;//degrees
+                byte[] mybytes = { dataItem[3], dataItem[4] };
+                this.mIwinddirection = utilities.DecodeUnsignedByteToDouble(mybytes, resolution);
+            }
+            if (dataItem.Length >= 6)
+            {
+                double resolution = 0.25;//temperature C
+                byte[] mybytes = { dataItem[5], dataItem[6] };
+                this.mItemperature = utilities.DecodeTwosComplementToDouble(mybytes, resolution);
+
+            }
+            if (dataItem.Length >= 8)
+            {
+                
+                
+                this.mIturbulence =(int)dataItem[7];
+            }
+
+
 
         }
         public void SelectedAltitude(byte[] dataItem)
