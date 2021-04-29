@@ -93,8 +93,23 @@ namespace ClassLibrary
         double mItemperature;
         int mIturbulence;
 
+        string sAsas;
+        string sAsource;
+        double sAaltitude;
 
+        string fssAmv;
+        string fssAah;
+        string fssAam;
+        double fssAaltitude;
+        double serviceManagement;
 
+        string aoSra;
+        string aoStc;
+        string aoSts;
+        string aoSarv;
+        string aoScdtia;
+        string aoSnottcas;
+        string aoSsa;
 
         public CAT21(int length)
         {
@@ -186,6 +201,24 @@ namespace ClassLibrary
             this.mItemperature = double.NaN; ;
             this.mIturbulence = -1;
 
+            this.sAsas= "N/A";
+            this.sAsource= "N/A";
+            this.sAaltitude = double.NaN;
+
+            this.fssAmv = "N/A"; 
+            this.fssAah = "N/A"; 
+            this.fssAam = "N/A"; 
+            this.fssAaltitude=double.NaN;
+
+            this.serviceManagement = double.NaN;
+
+            this.aoSra = "N/A";
+            this.aoStc = "N/A";
+            this.aoSts = "N/A";
+            this.aoSarv = "N/A";
+            this.aoScdtia = "N/A";
+            this.aoSnottcas = "N/A";
+            this.aoSsa = "N/A";
         }
 
         public void SetMessage(List<byte> message)
@@ -422,24 +455,25 @@ namespace ClassLibrary
                 if (boolFSPEC[36] == true) //Selected altitude
                 {
                     byte[] datItem = utilities.GetFixedLengthDataItem(message, 2);
+                    DecodeSelectedAltitude(datItem);
 
                 }
 
                 if (boolFSPEC[35] == true) //Final state selected altitude
                 {
                     byte[] datItem = utilities.GetFixedLengthDataItem(message, 2);
-
+                    DecodeFinalstateselectedaltitude(datItem);
                 }
 
                 if (boolFSPEC[34] == true) //Trajectory intent
                 {
                     byte[] datItem = utilities.GetVariableLengthDataItem(message);
-
+                    DecodeTrajectoryIntent(datItem);
                 }
                 if (boolFSPEC[33] == true) //Service management
                 {
                     byte[] datItem = utilities.GetFixedLengthDataItem(message, 1);
-
+                    DecodeServiceManagement(datItem);
                 }
             }
 
@@ -448,7 +482,7 @@ namespace ClassLibrary
                 if (boolFSPEC[47] == true) //Aircraft Operational Status
                 {
                     byte[] datItem = utilities.GetFixedLengthDataItem(message, 1);
-
+                    DecodeAircraftOperationalStatus(datItem);
                 }
 
                 if (boolFSPEC[46] == true) //Surfce capabilities and charcterisitcs
@@ -1379,24 +1413,263 @@ namespace ClassLibrary
 
 
         }
-        public void SelectedAltitude(byte[] dataItem)
+        public void DecodeSelectedAltitude(byte[] dataItem)
         {
+            double resolution = 25;//ft
+            byte sasMask = 128;
+            byte sourceMask = 96;
+            byte firstbyteMask = 31;
+
+            int sas = ((sasMask & dataItem[0])>>7);
+            int source= ((sourceMask & dataItem[0]) >> 5);
+            byte firstbyte = (byte)(dataItem[0] & firstbyteMask);
+            byte[] mybytes = { firstbyte, dataItem[1] };
+
+            switch (sas)
+            {
+                case 0:
+                    this.sAsas = "No source information provided";
+                    break;
+                case 1:
+                    this.sAsas = "Source information provided";
+                    break;
+
+
+            }
+            switch (source)
+            {
+                case 0:
+                    this.sAsource = "Uknown";
+                    break;
+                case 1:
+                    this.sAsource = "Aircraft Altitude(Holding Altitude)";
+                    break;
+                case 2:
+                    this.sAsource = "MCP/FCU Selected Altitude";
+                    break;
+                case 3:
+                    this.sAsource = "FMS Selected Altitude";
+                    break;
+
+
+
+            }
+            this.sAaltitude = utilities.DecodeTwosComplementToDouble(mybytes, resolution);
+        }
+        public void DecodeFinalstateselectedaltitude(byte[] dataItem)
+        {
+            double resolution = 25;//ft
+            byte mvMask = 128;
+            byte ahMask = 64;
+            byte amMask = 32;
+            byte firstbyteMask = 31;
+
+            int mv = ((mvMask & dataItem[0]) >> 7);
+            int ah = ((ahMask & dataItem[0]) >> 6);
+            int am = ((amMask & dataItem[0]) >> 5);
+            byte firstbyte = (byte)(dataItem[0] & firstbyteMask);
+            byte[] mybytes = { firstbyte, dataItem[1] };
+
+            switch (mv)
+            {
+                case 0:
+                    this.fssAmv = "Not active or uknowun";
+                    break;
+                case 1:
+                    this.fssAmv = "Active";
+                    break;
+
+
+            }
+            switch (ah)
+            {
+                case 0:
+                    this.fssAah = "Not active or unknown";
+                    break;
+                case 1:
+                    this.fssAah = "Active";
+                    break;
+
+
+            }
+            switch (am)
+            {
+                case 0:
+                    this.fssAam = "Not active or unknown";
+                    break;
+                case 1:
+                    this.fssAam = "Active";
+                    break;
+
+            }
+            this.fssAaltitude = utilities.DecodeTwosComplementToDouble(mybytes, resolution);
+        }
+            public void DecodeTrajectoryIntent(byte[] dataItem)
+        {
+            byte tisMask = 128;
+            byte tidMask= 64;
+
+            int tis = ((tisMask & dataItem[0]) >> 7);
+            int tid= ((tidMask & dataItem[0]) >> 6);
+            switch (tis)
+            {
+                case 0:
+                    this.tiTis = "Absence of subfield #1";
+                    break;
+                case 1:
+                    this.tiTis = "Presence of subfield #1";
+                    break;
+
+
+            }
+            switch (tid)
+            {
+                case 0:
+                    this.tiTid = "Absence of subfield #2";
+                    break;
+                case 1:
+                    this.tiTid = "Presence of subfield #2";
+                    break;
+
+
+            }
+            if (dataItem.Length >= 2) 
+            {
+                byte navMask = 128;
+                byte nvbMask = 64;
+
+                int nav = ((navMask & dataItem[1]) >> 7);
+                int nvb = ((nvbMask & dataItem[1]) >> 6);
+                switch (nav)
+                {
+                    case 0:
+                        this.tiNav = "Trajectory Intent Data is available for this aircraft";
+                        break;
+                    case 1:
+                        this.tiNav = "Trajectory Intent Data is not available for this aircraft";
+                        break;
+
+
+                }
+                switch (nvb)
+                {
+                    case 0:
+                        this.tiNvb = "Trajectory Intent Data is valid";
+                        break;
+                    case 1:
+                        this.tiNvb = "Trajectory Intent Data is not valid";
+                        break;
+
+
+                }
+            }
+        }
+        public void DecodeServiceManagement(byte[] dataItem)
+        {
+            double resolution = 0.5;//s
+            this.serviceManagement = utilities.DecodeUnsignedByteToDouble(dataItem, resolution);
 
         }
-        public void Finalstateselectedaltitude(byte[] dataItem)
+        public void DecodeAircraftOperationalStatus(byte[] dataItem)
         {
+            byte ramask = 128;
+            byte tcmask = 96;
+            byte tsmask = 16;
+            byte arvmask = 8;
+            byte cdtiamask = 4;
+            byte nottcasmask = 2;
+            byte samask = 1;
 
-        }
-        public void Trajectoryintent(byte[] dataItem)
-        {
+            int ra = ((dataItem[0] & ramask) >> 7);
+            int tc= ((dataItem[0] & tcmask) >> 5);
+            int ts= ((dataItem[0] & tsmask) >> 4);
+            int arv=((dataItem[0] & arvmask) >> 3);
+            int cdtia= ((dataItem[0] & cdtiamask) >> 2);
+            int nottcas= ((dataItem[0] & nottcasmask) >> 1);
+            int sa= (dataItem[0] & samask);
 
-        }
-        public void ServiceManagement(byte[] dataItem)
-        {
+            switch (ra)
+            {
+                case 0:
+                    this.aoSra = "TCAS II or ACAS RA not active";
+                    break;
+                case 1:
+                    this.aoSra = "TCAS RA active";
+                    break;
 
-        }
-        public void Aircraftoperationalstatus(byte[] dataItem)
-        {
+
+            }
+            switch (tc)
+            {
+                case 0:
+                    this.aoStc = "no capability for Trajectory change report";
+                    break;
+                case 1:
+                    this.aoStc = "support for TC+0 reports only";
+                    break;
+                case 2:
+                    this.aoStc = "support for multiple TC reports";
+                    break;
+                case 3:
+                    this.aoStc = "reserved";
+                    break;
+
+            }
+            switch (ts)
+            {
+                case 0:
+                    this.aoSts = "no capability to support Target State Reports";
+                    break;
+                case 1:
+                    this.aoSts = "capable of supporting target State Reports";
+                    break;
+
+
+            }
+            switch (arv)
+            {
+                case 0:
+                    this.aoSarv = "no capability to generate ARV-reports";
+                    break;
+                case 1:
+                    this.aoSarv = "capable of generate ARV-reports";
+                    break;
+
+
+            }
+            switch (cdtia)
+            {
+                case 0:
+                    this.aoScdtia = "cdti not operational";
+                    break;
+                case 1:
+                    this.aoScdtia = "cdti operational";
+                    break;
+
+
+            }
+            switch (nottcas)
+            {
+                case 0:
+                    this.aoSnottcas = "TCAS operational";
+                    break;
+                case 1:
+                    this.aoSnottcas= "TCAS not operational";
+                    break;
+
+
+            }
+            switch (sa)
+            {
+                case 0:
+                    this.aoSsa = "Antenna diversity";
+                    break;
+                case 1:
+                    this.aoSsa = "Single Antenna Only";
+                    break;
+
+
+            }
 
         }
         public void Surfacecapabilitiesandcharacteristics(byte[] dataItem)
