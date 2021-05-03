@@ -15,8 +15,6 @@ namespace GUI
     {
         string path;
         AsterixFile asterixFile = new AsterixFile();
-        List<CAT10> cat10list;
-        List<CAT21> cat21list;
         List<DataBlock> dataBlockList ;
         public MainMenu()
         {
@@ -25,9 +23,9 @@ namespace GUI
 
         private void loadAsterixFile(string path)
         {
+            if (dataBlockList != null)
+                dataBlockList.Clear();
             asterixFile.ReadFile(path);
-            cat10list = asterixFile.GetCAT10Blocks();
-            cat21list = asterixFile.GetCAT21Blocks();
             dataBlockList = asterixFile.GetDataBlocks();
         }
 
@@ -73,8 +71,14 @@ namespace GUI
 
         private void moreInfoOfPacket_Click(object sender, EventArgs e)
         {
-            MoreInfoOfPacket newForm = new MoreInfoOfPacket();
-            newForm.Show();
+            int packet = packetGridView.CurrentCell.RowIndex;
+
+            if (dataBlockList[packet].GetCAT10() != null)
+            {
+                MoreInfoOfPacketCAT10 newForm = new MoreInfoOfPacketCAT10(dataBlockList[packet].GetCAT10());
+                newForm.Show();
+            }
+           
         }
 
         private void packetGridView_CellClick(object sender, DataGridViewCellEventArgs e)

@@ -1461,5 +1461,15 @@ namespace ClassLibrary
             double[] wgs84 = { this.wgs84latitude, this.wgs84longitude };
             return wgs84;
         }
+
+        public CAT10 GetCAT10()
+        {
+            return null;
+        }
+
+        public CAT21 GetCAT21()
+        {
+            return this;
+        }
     }
 }
