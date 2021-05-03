@@ -393,13 +393,13 @@ namespace ClassLibrary
 
 
         ///DECODING FUNCTIONS
-        public void DecodeDataSourceIdentifier(byte[] dataItem)
+        void DecodeDataSourceIdentifier(byte[] dataItem)
         {
             this.systemIdentificationCode = dataItem[1];
             this.systemAreaCode = dataItem[0];
         }
 
-        public void DecodeMessageType(byte[] dataItem)
+        void DecodeMessageType(byte[] dataItem)
         {
 
             byte data = dataItem[0];
@@ -420,7 +420,7 @@ namespace ClassLibrary
 
             };
         }
-        public void DecodeTargetReportDescriptor(byte[] dataItem)
+        void DecodeTargetReportDescriptor(byte[] dataItem)
         {
             byte typMask = 224;
             byte dcrMask = 16;
@@ -574,7 +574,7 @@ namespace ClassLibrary
         }
 
 
-        public void DecodeTimeOfDay(byte[] dataItem)
+        void DecodeTimeOfDay(byte[] dataItem)
         {
             byte[] timeBytes = { dataItem[0], dataItem[1], dataItem[2] };
             double timeResolution = Math.Pow(2,-7);
@@ -582,7 +582,7 @@ namespace ClassLibrary
             this.timeOfDay = TimeSpan.FromSeconds(seconds);
         }
 
-        public void DecodeWGS84Coordinates(byte[] dataItem)
+        void DecodeWGS84Coordinates(byte[] dataItem)
         {
             int i = 0;
             byte[] latitudeBytes = new byte[4];
@@ -600,7 +600,7 @@ namespace ClassLibrary
             this.wgs84longitude = utilities.DecodeTwosComplementToDouble(longitudeBytes, resolution);
         }
 
-        public void DecodePolarCoordinatesPosition(byte[] dataItem)
+        void DecodePolarCoordinatesPosition(byte[] dataItem)
         {
             byte[] rhoBytes = { dataItem[0], dataItem[1] };
             double rhoResolution = 1;
@@ -609,7 +609,7 @@ namespace ClassLibrary
             double thetaResolution = 360 / Math.Pow(2, 16);
             this.polarTheta = utilities.DecodeUnsignedByteToDouble(thetaBytes, thetaResolution);
         }
-        public void DecodeCartesianCoordinatesPosition(byte[] dataItem)
+        void DecodeCartesianCoordinatesPosition(byte[] dataItem)
         {
             byte[] xBytes = { dataItem[0], dataItem[1] };
             double xResolution = 1;
@@ -618,7 +618,7 @@ namespace ClassLibrary
             double yResolution = 1;
             this.cartesianY = utilities.DecodeTwosComplementToDouble(yBytes, yResolution);
         }
-        public void DecodeCalculatedTrackVelocityInPolarCoordinates(byte[] dataItem)
+        void DecodeCalculatedTrackVelocityInPolarCoordinates(byte[] dataItem)
         {
             byte[] speedBytes = { dataItem[0], dataItem[1] };
             double speedResolution = Math.Pow(2, -14) * 3600;
@@ -627,7 +627,7 @@ namespace ClassLibrary
             double trackAngleResolution = (360 / Math.Pow(2, 16));
             this.polarTrackAngle = utilities.DecodeUnsignedByteToDouble(trackAngleBytes, trackAngleResolution);
         }
-        public void DecodeCalculatedTrackVelocityInCartesianCoordinates(byte[] dataItem)
+        void DecodeCalculatedTrackVelocityInCartesianCoordinates(byte[] dataItem)
         {
             byte[] xBytes = { dataItem[0], dataItem[1] };
             double xResolution = 0.25;
@@ -637,7 +637,7 @@ namespace ClassLibrary
             this.cartesianVy = utilities.DecodeTwosComplementToDouble(yBytes, yResolution);
         }
 
-        public void DecodeTrackNumber(byte[] dataItem)
+        void DecodeTrackNumber(byte[] dataItem)
         {
             byte[] trackBytes = { dataItem[0], dataItem[1] };
             double resolution = 1;
@@ -645,7 +645,7 @@ namespace ClassLibrary
             this.trackNumber = (int)number;
         }
 
-        public void DecodeTrackStatus(byte[] dataItem)
+        void DecodeTrackStatus(byte[] dataItem)
         {
             byte cnfMask = 128;
             byte treMask = 64;
@@ -791,7 +791,7 @@ namespace ClassLibrary
                     this.tsGHO = "Ghost track";
             }
         }
-        public void DecodeMode3A(byte[] dataItem)
+        void DecodeMode3A(byte[] dataItem)
         {
             byte vMask = 128;
             byte gMask = 64;
@@ -828,11 +828,11 @@ namespace ClassLibrary
                     break;
             }
         }
-        public void DecodeTargetAddress(byte[] dataItem)
+        void DecodeTargetAddress(byte[] dataItem)
         {
             this.targetAddress ="0x" + BitConverter.ToString(dataItem).Replace("-", string.Empty);
         }
-        public void DecodeTargetIdentification(byte[] dataItem)
+        void DecodeTargetIdentification(byte[] dataItem)
         {
             byte char8 = (byte)((dataItem[6] & 63));
             byte char7 = (byte)(((dataItem[6] & 192) >> 6) + ((dataItem[5] & 15) << 2));
@@ -847,11 +847,11 @@ namespace ClassLibrary
             byte[] chars = {char1, char2, char3, char4, char5, char6, char7, char8 };
             this.targetIdentification = utilities.GetAircraftIdFromBytes(chars);
         }
-        public void DecodeModeSMBData(byte[] data)
+        void DecodeModeSMBData(byte[] data)
         {
 
         }
-        public void DecodeVehicleFleetIdentification(byte[] dataItem)
+        void DecodeVehicleFleetIdentification(byte[] dataItem)
         {
             int value = dataItem[0];
             switch (value) {
@@ -909,7 +909,7 @@ namespace ClassLibrary
             }
 
         }
-        public void DecodeFlightLevel(byte[] dataItem)
+        void DecodeFlightLevel(byte[] dataItem)
         {
             byte vMask = 128;
             byte gMask = 64;
@@ -942,13 +942,13 @@ namespace ClassLibrary
                     break;
             }
         }
-        public void DecodeMeasuredHeight(byte[] dataItem)
+        void DecodeMeasuredHeight(byte[] dataItem)
         {
             byte[] heightByte = { dataItem[0], dataItem[1] };
             double resolution = 6.25;
             this.measuredHeight = utilities.DecodeTwosComplementToDouble(dataItem, resolution);
         }
-        public void DecodeTargetSizeAndOrientation(byte[] dataItem)
+        void DecodeTargetSizeAndOrientation(byte[] dataItem)
         {
             byte lengthMask = 254;
             byte orientationMask = 254;
@@ -973,7 +973,7 @@ namespace ClassLibrary
                 this.targetWidth = utilities.DecodeUnsignedByteToDouble(widthByte, widthResolution);
             }
         }
-        public void DecodeSystemStatus(byte[] dataItem)
+        void DecodeSystemStatus(byte[] dataItem)
         {
             byte nogoMask = 192;
             byte ovlMask = 32;
@@ -1037,7 +1037,7 @@ namespace ClassLibrary
                     break;
             }
         }
-        public void DecodePreProgrammedMessage(byte[] dataItem)
+        void DecodePreProgrammedMessage(byte[] dataItem)
         {
             byte octet= dataItem[0];
             byte maskTrb = 128;
@@ -1076,7 +1076,7 @@ namespace ClassLibrary
                     break;
             }
         }
-        public void DecodeStandardDeviationOfPosition(byte[] dataItem)
+        void DecodeStandardDeviationOfPosition(byte[] dataItem)
         {
             byte[] xstandarddeviation = { dataItem[0] };
             byte[] ystandarddeviation = { dataItem[1] };
@@ -1086,16 +1086,16 @@ namespace ClassLibrary
             this.standardDeviationY= utilities.DecodeUnsignedByteToDouble(ystandarddeviation, 0.25);
             this.standardDeviationXY= utilities.DecodeUnsignedByteToDouble(xystandardeviation, 0.25);
         }
-        public void DecodePresence(byte[] dataItem)
+        void DecodePresence(byte[] dataItem)
         {
 
         }
-        public void DecodeAmplitudeOfPrimaryPlot(byte[] dataItem)
+        void DecodeAmplitudeOfPrimaryPlot(byte[] dataItem)
         {
             
             this.amplitudeOfPrimaryPlot = utilities.DecodeUnsignedByteToDouble(dataItem,0.255);
         }
-        public void DecodeCalculatedAcceleration(byte[] dataItem)
+        void DecodeCalculatedAcceleration(byte[] dataItem)
         {
             byte[] xBytes = { dataItem[0] };
             double xResolution = 0.25;
@@ -1104,7 +1104,121 @@ namespace ClassLibrary
             double yResolution = 0.25;
             this.calcAccelerationY = utilities.DecodeTwosComplementToDouble(yBytes, yResolution);
         }
+        //FUNCIONES GET PARAMETERS
 
+
+        public string GetDataSourceIdentifier()
+        {
+            return this.systemAreaCode.ToString() + this.systemIdentificationCode.ToString();
+        }
+
+        public string GetTimeOfDay()
+        {
+            if (timeOfDay != new TimeSpan())
+                return this.timeOfDay.ToString();
+            else
+                return "N/A";
+        }
+
+        public string GetTargetAddress()
+        {
+            return targetAddress;
+        }
+
+        public string GetTargetID()
+        {
+            return targetIdentification;
+        }
+
+        public string[] GetTargetReportDescriptor()
+        {
+            string[] result = { trTYP, trDCR, trCHN, trGBS, trCRT, trSIM, trTST, trRAB, trLOP, trTOT, trSPI };
+            return result;
+        }
+
+        public Dictionary<string, string> GetPolarPosition()
+        {
+            return new Dictionary<string, string>
+            {
+                {"rho", polarRho.ToString() },
+                {"theta", polarTheta.ToString() },
+            };
+        }
+        public Dictionary<string, string> GetCartesianPosition()
+        {
+            return new Dictionary<string, string>
+            {
+                {"X", cartesianX.ToString() },
+                {"Y", cartesianY.ToString() },
+            };
+        }
+        public Dictionary<string, string> GetPolarVelocity()
+        {
+            return new Dictionary<string, string>
+            {
+                {"ground speed", polarGroundSpeed.ToString() },
+                {"track angle", polarTrackAngle.ToString() },
+            };
+        }
+        public Dictionary<string, string> GetCartesianVelocity()
+        {
+            return new Dictionary<string, string>
+            {
+                {"Vx", cartesianVx.ToString() },
+                {"Vy", cartesianVy.ToString() },
+            };
+        }
+
+        public Dictionary<string, string> GetSizeAndOrientation()
+        {
+            return new Dictionary<string, string>
+            {
+                {"width", targetWidth.ToString() },
+                {"length", targetLength.ToString() },
+                {"orientation", targetOrientation.ToString() }
+            };
+        }
+        public Dictionary<string, string> GetWGS84CoordinatesString()
+        {
+            return new Dictionary<string, string>
+            {
+                {"latitude", wgs84latitude.ToString() },
+                {"longitude", wgs84longitude.ToString() },
+            };
+        }
+        public Dictionary<string, string> GetCalculatedAcceleration()
+        {
+            return new Dictionary<string, string>
+            {
+                {"Ax", calcAccelerationX.ToString() },
+                {"Ay", calcAccelerationY.ToString() },
+            };
+        }
+        public Dictionary<string, string> GetFlightLevel()
+        {
+            return new Dictionary<string, string>
+            {
+                {"validated", flValidated },
+                {"garbled", flGarbled },
+                {"flight level", flFlightLevel.ToString() },
+            };
+        }
+        public Dictionary<string, string> GetStandardDeviationOfPosition()
+        {
+            return new Dictionary<string, string>
+            {
+                {"X", (standardDeviationX.ToString() !="NaN" ? standardDeviationX.ToString() + " m" : "N/A")},
+                {"Y", (standardDeviationY.ToString() !="NaN" ? standardDeviationY.ToString() + " m" : "N/A") },
+                {"XY", (standardDeviationXY.ToString() !="NaN" ? standardDeviationXY.ToString() + " m^2" : "N/A") },
+            };
+        }
+
+        public string GetMeasuredHeight()
+        {
+            return measuredHeight.ToString();
+        }
+
+        // FUNCIONES INTERFAZ
         public int GetLength()
         {
             return this.length;
@@ -1130,6 +1244,15 @@ namespace ClassLibrary
             double[] wgs84 = { wgs84latitude, wgs84longitude };
             return wgs84;
         }
-        
+
+        public CAT10 GetCAT10()
+        {
+            return this;
+        }
+
+        public CAT21 GetCAT21()
+        {
+            return null;
+        }
     }
 }

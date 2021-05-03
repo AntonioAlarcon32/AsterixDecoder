@@ -24,3 +24,4 @@ C:\Users\Usuario\Documents\GitHub\AsterixDecoder\GUI\obj\Debug\GUI.csproj.CoreCo
 C:\Users\Usuario\Documents\GitHub\AsterixDecoder\GUI\obj\Debug\GUI.csproj.CopyComplete
 C:\Users\Usuario\Documents\GitHub\AsterixDecoder\GUI\obj\Debug\GUI.exe
 C:\Users\Usuario\Documents\GitHub\AsterixDecoder\GUI\obj\Debug\GUI.pdb
+\\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\obj\Debug\GUI.MoreInfoOfPacketCAT10.resources

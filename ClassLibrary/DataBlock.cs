@@ -18,5 +18,9 @@ namespace ClassLibrary
 
         double[] GetWGS84Coordinates();
 
+        CAT10 GetCAT10();
+
+        CAT21 GetCAT21();
+
     }
 }
