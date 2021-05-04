@@ -369,7 +369,7 @@ namespace ClassLibrary
             this.FSPEC = finalFSPEC;
             return finalFSPEC;
         }
-        public void fullDecode()
+        public void FullDecode()
         {
             BitArray boolFSPEC = new BitArray(FSPEC);
             if (FSPEC.Length >= 1)
@@ -1632,7 +1632,7 @@ namespace ClassLibrary
         }
         public void DecodeTrajectoryIntent(byte[] dataItem)
         {
-            byte tisMask = 128;
+           /* byte tisMask = 128;
             byte tidMask = 64;
 
             int tis = ((tisMask & dataItem[0]) >> 7);
@@ -1686,9 +1686,9 @@ namespace ClassLibrary
                         this.tiNvb = "Trajectory Intent Data is not valid";
                         break;
 
-
+            
                 }
-            }
+            }*/
         }
         public void DecodeServiceManagement(byte[] dataItem)
         {

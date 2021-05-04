@@ -18,6 +18,8 @@ namespace ClassLibrary
 
         double[] GetWGS84Coordinates();
 
+        void FullDecode();
+
         CAT10 GetCAT10();
 
         CAT21 GetCAT21();

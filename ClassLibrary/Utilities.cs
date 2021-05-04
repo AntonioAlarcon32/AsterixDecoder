@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ClassLibrary
 {
-    public class Utilities
+    public sealed class Utilities
     {
 
         private Utilities()

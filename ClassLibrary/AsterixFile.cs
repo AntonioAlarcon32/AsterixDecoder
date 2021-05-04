@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Threading;
 
 namespace ClassLibrary
 {
@@ -11,14 +12,10 @@ namespace ClassLibrary
     {
         string path;
         BinaryReader fileReader;
-        List<CAT10> cat10DataBlocks;
-        List<CAT21> cat21DataBlocks;
         List<DataBlock> dataBlocks;
         int otherCategories;
         public AsterixFile() 
         {
-            this.cat10DataBlocks = new List<CAT10>();
-            this.cat21DataBlocks = new List<CAT21>();
             this.dataBlocks = new List<DataBlock>();
             this.otherCategories = 0;
         }
@@ -30,13 +27,7 @@ namespace ClassLibrary
                 {
                     this.fileReader = new BinaryReader(File.Open(path, FileMode.Open));
 
-
-
                     while (fileReader.BaseStream.Position != fileReader.BaseStream.Length) {
-                        if (cat21DataBlocks.Count == 47)
-                        {
-                            int c = 1;
-                        }
 
                         int category = fileReader.ReadByte();
 
@@ -50,7 +41,7 @@ namespace ClassLibrary
                             List<byte> data = fileReader.ReadBytes(length - 3).ToList<byte>();
                             dataBlock.SetMessage(data);
                             dataBlock.GetFSPEC(data);
-                            dataBlock.fullDecode();
+                            dataBlock.FullDecode();
                             this.dataBlocks.Add(dataBlock);
 
                         }
@@ -60,7 +51,7 @@ namespace ClassLibrary
                             List<byte> data = fileReader.ReadBytes(length - 3).ToList<byte>();
                             dataBlock.SetMessage(data);
                             dataBlock.GetFSPEC(data);
-                            dataBlock.fullDecode();
+                            dataBlock.FullDecode();
                             this.dataBlocks.Add(dataBlock);
                         }
                         else
@@ -69,7 +60,7 @@ namespace ClassLibrary
                             this.otherCategories += 1;
                         }
                     }
-                        return 0;
+                    return 0;
                 }
                 catch(Exception e)
                 {
@@ -80,13 +71,6 @@ namespace ClassLibrary
             {
                 return -2;
             }
-        }
-        public List<CAT10> GetCAT10Blocks() {
-            return this.cat10DataBlocks;
-        }
-        public List<CAT21> GetCAT21Blocks()
-        {
-            return this.cat21DataBlocks;
         }
         public List<DataBlock> GetDataBlocks()
         {

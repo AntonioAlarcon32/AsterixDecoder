@@ -8,6 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClassLibrary;
+using GMap.NET;
+using GMap.NET.MapProviders;
+using GMap.NET.WindowsForms;
+using GMap.NET.WindowsForms.Markers;
 
 namespace GUI
 {
@@ -15,10 +19,25 @@ namespace GUI
     {
         string path;
         AsterixFile asterixFile = new AsterixFile();
-        List<DataBlock> dataBlockList ;
+        List<DataBlock> dataBlockList;
+        
         public MainMenu()
         {
-            InitializeComponent();
+            InitializeComponent();    
+        }
+
+        private void MainMenu_Load(object sender, EventArgs e)
+        {
+            map.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
+            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
+            map.Position = new GMap.NET.PointLatLng(41.29722, 2.083056);
+            map.ShowCenter = false;
+            GMapOverlay markers = new GMapOverlay("markers");
+            GMapMarker marker = new GMarkerGoogle(
+                new PointLatLng(41.29722, 2.083056),
+                GMarkerGoogleType.arrow);
+            markers.Markers.Add(marker);
+            map.Overlays.Add(markers);
         }
 
         private void loadAsterixFile(string path)
@@ -85,6 +104,8 @@ namespace GUI
         {
             moreInfoOfPacket.Enabled = true;
         }
+
+
     }
 }
 

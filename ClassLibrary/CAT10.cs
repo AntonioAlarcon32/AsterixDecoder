@@ -222,7 +222,7 @@ namespace ClassLibrary
             return finalFSPEC;
         }
 
-        public void fullDecode()
+        public void FullDecode()
         {
             BitArray boolFSPEC = new BitArray(FSPEC);
             if (FSPEC.Length >= 1)
@@ -389,8 +389,6 @@ namespace ClassLibrary
                 }
             }
         }
-
-
 
         ///DECODING FUNCTIONS
         void DecodeDataSourceIdentifier(byte[] dataItem)
