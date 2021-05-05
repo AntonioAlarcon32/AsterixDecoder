@@ -42,3 +42,4 @@ C:\Users\Usuario\Documents\GitHub\AsterixDecoder\GUI\obj\Debug\GUI.pdb
 \\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\bin\Debug\System.Data.SqlClient.xml
 \\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\bin\Debug\System.Data.SQLite.xml
 \\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\bin\Debug\System.Security.Principal.Windows.xml
+\\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\obj\Debug\GUI.MoreInfoOfFlight.resources

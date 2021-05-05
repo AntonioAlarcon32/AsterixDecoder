@@ -2458,7 +2458,7 @@ namespace ClassLibrary
 
         public TimeSpan GetTime()
         {
-            return timeOfAppicabilityPosition;
+            return timeOfAsterixReportTransmission;
         }
 
         public string GetTypeOfMessage()
@@ -2468,8 +2468,29 @@ namespace ClassLibrary
 
         public double[] GetWGS84Coordinates()
         {
-            double[] wgs84 = { this.wgs84latitude, this.wgs84longitude };
-            return wgs84;
+            double[] wgs84 = { double.NaN, double.NaN };
+            if (this.wgs84latitudehigh != double.NaN)
+            {
+                wgs84[0] = wgs84latitudehigh;
+                wgs84[1] = wgs84longitudehigh;
+                return wgs84;
+            }
+            else if (this.wgs84latitude != double.NaN)
+            {
+                wgs84[0] = wgs84latitude;
+                wgs84[1] = wgs84longitude;
+                return wgs84;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
+        public string GetTargetID()
+        {
+            return this.targetIdentification;
         }
 
         public CAT10 GetCAT10()
