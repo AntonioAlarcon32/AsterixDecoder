@@ -50,17 +50,18 @@ namespace GUI
 
         private void setDataTable(DataGridView dataGrid)
         {
-            dataGrid.ColumnCount = 5;
-            dataGrid.Columns[0].Name = "Num";
-            dataGrid.Columns[1].Name = "Category";
-            dataGrid.Columns[2].Name = "Length";
-            dataGrid.Columns[3].Name = "Time";
-            dataGrid.Columns[4].Name = "Type Of Message";
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Num");
+            dt.Columns.Add("Category");
+            dt.Columns.Add("Length");
+            dt.Columns.Add("Time");
+            dt.Columns.Add("Type Of Message");
             for (int i = 0; i < dataBlockList.Count; i++)
             {
                     string[] row = new string[] { (i + 1).ToString(),"Cat " + dataBlockList[i].GetCategory().ToString() , dataBlockList[i].GetLength().ToString(), dataBlockList[i].GetTime().ToString(), dataBlockList[i].GetTypeOfMessage()};
-                    dataGrid.Rows.Add(row);
+                    dt.Rows.Add(row);
             }
+            packetGridView.DataSource = dt;
         }
 
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)

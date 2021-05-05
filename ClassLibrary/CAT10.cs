@@ -1234,7 +1234,10 @@ namespace ClassLibrary
 
         public string GetTypeOfMessage()
         {
-            return this.messageType;
+            if (this.systemIdentificationCode == 7)
+                return "SMR";
+            else
+                return "MLAT";
         }
 
         public double[] GetWGS84Coordinates()

@@ -2463,7 +2463,7 @@ namespace ClassLibrary
 
         public string GetTypeOfMessage()
         {
-            return "N/A";
+            return "ADS-B";
         }
 
         public double[] GetWGS84Coordinates()

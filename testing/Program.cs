@@ -13,7 +13,7 @@ namespace testing
         {
             Console.WriteLine("Hello");
             AsterixFile asterixFile = new AsterixFile();
-            asterixFile.ReadFile(@"C:\Users\Usuario\Desktop\4A\PGTA\Ficheros_asterix\201002-lebl-080001_adsb.ast");//@"\\Mac\Home\Desktop\Windows\file3.ast
+            asterixFile.ReadFile(@"\\Mac\Home\Desktop\Windows\file3.ast");//@"\\Mac\Home\Desktop\Windows\file3.ast
             List<DataBlock> dataBlockList = asterixFile.GetDataBlocks();                                           //@"C:\Users\Usuario\Desktop\4A\PGTA\Ficheros_asterix\201002-lebl-080001_adsb.ast"
             Console.ReadLine();
         }
