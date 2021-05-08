@@ -100,6 +100,12 @@ namespace ClassLibrary
 
         double amplitudeOfPrimaryPlot;
 
+        List<byte[]> ModeSMBData;
+        List<byte[]> ModeSMBCodes;
+        List<double> presenceDrho;
+        List<double> presenceDtheta;
+
+
         public CAT10(int lenght)
         {
             this.length = lenght;
@@ -191,6 +197,9 @@ namespace ClassLibrary
             this.amplitudeOfPrimaryPlot= double.NaN;
 
             this.utilities = Utilities.GetInstance();
+
+            this.ModeSMBData = new List<byte[]>();
+            this.ModeSMBCodes = new List<byte[]>();
 
         }
 
@@ -311,6 +320,8 @@ namespace ClassLibrary
             {
                 if (boolFSPEC[23] == true)//Mode S MB Data
                 {
+                    List<byte[]> ItemsList = utilities.GetRepetitiveItems(message, 8);
+                    DecodeModeSMBData(ItemsList);
 
                 }
 
@@ -359,7 +370,8 @@ namespace ClassLibrary
 
                 if (boolFSPEC[30] == true)//Presence
                 {
-
+                    List<byte[]> ItemsList = utilities.GetRepetitiveItems(message, 2);
+                    DecodePresence(ItemsList);
                 }
 
                 if (boolFSPEC[29] == true)//Amplitude of Primary Plot
@@ -845,9 +857,19 @@ namespace ClassLibrary
             byte[] chars = {char1, char2, char3, char4, char5, char6, char7, char8 };
             this.targetIdentification = utilities.GetAircraftIdFromBytes(chars);
         }
-        void DecodeModeSMBData(byte[] data)
+        void DecodeModeSMBData(List<byte[]> ItemsList)
         {
+            int i = 0;
+            while (i < ItemsList.Count)
+            {
+                byte[] bytes=ItemsList[i];
+                byte[] ModeSMBDatabytes = { bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5], bytes[6] };
+                byte[] ModeSMBCode = { bytes[7] };
+                ModeSMBData.Add(ModeSMBDatabytes);
+                ModeSMBCodes.Add(ModeSMBCode);
 
+                i++;
+            }
         }
         void DecodeVehicleFleetIdentification(byte[] dataItem)
         {
@@ -1084,11 +1106,28 @@ namespace ClassLibrary
             this.standardDeviationY= utilities.DecodeUnsignedByteToDouble(ystandarddeviation, 0.25);
             this.standardDeviationXY= utilities.DecodeUnsignedByteToDouble(xystandardeviation, 0.25);
         }
-        void DecodePresence(byte[] dataItem)
+        void DecodePresence(List<byte[]> ItemsList)
         {
+            int i = 0;
+            while (i < ItemsList.Count)
+            {
+                byte[] bytes = ItemsList[i];
+                byte[] DRHO = { bytes[0]};
+                byte[] DTHETA = { bytes[1] };
 
+                double resolution = 1;
+
+                double drho = utilities.DecodeTwosComplementToDouble(DRHO, resolution);
+                double dtheta = utilities.DecodeTwosComplementToDouble(DTHETA, resolution);
+
+
+                presenceDrho.Add(drho);
+                presenceDtheta.Add(dtheta);
+
+                i++;
+            }
         }
-        void DecodeAmplitudeOfPrimaryPlot(byte[] dataItem)
+            void DecodeAmplitudeOfPrimaryPlot(byte[] dataItem)
         {
             
             this.amplitudeOfPrimaryPlot = utilities.DecodeUnsignedByteToDouble(dataItem,0.255);
