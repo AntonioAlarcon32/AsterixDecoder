@@ -60,6 +60,28 @@ namespace ClassLibrary
             }
             return dataItem.ToArray();
         }
+        public List<byte[]> GetRepetitiveItems(List<byte> message,int ItemLength) {
+            List<byte[]> Items = new List<byte[]>();
+            int REP = message[0];
+            message.RemoveAt(0);
+            int i = 0;
+            while (i < REP)
+            {
+               byte[] item= GetFixedLengthDataItem(message, ItemLength);
+               Items.Add(item);
+
+               
+
+                i++;
+            } 
+            
+            return Items;
+            
+        
+        }
+        
+
+        
 
         public double DecodeUnsignedByteToDouble(byte[] dataItem, double resolution)
         {

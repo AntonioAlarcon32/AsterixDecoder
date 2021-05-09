@@ -169,6 +169,9 @@ namespace ClassLibrary
         double dAAra;
         double dAScc;
 
+        List<byte[]> ModeSMBData;
+        List<byte[]> ModeSMBCodes;
+       
 
 
         public CAT21(int length)
@@ -340,6 +343,9 @@ namespace ClassLibrary
             this.dARoa = double.NaN;
             this.dAAra = double.NaN;
             this.dAScc = double.NaN;
+
+            this.ModeSMBData = new List<byte[]>();
+            this.ModeSMBCodes = new List<byte[]>();
 
 
         }
@@ -623,7 +629,8 @@ namespace ClassLibrary
 
                 if (boolFSPEC[44] == true) //Mode S MB Data
                 {
-
+                    List<byte[]> ItemsList = utilities.GetRepetitiveItems(message, 8);
+                    DecodeModeSMBData(ItemsList);
 
                 }
 
@@ -1932,10 +1939,22 @@ namespace ClassLibrary
             double resolution = 1;//dbm
             this.messageAmplitude = utilities.DecodeUnsignedByteToDouble(dataItem, resolution);
         }
-        public void ModeSMData(byte[] dataItem)
-        {
+        
+            void DecodeModeSMBData(List<byte[]> ItemsList)
+            {
+                int i = 0;
+                while (i < ItemsList.Count)
+                {
+                    byte[] bytes = ItemsList[i];
+                    byte[] ModeSMBDatabytes = { bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5], bytes[6] };
+                    byte[] ModeSMBCode = { bytes[7] };
+                    ModeSMBData.Add(ModeSMBDatabytes);
+                    ModeSMBCodes.Add(ModeSMBCode);
 
-        }
+                    i++;
+                }
+            }
+        
         public void DecodeACASResolutionAdvisoryReport(byte[] dataItem)
         {
             byte typMask = 240;
