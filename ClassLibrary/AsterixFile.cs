@@ -90,20 +90,19 @@ namespace ClassLibrary
                     bool found = false;
                     int index = 0;
                     CAT21 cat21Block = dataBlock.GetCAT21();
-                    foreach (Flight flight in flights)
+                    if (cat21Block.GetTargetID() != "N/A")
                     {
-                        if (cat21Block.GetTargetID() != "N/A" && cat21Block.GetTargetID() == flight.GetID())
+                        Flight foundFlight = flights.FirstOrDefault(flight => flight.GetID() == cat21Block.GetTargetID());
+                        if (foundFlight != null)
                         {
-                            found = true;
-                            index = flights.IndexOf(flight);
-                            flight.AddPosition(dataBlock.GetWGS84Coordinates(), dataBlock.GetTime());
+                            foundFlight.AddPosition(dataBlock.GetWGS84Coordinates(), dataBlock.GetTime());
                         }
-                    }
-                    if (!found && dataBlock.GetWGS84Coordinates() != null)
-                    {
-                        Flight newFlight = new Flight(cat21Block.GetTargetID());
-                        newFlight.AddPosition(dataBlock.GetWGS84Coordinates(), dataBlock.GetTime());
-                        flights.Add(newFlight);
+                        else
+                        {
+                            Flight newFlight = new Flight(cat21Block.GetTargetID());
+                            newFlight.AddPosition(dataBlock.GetWGS84Coordinates(), dataBlock.GetTime());
+                            flights.Add(newFlight);
+                        }
                     }
                 }
             }

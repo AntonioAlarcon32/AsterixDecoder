@@ -19,6 +19,8 @@ namespace GUI
     public partial class MoreInfoOfFlight : Form
     {
         Flight selectedFlight;
+        Bitmap bmp = new Bitmap(Properties.Resources.redMarker, new Size(7,7));
+        
         public MoreInfoOfFlight(Flight flight)
         {
             InitializeComponent();
@@ -27,9 +29,7 @@ namespace GUI
 
         private void MoreInfoOfFlight_Load(object sender, EventArgs e)
         {
-            int c = 0;
-            //Bitmap resized = new Bitmap(marker, new Size(20, 20));
-            trackMap.MapProvider = GoogleMapProvider.Instance;
+            trackMap.MapProvider = GoogleSatelliteMapProvider.Instance;
             GMaps.Instance.Mode = AccessMode.ServerOnly;
             trackMap.DragButton = MouseButtons.Left;
             trackMap.Position = new PointLatLng(41.29722, 2.083056);
@@ -37,13 +37,37 @@ namespace GUI
             GMapOverlay markers = new GMapOverlay("markers");
             foreach (Coordinates coordinate in selectedFlight.GetAllCoordinates())
             {
-               // GMapMarker marker = new GMarkerGoogle(
-                  // new PointLatLng(coordinate.GetLatitude(), coordinate.GetLongitude()),
-                  // resized);
-               // markers.Markers.Add(marker);
+               GMapMarker marker = new GMarkerGoogle(
+                  new PointLatLng(coordinate.GetLatitude(), coordinate.GetLongitude()),
+                  bmp);
+               markers.Markers.Add(marker);
             }
-
             trackMap.Overlays.Add(markers);
+            trackMap.Zoom = 7;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            trackMap.Position = new PointLatLng(41.29722, 2.083056);
+            trackMap.Zoom = 14;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            trackMap.Position = new PointLatLng(40.002384, 1.686835);
+            trackMap.Zoom = 7;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            trackMap.Position = new PointLatLng(40.298517, 6.212262);
+            trackMap.Zoom = 6;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            trackMap.Position = new PointLatLng(41.881681, 1.576703);
+            trackMap.Zoom = 8;
         }
     }
 }

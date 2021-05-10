@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+
 namespace ClassLibrary
 {
     public sealed class Utilities
@@ -16,10 +17,17 @@ namespace ClassLibrary
                 {32,' '},{48,'0'},{49,'1'},{50,'2'},{51,'3'},{52,'4'},{53,'5'},{54,'6'},{55,'7'},{56,'8'},
                 {57,'9'},
             };
+
+            this.radarCoordinates = new Dictionary<string, Coordinates>
+            {
+                {"SMRLebl", new Coordinates(41.29561833, 2.095114167)},
+                {"ARPLebl", new Coordinates(41.2970767, 2.07846278)}
+            };
         }
 
         private static Utilities instance;
         private Dictionary<byte, char> targetIdentification;
+        private Dictionary<string, Coordinates> radarCoordinates;
 
 
         public static Utilities GetInstance()
@@ -134,6 +142,11 @@ namespace ClassLibrary
                 i++;
             }
             return result;
+        }
+
+        public Coordinates GetCoordinatesOfRadar(string radar)
+        {
+            return this.radarCoordinates[radar];
         }
     }
 }

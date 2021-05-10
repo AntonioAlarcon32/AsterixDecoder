@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using MultiCAT6.Utils;
 
 namespace ClassLibrary
 {
@@ -1281,8 +1282,21 @@ namespace ClassLibrary
 
         public double[] GetWGS84Coordinates()
         {
-            double[] wgs84 = { wgs84latitude, wgs84longitude };
-            return wgs84;
+            if (wgs84latitude != double.NaN)
+            {
+                double[] wgs84 = { wgs84latitude, wgs84longitude };
+                return wgs84;
+            }
+
+            else
+            {
+                if (GetTypeOfMessage() == "SMR")
+                {
+                    GeoUtils geoUtils = new GeoUtils();
+                    Coordinates radarCoordinates = utilities.GetCoordinatesOfRadar("SMRLebl");
+                    CoordinatesWGS84 radarCoordinatesGeocentric = new CoordinatesWGS84();
+                }
+            }
         }
 
         public CAT10 GetCAT10()

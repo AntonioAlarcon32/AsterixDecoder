@@ -12,6 +12,7 @@ using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
+using MultiCAT6.Utils;
 
 namespace GUI
 {
@@ -23,8 +24,10 @@ namespace GUI
         List<Flight> flightList;
         DataTable packetsTable = new DataTable();
         DataTable flightsTable = new DataTable();
-        TimeSpan currentTime = TimeSpan.Parse("8");
-
+        TimeSpan currentTime = TimeSpan.FromHours(8.0);
+        int packetIndex = 0;
+        GMapOverlay overlay = new GMapOverlay();
+        Bitmap bmp = new Bitmap(Properties.Resources.redMarker, new Size(7, 7));
         public MainMenu()
         {
             InitializeComponent();    
@@ -32,17 +35,17 @@ namespace GUI
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
-            map.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
+            map.MapProvider = GMap.NET.MapProviders.GoogleSatelliteMapProvider.Instance;
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
+            map.DragButton = MouseButtons.Left;
             map.Position = new GMap.NET.PointLatLng(41.29722, 2.083056);
             map.ShowCenter = false;
-            GMapOverlay markers = new GMapOverlay("markers");
-            GMapMarker marker = new GMarkerGoogle(
-                new PointLatLng(41.29722, 2.083056),
-                GMarkerGoogleType.arrow);
-            markers.Markers.Add(marker);
-            map.Overlays.Add(markers);
             timeLabel.Text = currentTime.ToString();
+            map.OnMarkerClick += new MarkerClick(map_OnMarkerClick);
+        }
+        void map_OnMarkerClick(GMapMarker item, MouseEventArgs e)
+        {
+            selectedMarker.Text = item.Tag.ToString();
         }
 
         private void loadAsterixFile(string path)
@@ -80,6 +83,10 @@ namespace GUI
 
             packetGridView.DataSource = packetsTable;
             flightGridView.DataSource = flightsTable;
+        }
+        bool AreEqual(TimeSpan a, TimeSpan b, TimeSpan precision)
+        {
+            return Math.Abs((a - b).TotalMilliseconds) < precision.TotalMilliseconds;
         }
 
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -134,6 +141,32 @@ namespace GUI
         private void timer1_Tick(object sender, EventArgs e)
         {
             currentTime = currentTime.Add(TimeSpan.FromSeconds(1));
+            overlay.Markers.Clear();
+            while (true)
+            {
+                if (packetIndex >= dataBlockList.Count())
+                {
+                    timer1.Stop();
+                    MessageBox.Show("End of File");
+                    break;
+                }
+                TimeSpan difference = currentTime - dataBlockList[packetIndex].GetTime();
+                if (AreEqual(currentTime, dataBlockList[packetIndex].GetTime(), TimeSpan.FromSeconds(1)) && dataBlockList[packetIndex].GetCategory() == 21)
+                {
+                    CAT21 cat21 = dataBlockList[packetIndex].GetCAT21();
+                    double[] coordinates = cat21.GetWGS84Coordinates();
+                    GMapMarker marker = new GMarkerGoogle(
+                        new PointLatLng(coordinates[0], coordinates[1]),
+                        bmp);
+                    marker.Tag = cat21.GetTargetID();
+                    overlay.Markers.Add(marker);
+                    packetIndex++;
+                }
+                else
+                    break;
+            }
+            map.Overlays.Add(overlay);
+            map.Zoom = map.Zoom;
             timeLabel.Text = currentTime.ToString();
         }
 
@@ -152,6 +185,55 @@ namespace GUI
         private void flightGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             moreInfoOfFlight.Enabled = true;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            map.Position = new PointLatLng(41.29722, 2.083056);
+            map.Zoom = 14;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            map.Position = new PointLatLng(41.881681, 1.576703);
+            map.Zoom = 8;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            map.Position = new PointLatLng(40.002384, 1.686835);
+            map.Zoom = 7;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            map.Position = new PointLatLng(40.298517, 6.212262);
+            map.Zoom = 6;
+        }
+
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+        }
+
+        private void x1Button_Click(object sender, EventArgs e)
+        {
+            timer1.Interval = 1000;
+        }
+
+        private void x2Button_Click(object sender, EventArgs e)
+        {
+            timer1.Interval = 500;
+        }
+
+        private void x4Button_Click(object sender, EventArgs e)
+        {
+            timer1.Interval = 250;
+        }
+
+        private void x16Button_Click(object sender, EventArgs e)
+        {
+            timer1.Interval = 62;
         }
     }
 }
