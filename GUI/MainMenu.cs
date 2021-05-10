@@ -162,6 +162,16 @@ namespace GUI
                     overlay.Markers.Add(marker);
                     packetIndex++;
                 }
+                else if ((AreEqual(currentTime, dataBlockList[packetIndex].GetTime(), TimeSpan.FromSeconds(1)) && dataBlockList[packetIndex].GetCategory() == 10))
+                {
+                    CAT10 cat10 = dataBlockList[packetIndex].GetCAT10();
+                    double[] coordinates = cat10.GetWGS84Coordinates();
+                    GMapMarker marker = new GMarkerGoogle(
+                       new PointLatLng(coordinates[0], coordinates[1]),
+                       bmp);
+                    overlay.Markers.Add(marker);
+                    packetIndex++;
+                }
                 else
                     break;
             }

@@ -1282,7 +1282,7 @@ namespace ClassLibrary
 
         public double[] GetWGS84Coordinates()
         {
-            if (wgs84latitude != double.NaN)
+            if (!Double.IsNaN(wgs84latitude))
             {
                 double[] wgs84 = { wgs84latitude, wgs84longitude };
                 return wgs84;
@@ -1294,7 +1294,27 @@ namespace ClassLibrary
                 {
                     GeoUtils geoUtils = new GeoUtils();
                     Coordinates radarCoordinates = utilities.GetCoordinatesOfRadar("SMRLebl");
-                    CoordinatesWGS84 radarCoordinatesGeocentric = new CoordinatesWGS84();
+                    CoordinatesWGS84 radarWGS84 = new CoordinatesWGS84(radarCoordinates.GetLatitude()* (Math.PI/180.0), radarCoordinates.GetLongitude()* (Math.PI / 180.0));
+                    CoordinatesXYZ objectCartesian = new CoordinatesXYZ(cartesianX, cartesianY, 0);
+                    CoordinatesXYZ objectGeocentric = geoUtils.change_radar_cartesian2geocentric(radarWGS84, objectCartesian);
+                    CoordinatesWGS84 objectWGS84 = geoUtils.change_geocentric2geodesic(objectGeocentric);
+                    double[] wgs84 = { objectWGS84.Lat* (180.0/Math.PI), objectWGS84.Lon * (180.0 / Math.PI) };
+                    return wgs84;
+                }
+                else if (GetTypeOfMessage() == "MLAT")
+                {
+                    GeoUtils geoUtils = new GeoUtils();
+                    Coordinates radarCoordinates = utilities.GetCoordinatesOfRadar("ARPLebl");
+                    CoordinatesWGS84 radarWGS84 = new CoordinatesWGS84(radarCoordinates.GetLatitude() * (Math.PI / 180.0), radarCoordinates.GetLongitude() * (Math.PI / 180.0));
+                    CoordinatesXYZ objectCartesian = new CoordinatesXYZ(cartesianX, cartesianY, 0);
+                    CoordinatesXYZ objectGeocentric = geoUtils.change_radar_cartesian2geocentric(radarWGS84, objectCartesian);
+                    CoordinatesWGS84 objectWGS84 = geoUtils.change_geocentric2geodesic(objectGeocentric);
+                    double[] wgs84 = { objectWGS84.Lat * (180.0 / Math.PI), objectWGS84.Lon * (180.0 / Math.PI) };
+                    return wgs84;
+                }
+                else
+                {
+                    return null;
                 }
             }
         }

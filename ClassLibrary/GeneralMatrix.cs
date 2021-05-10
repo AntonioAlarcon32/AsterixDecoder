@@ -674,10 +674,6 @@ namespace DotNetMatrix
 		/// <returns>    maximum singular value.
 		/// </returns>
 		
-		public virtual double Norm2()
-		{
-			return (new SingularValueDecomposition(this).Norm2());
-		}
 		
 		/// <summary>Infinity norm</summary>
 		/// <returns>    maximum row sum.
@@ -1051,10 +1047,6 @@ namespace DotNetMatrix
 		/// <seealso cref="LUDecomposition">
 		/// </seealso>
 		
-		public virtual LUDecomposition LUD()
-		{
-			return new LUDecomposition(this);
-		}
 		
 		/// <summary>QR Decomposition</summary>
 		/// <returns>     QRDecomposition
@@ -1062,10 +1054,6 @@ namespace DotNetMatrix
 		/// <seealso cref="QRDecomposition">
 		/// </seealso>
 		
-		public virtual QRDecomposition QRD()
-		{
-			return new QRDecomposition(this);
-		}
 		
 		/// <summary>Cholesky Decomposition</summary>
 		/// <returns>     CholeskyDecomposition
@@ -1073,21 +1061,12 @@ namespace DotNetMatrix
 		/// <seealso cref="CholeskyDecomposition">
 		/// </seealso>
 		
-		public virtual CholeskyDecomposition chol()
-		{
-			return new CholeskyDecomposition(this);
-		}
-		
 		/// <summary>Singular Value Decomposition</summary>
 		/// <returns>     SingularValueDecomposition
 		/// </returns>
 		/// <seealso cref="SingularValueDecomposition">
 		/// </seealso>
 		
-		public virtual SingularValueDecomposition SVD()
-		{
-			return new SingularValueDecomposition(this);
-		}
 		
 		/// <summary>Eigenvalue Decomposition</summary>
 		/// <returns>     EigenvalueDecomposition
@@ -1095,10 +1074,6 @@ namespace DotNetMatrix
 		/// <seealso cref="EigenvalueDecomposition">
 		/// </seealso>
 		
-		public virtual EigenvalueDecomposition Eigen()
-		{
-			return new EigenvalueDecomposition(this);
-		}
 		
 		/// <summary>Solve A*X = B</summary>
 		/// <param name="B">   right hand side
@@ -1106,58 +1081,33 @@ namespace DotNetMatrix
 		/// <returns>     solution if A is square, least squares solution otherwise
 		/// </returns>
 		
-		public virtual GeneralMatrix Solve(GeneralMatrix B)
-		{
-			return (m == n ? (new LUDecomposition(this)).Solve(B):(new QRDecomposition(this)).Solve(B));
-		}
-		
 		/// <summary>Solve X*A = B, which is also A'*X' = B'</summary>
 		/// <param name="B">   right hand side
 		/// </param>
 		/// <returns>     solution if A is square, least squares solution otherwise.
 		/// </returns>
 		
-		public virtual GeneralMatrix SolveTranspose(GeneralMatrix B)
-		{
-			return Transpose().Solve(B.Transpose());
-		}
 		
 		/// <summary>Matrix inverse or pseudoinverse</summary>
 		/// <returns>     inverse(A) if A is square, pseudoinverse otherwise.
 		/// </returns>
 		
-		public virtual GeneralMatrix Inverse()
-		{
-			return Solve(Identity(m, m));
-		}
 		
 		/// <summary>GeneralMatrix determinant</summary>
 		/// <returns>     determinant
 		/// </returns>
 		
-		public virtual double Determinant()
-		{
-			return new LUDecomposition(this).Determinant();
-		}
 		
 		/// <summary>GeneralMatrix rank</summary>
 		/// <returns>     effective numerical rank, obtained from SVD.
 		/// </returns>
 		
-		public virtual int Rank()
-		{
-			return new SingularValueDecomposition(this).Rank();
-		}
 		
 		/// <summary>Matrix condition (2 norm)</summary>
 		/// <returns>     ratio of largest to smallest singular value.
 		/// </returns>
 		
-		public virtual double Condition()
-		{
-			return new SingularValueDecomposition(this).Condition();
-		}
-		
+
 		/// <summary>Matrix trace.</summary>
 		/// <returns>     sum of the diagonal elements.
 		/// </returns>
