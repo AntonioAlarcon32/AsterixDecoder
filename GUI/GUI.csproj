@@ -146,6 +146,8 @@
     <None Include="Resources\200.gif" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\yellowMarker.png" />
+    <None Include="Resources\blueMarker.png" />
     <Content Include="Resources\redMarker.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

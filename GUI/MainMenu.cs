@@ -27,7 +27,9 @@ namespace GUI
         TimeSpan currentTime = TimeSpan.FromHours(8.0);
         int packetIndex = 0;
         GMapOverlay overlay = new GMapOverlay();
-        Bitmap bmp = new Bitmap(Properties.Resources.redMarker, new Size(7, 7));
+        Bitmap redBmp = new Bitmap(Properties.Resources.redMarker, new Size(7, 7));
+        Bitmap blueBmp = new Bitmap(Properties.Resources.blueMarker, new Size(7, 7));
+        Bitmap yellowBmp = new Bitmap(Properties.Resources.yellowMarker, new Size(7, 7));
         public MainMenu()
         {
             InitializeComponent();    
@@ -157,7 +159,7 @@ namespace GUI
                     double[] coordinates = cat21.GetWGS84Coordinates();
                     GMapMarker marker = new GMarkerGoogle(
                         new PointLatLng(coordinates[0], coordinates[1]),
-                        bmp);
+                        blueBmp);
                     marker.Tag = cat21.GetTargetID();
                     overlay.Markers.Add(marker);
                     packetIndex++;
@@ -166,11 +168,22 @@ namespace GUI
                 {
                     CAT10 cat10 = dataBlockList[packetIndex].GetCAT10();
                     double[] coordinates = cat10.GetWGS84Coordinates();
-                    GMapMarker marker = new GMarkerGoogle(
-                       new PointLatLng(coordinates[0], coordinates[1]),
-                       bmp);
-                    overlay.Markers.Add(marker);
-                    packetIndex++;
+                    if (cat10.GetTypeOfMessage() == "SMR")
+                    {
+                        GMapMarker marker = new GMarkerGoogle(
+                           new PointLatLng(coordinates[0], coordinates[1]),
+                           redBmp);
+                        overlay.Markers.Add(marker);
+                        packetIndex++;
+                    }
+                    else if (cat10.GetTypeOfMessage() == "MLAT")
+                    {
+                        GMapMarker marker = new GMarkerGoogle(
+                           new PointLatLng(coordinates[0], coordinates[1]),
+                           yellowBmp);
+                        overlay.Markers.Add(marker);
+                        packetIndex++;
+                    }
                 }
                 else
                     break;
