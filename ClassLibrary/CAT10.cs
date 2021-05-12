@@ -45,6 +45,7 @@ namespace ClassLibrary
 
         string M3AValidated;
         string M3AGarbled;
+        string M3ADerivation;
         string M3ACode;
 
         string targetAddress;
@@ -144,6 +145,7 @@ namespace ClassLibrary
             this.M3AValidated = "N/A";
             this.M3AGarbled = "N/A";
             this.M3ACode = "N/A";
+            this.M3ADerivation= "N/A";
 
             this.targetAddress = "N/A";
 
@@ -806,9 +808,11 @@ namespace ClassLibrary
         {
             byte vMask = 128;
             byte gMask = 64;
+            byte lMask = 32;
             byte m3aMask = 15;
 
             int validated = (vMask & dataItem[0]);
+            int derivation= (lMask & dataItem[0]);
             int garbled = (gMask & dataItem[0]);
             int firstByte = (byte)((m3aMask & dataItem[0]));
 
@@ -836,6 +840,15 @@ namespace ClassLibrary
                     break;
                 case 1:
                     this.M3AValidated = "Garbled Code";
+                    break;
+            }
+            switch (derivation)
+            {
+                case 0:
+                    this.M3ADerivation = "Mode-3/A code derived from the reply of the transponder";
+                    break;
+                case 1:
+                    this.M3ADerivation = "Mode-3/A code not extracted during the last scan";
                     break;
             }
         }
@@ -1173,7 +1186,31 @@ namespace ClassLibrary
             string[] result = { trTYP, trDCR, trCHN, trGBS, trCRT, trSIM, trTST, trRAB, trLOP, trTOT, trSPI };
             return result;
         }
-
+        public string GetMode3AValidated()
+        {
+            return M3AValidated;
+        }
+        public string GetMode3AGarbled()
+        {
+            return M3AGarbled;
+        }
+        public string GetMode3Derivation()
+        {
+            return M3ADerivation;
+        }
+        public string GetMode3ACode()
+        {
+            return M3ACode;
+        }
+        public string GetpreprogrammedTRB()
+        {
+            return ppmTRB;
+        }
+        public string GetpreprogrammedMSG()
+        {
+            return ppMSG;
+        }
+      
         public Dictionary<string, string> GetPolarPosition()
         {
             return new Dictionary<string, string>
@@ -1250,7 +1287,44 @@ namespace ClassLibrary
                 {"XY", (standardDeviationXY.ToString() !="NaN" ? standardDeviationXY.ToString() + " m^2" : "N/A") },
             };
         }
+        public Dictionary<string, string> GetTrackNumber()
+        {
+            return new Dictionary<string, string>
+            {
+                {"tracknumber", trackNumber.ToString() },
+                
+            };
+        }
+        public Dictionary<string, string> GetTrackStatus()
+        {
+            return new Dictionary<string, string>
+            {
+                {"cnf", (tsCNF !="N/A" ? tsCNF : "N/A")},
+                {"tre", (tsTRE!="N/A" ? tsTRE: "N/A") },
+                {"cst", (tsCST!="N/A" ? tsCST: "N/A") }, 
+                {"mah", (tsMAH!="N/A" ? tsMAH: "N/A") },
+                {"tcc", (tsTCC!="N/A" ? tsTCC: "N/A") },
+                {"sth", (tsSTH !="N/A" ? tsSTH: "N/A")},
+                {"tom", (tsTOM!="N/A" ? tsTOM: "N/A") },
+                {"dou", (tsDOU!="N/A" ? tsDOU: "N/A") },
+                {"mrs", (tsMRS!="N/A" ? tsMRS: "N/A") },
+                {"gho", (tsGHO !="N/A"? tsGHO: "N/A")},
 
+            };
+        }
+        public Dictionary<string, string> GetSystemStatus()
+        {
+            return new Dictionary<string, string>
+            {
+                {"nogo", (ssNOGO !="N/A" ? ssNOGO : "N/A")},
+                {"ovl", (ssOVL!="N/A" ? ssOVL: "N/A") },
+                {"tsv", (ssTSV!="N/A" ? ssTSV: "N/A") },
+                {"div", (ssDIV!="N/A"? ssDIV: "N/A") },
+                {"ttf", (ssTTF!="N/A" ? ssTTF: "N/A") },
+                
+
+            };
+        }
         public string GetMeasuredHeight()
         {
             return measuredHeight.ToString();
@@ -1279,6 +1353,13 @@ namespace ClassLibrary
             else
                 return "MLAT";
         }
+
+        public string GetVehicleFleetId()
+        {
+            return vehicleFleetId;
+        }
+
+
 
         public double[] GetWGS84Coordinates()
         {

@@ -42,7 +42,7 @@ namespace GUI
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.labelTrackNumber = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -100,14 +100,14 @@ namespace GUI
             this.label69 = new System.Windows.Forms.Label();
             this.label70 = new System.Windows.Forms.Label();
             this.label71 = new System.Windows.Forms.Label();
-            this.label73 = new System.Windows.Forms.Label();
-            this.label74 = new System.Windows.Forms.Label();
-            this.label75 = new System.Windows.Forms.Label();
-            this.label76 = new System.Windows.Forms.Label();
+            this.labelM3ACode = new System.Windows.Forms.Label();
+            this.labelM3ADerivation = new System.Windows.Forms.Label();
+            this.labelM3AGarbled = new System.Windows.Forms.Label();
+            this.labelM3AValidated = new System.Windows.Forms.Label();
             this.label77 = new System.Windows.Forms.Label();
-            this.label72 = new System.Windows.Forms.Label();
-            this.label78 = new System.Windows.Forms.Label();
-            this.label79 = new System.Windows.Forms.Label();
+            this.labelVehicleFleetId = new System.Windows.Forms.Label();
+            this.labelppMSG = new System.Windows.Forms.Label();
+            this.labelppTRB = new System.Windows.Forms.Label();
             this.label80 = new System.Windows.Forms.Label();
             this.dsiLabel = new System.Windows.Forms.Label();
             this.tomLabel = new System.Windows.Forms.Label();
@@ -147,6 +147,30 @@ namespace GUI
             this.flGarbledLabel = new System.Windows.Forms.Label();
             this.flFlightLevelLabel = new System.Windows.Forms.Label();
             this.measuredHeigthLabel = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.labelTSConfirmed = new System.Windows.Forms.Label();
+            this.label73 = new System.Windows.Forms.Label();
+            this.label74 = new System.Windows.Forms.Label();
+            this.label75 = new System.Windows.Forms.Label();
+            this.label76 = new System.Windows.Forms.Label();
+            this.label78 = new System.Windows.Forms.Label();
+            this.label79 = new System.Windows.Forms.Label();
+            this.label81 = new System.Windows.Forms.Label();
+            this.labelTSLastReport = new System.Windows.Forms.Label();
+            this.labelTSExtrapolationType = new System.Windows.Forms.Label();
+            this.labelTSHorizontalManoeuvre = new System.Windows.Forms.Label();
+            this.labelTSSRC = new System.Windows.Forms.Label();
+            this.labelTSSmoothed = new System.Windows.Forms.Label();
+            this.labelTSTOM = new System.Windows.Forms.Label();
+            this.labelTSDoubtful = new System.Windows.Forms.Label();
+            this.labelMerge = new System.Windows.Forms.Label();
+            this.labelTSGT = new System.Windows.Forms.Label();
+            this.labelTSMOS = new System.Windows.Forms.Label();
+            this.labelSSNOGO = new System.Windows.Forms.Label();
+            this.labelSSOVL = new System.Windows.Forms.Label();
+            this.labelSSTSV = new System.Windows.Forms.Label();
+            this.labelSSDIV = new System.Windows.Forms.Label();
+            this.labelSSTTF = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -265,14 +289,14 @@ namespace GUI
             this.label13.TabIndex = 13;
             this.label13.Text = "Track Status";
             // 
-            // label14
+            // labelTrackNumber
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(669, 100);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(75, 13);
-            this.label14.TabIndex = 12;
-            this.label14.Text = "Track Number";
+            this.labelTrackNumber.AutoSize = true;
+            this.labelTrackNumber.Location = new System.Drawing.Point(745, 100);
+            this.labelTrackNumber.Name = "labelTrackNumber";
+            this.labelTrackNumber.Size = new System.Drawing.Size(0, 13);
+            this.labelTrackNumber.TabIndex = 12;
+            this.labelTrackNumber.Click += new System.EventHandler(this.labelTrackNumber_Click);
             // 
             // label15
             // 
@@ -786,41 +810,38 @@ namespace GUI
             this.label71.TabIndex = 70;
             this.label71.Text = "Special Position ID:";
             // 
-            // label73
+            // labelM3ACode
             // 
-            this.label73.AutoSize = true;
-            this.label73.Location = new System.Drawing.Point(89, 469);
-            this.label73.Name = "label73";
-            this.label73.Size = new System.Drawing.Size(88, 13);
-            this.label73.TabIndex = 75;
-            this.label73.Text = "Mode 3/A Reply:";
+            this.labelM3ACode.AutoSize = true;
+            this.labelM3ACode.Location = new System.Drawing.Point(173, 470);
+            this.labelM3ACode.Name = "labelM3ACode";
+            this.labelM3ACode.Size = new System.Drawing.Size(0, 13);
+            this.labelM3ACode.TabIndex = 75;
             // 
-            // label74
+            // labelM3ADerivation
             // 
-            this.label74.AutoSize = true;
-            this.label74.Location = new System.Drawing.Point(89, 456);
-            this.label74.Name = "label74";
-            this.label74.Size = new System.Drawing.Size(85, 13);
-            this.label74.TabIndex = 74;
-            this.label74.Text = "Derivation Type:";
+            this.labelM3ADerivation.AutoSize = true;
+            this.labelM3ADerivation.Location = new System.Drawing.Point(176, 455);
+            this.labelM3ADerivation.Name = "labelM3ADerivation";
+            this.labelM3ADerivation.Size = new System.Drawing.Size(0, 13);
+            this.labelM3ADerivation.TabIndex = 74;
             // 
-            // label75
+            // labelM3AGarbled
             // 
-            this.label75.AutoSize = true;
-            this.label75.Location = new System.Drawing.Point(89, 443);
-            this.label75.Name = "label75";
-            this.label75.Size = new System.Drawing.Size(75, 13);
-            this.label75.TabIndex = 73;
-            this.label75.Text = "Garbled Code:";
+            this.labelM3AGarbled.AutoSize = true;
+            this.labelM3AGarbled.Location = new System.Drawing.Point(180, 442);
+            this.labelM3AGarbled.Name = "labelM3AGarbled";
+            this.labelM3AGarbled.Size = new System.Drawing.Size(0, 13);
+            this.labelM3AGarbled.TabIndex = 73;
             // 
-            // label76
+            // labelM3AValidated
             // 
-            this.label76.AutoSize = true;
-            this.label76.Location = new System.Drawing.Point(89, 430);
-            this.label76.Name = "label76";
-            this.label76.Size = new System.Drawing.Size(54, 13);
-            this.label76.TabIndex = 72;
-            this.label76.Text = "Validated:";
+            this.labelM3AValidated.AutoSize = true;
+            this.labelM3AValidated.Location = new System.Drawing.Point(180, 429);
+            this.labelM3AValidated.Name = "labelM3AValidated";
+            this.labelM3AValidated.Size = new System.Drawing.Size(0, 13);
+            this.labelM3AValidated.TabIndex = 72;
+            this.labelM3AValidated.Click += new System.EventHandler(this.label76_Click);
             // 
             // label77
             // 
@@ -831,32 +852,29 @@ namespace GUI
             this.label77.TabIndex = 71;
             this.label77.Text = "Mode 3/A";
             // 
-            // label72
+            // labelVehicleFleetId
             // 
-            this.label72.AutoSize = true;
-            this.label72.Location = new System.Drawing.Point(73, 495);
-            this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(85, 13);
-            this.label72.TabIndex = 76;
-            this.label72.Text = "Vehicle Fleet ID:";
+            this.labelVehicleFleetId.AutoSize = true;
+            this.labelVehicleFleetId.Location = new System.Drawing.Point(176, 493);
+            this.labelVehicleFleetId.Name = "labelVehicleFleetId";
+            this.labelVehicleFleetId.Size = new System.Drawing.Size(0, 13);
+            this.labelVehicleFleetId.TabIndex = 76;
             // 
-            // label78
+            // labelppMSG
             // 
-            this.label78.AutoSize = true;
-            this.label78.Location = new System.Drawing.Point(86, 550);
-            this.label78.Name = "label78";
-            this.label78.Size = new System.Drawing.Size(53, 13);
-            this.label78.TabIndex = 79;
-            this.label78.Text = "Message:";
+            this.labelppMSG.AutoSize = true;
+            this.labelppMSG.Location = new System.Drawing.Point(173, 550);
+            this.labelppMSG.Name = "labelppMSG";
+            this.labelppMSG.Size = new System.Drawing.Size(0, 13);
+            this.labelppMSG.TabIndex = 79;
             // 
-            // label79
+            // labelppTRB
             // 
-            this.label79.AutoSize = true;
-            this.label79.Location = new System.Drawing.Point(86, 537);
-            this.label79.Name = "label79";
-            this.label79.Size = new System.Drawing.Size(58, 13);
-            this.label79.TabIndex = 78;
-            this.label79.Text = "In Trouble:";
+            this.labelppTRB.AutoSize = true;
+            this.labelppTRB.Location = new System.Drawing.Point(173, 537);
+            this.labelppTRB.Name = "labelppTRB";
+            this.labelppTRB.Size = new System.Drawing.Size(0, 13);
+            this.labelppTRB.TabIndex = 78;
             // 
             // label80
             // 
@@ -1209,11 +1227,238 @@ namespace GUI
             this.measuredHeigthLabel.TabIndex = 117;
             this.measuredHeigthLabel.Text = "Data Source Identifier:";
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(92, 431);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(54, 13);
+            this.label14.TabIndex = 118;
+            this.label14.Text = "Validated:";
+            this.label14.Click += new System.EventHandler(this.label14_Click);
+            // 
+            // labelTSConfirmed
+            // 
+            this.labelTSConfirmed.AutoSize = true;
+            this.labelTSConfirmed.Location = new System.Drawing.Point(758, 145);
+            this.labelTSConfirmed.Name = "labelTSConfirmed";
+            this.labelTSConfirmed.Size = new System.Drawing.Size(0, 13);
+            this.labelTSConfirmed.TabIndex = 119;
+            this.labelTSConfirmed.Click += new System.EventHandler(this.labelTSConfirmed_Click);
+            // 
+            // label73
+            // 
+            this.label73.AutoSize = true;
+            this.label73.Location = new System.Drawing.Point(89, 442);
+            this.label73.Name = "label73";
+            this.label73.Size = new System.Drawing.Size(75, 13);
+            this.label73.TabIndex = 120;
+            this.label73.Text = "Garbled Code:";
+            // 
+            // label74
+            // 
+            this.label74.AutoSize = true;
+            this.label74.Location = new System.Drawing.Point(89, 455);
+            this.label74.Name = "label74";
+            this.label74.Size = new System.Drawing.Size(85, 13);
+            this.label74.TabIndex = 121;
+            this.label74.Text = "Derivation Type:";
+            // 
+            // label75
+            // 
+            this.label75.AutoSize = true;
+            this.label75.Location = new System.Drawing.Point(89, 469);
+            this.label75.Name = "label75";
+            this.label75.Size = new System.Drawing.Size(85, 13);
+            this.label75.TabIndex = 122;
+            this.label75.Text = "Mode3/A Reply:";
+            // 
+            // label76
+            // 
+            this.label76.AutoSize = true;
+            this.label76.Location = new System.Drawing.Point(87, 493);
+            this.label76.Name = "label76";
+            this.label76.Size = new System.Drawing.Size(83, 13);
+            this.label76.TabIndex = 123;
+            this.label76.Text = "Vehicle Fleet Id:";
+            // 
+            // label78
+            // 
+            this.label78.AutoSize = true;
+            this.label78.Location = new System.Drawing.Point(93, 537);
+            this.label78.Name = "label78";
+            this.label78.Size = new System.Drawing.Size(58, 13);
+            this.label78.TabIndex = 124;
+            this.label78.Text = "In Trouble:";
+            // 
+            // label79
+            // 
+            this.label79.AutoSize = true;
+            this.label79.Location = new System.Drawing.Point(92, 550);
+            this.label79.Name = "label79";
+            this.label79.Size = new System.Drawing.Size(53, 13);
+            this.label79.TabIndex = 125;
+            this.label79.Text = "Message:";
+            // 
+            // label81
+            // 
+            this.label81.AutoSize = true;
+            this.label81.Location = new System.Drawing.Point(672, 99);
+            this.label81.Name = "label81";
+            this.label81.Size = new System.Drawing.Size(75, 13);
+            this.label81.TabIndex = 126;
+            this.label81.Text = "TrackNumber:";
+            // 
+            // labelTSLastReport
+            // 
+            this.labelTSLastReport.AutoSize = true;
+            this.labelTSLastReport.Location = new System.Drawing.Point(758, 156);
+            this.labelTSLastReport.Name = "labelTSLastReport";
+            this.labelTSLastReport.Size = new System.Drawing.Size(0, 13);
+            this.labelTSLastReport.TabIndex = 127;
+            // 
+            // labelTSExtrapolationType
+            // 
+            this.labelTSExtrapolationType.AutoSize = true;
+            this.labelTSExtrapolationType.Location = new System.Drawing.Point(789, 171);
+            this.labelTSExtrapolationType.Name = "labelTSExtrapolationType";
+            this.labelTSExtrapolationType.Size = new System.Drawing.Size(0, 13);
+            this.labelTSExtrapolationType.TabIndex = 128;
+            this.labelTSExtrapolationType.Click += new System.EventHandler(this.labelTSExtrapolationType_Click);
+            // 
+            // labelTSHorizontalManoeuvre
+            // 
+            this.labelTSHorizontalManoeuvre.AutoSize = true;
+            this.labelTSHorizontalManoeuvre.Location = new System.Drawing.Point(805, 184);
+            this.labelTSHorizontalManoeuvre.Name = "labelTSHorizontalManoeuvre";
+            this.labelTSHorizontalManoeuvre.Size = new System.Drawing.Size(0, 13);
+            this.labelTSHorizontalManoeuvre.TabIndex = 129;
+            // 
+            // labelTSSRC
+            // 
+            this.labelTSSRC.AutoSize = true;
+            this.labelTSSRC.Location = new System.Drawing.Point(816, 197);
+            this.labelTSSRC.Name = "labelTSSRC";
+            this.labelTSSRC.Size = new System.Drawing.Size(0, 13);
+            this.labelTSSRC.TabIndex = 130;
+            // 
+            // labelTSSmoothed
+            // 
+            this.labelTSSmoothed.AutoSize = true;
+            this.labelTSSmoothed.Location = new System.Drawing.Point(750, 210);
+            this.labelTSSmoothed.Name = "labelTSSmoothed";
+            this.labelTSSmoothed.Size = new System.Drawing.Size(0, 13);
+            this.labelTSSmoothed.TabIndex = 131;
+            // 
+            // labelTSTOM
+            // 
+            this.labelTSTOM.AutoSize = true;
+            this.labelTSTOM.Location = new System.Drawing.Point(789, 223);
+            this.labelTSTOM.Name = "labelTSTOM";
+            this.labelTSTOM.Size = new System.Drawing.Size(0, 13);
+            this.labelTSTOM.TabIndex = 132;
+            // 
+            // labelTSDoubtful
+            // 
+            this.labelTSDoubtful.AutoSize = true;
+            this.labelTSDoubtful.Location = new System.Drawing.Point(741, 236);
+            this.labelTSDoubtful.Name = "labelTSDoubtful";
+            this.labelTSDoubtful.Size = new System.Drawing.Size(0, 13);
+            this.labelTSDoubtful.TabIndex = 133;
+            // 
+            // labelMerge
+            // 
+            this.labelMerge.AutoSize = true;
+            this.labelMerge.Location = new System.Drawing.Point(761, 249);
+            this.labelMerge.Name = "labelMerge";
+            this.labelMerge.Size = new System.Drawing.Size(0, 13);
+            this.labelMerge.TabIndex = 134;
+            // 
+            // labelTSGT
+            // 
+            this.labelTSGT.AutoSize = true;
+            this.labelTSGT.Location = new System.Drawing.Point(764, 262);
+            this.labelTSGT.Name = "labelTSGT";
+            this.labelTSGT.Size = new System.Drawing.Size(0, 13);
+            this.labelTSGT.TabIndex = 135;
+            // 
+            // labelTSMOS
+            // 
+            this.labelTSMOS.AutoSize = true;
+            this.labelTSMOS.Location = new System.Drawing.Point(749, 249);
+            this.labelTSMOS.Name = "labelTSMOS";
+            this.labelTSMOS.Size = new System.Drawing.Size(0, 13);
+            this.labelTSMOS.TabIndex = 136;
+            // 
+            // labelSSNOGO
+            // 
+            this.labelSSNOGO.AutoSize = true;
+            this.labelSSNOGO.Location = new System.Drawing.Point(775, 325);
+            this.labelSSNOGO.Name = "labelSSNOGO";
+            this.labelSSNOGO.Size = new System.Drawing.Size(0, 13);
+            this.labelSSNOGO.TabIndex = 137;
+            // 
+            // labelSSOVL
+            // 
+            this.labelSSOVL.AutoSize = true;
+            this.labelSSOVL.Location = new System.Drawing.Point(769, 338);
+            this.labelSSOVL.Name = "labelSSOVL";
+            this.labelSSOVL.Size = new System.Drawing.Size(0, 13);
+            this.labelSSOVL.TabIndex = 138;
+            // 
+            // labelSSTSV
+            // 
+            this.labelSSTSV.AutoSize = true;
+            this.labelSSTSV.Location = new System.Drawing.Point(789, 351);
+            this.labelSSTSV.Name = "labelSSTSV";
+            this.labelSSTSV.Size = new System.Drawing.Size(0, 13);
+            this.labelSSTSV.TabIndex = 139;
+            // 
+            // labelSSDIV
+            // 
+            this.labelSSDIV.AutoSize = true;
+            this.labelSSDIV.Location = new System.Drawing.Point(780, 364);
+            this.labelSSDIV.Name = "labelSSDIV";
+            this.labelSSDIV.Size = new System.Drawing.Size(0, 13);
+            this.labelSSDIV.TabIndex = 140;
+            // 
+            // labelSSTTF
+            // 
+            this.labelSSTTF.AutoSize = true;
+            this.labelSSTTF.Location = new System.Drawing.Point(778, 377);
+            this.labelSSTTF.Name = "labelSSTTF";
+            this.labelSSTTF.Size = new System.Drawing.Size(0, 13);
+            this.labelSSTTF.TabIndex = 141;
+            // 
             // MoreInfoOfPacketCAT10
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(966, 598);
+            this.Controls.Add(this.labelSSTTF);
+            this.Controls.Add(this.labelSSDIV);
+            this.Controls.Add(this.labelSSTSV);
+            this.Controls.Add(this.labelSSOVL);
+            this.Controls.Add(this.labelSSNOGO);
+            this.Controls.Add(this.labelTSMOS);
+            this.Controls.Add(this.labelTSGT);
+            this.Controls.Add(this.labelMerge);
+            this.Controls.Add(this.labelTSDoubtful);
+            this.Controls.Add(this.labelTSTOM);
+            this.Controls.Add(this.labelTSSmoothed);
+            this.Controls.Add(this.labelTSSRC);
+            this.Controls.Add(this.labelTSHorizontalManoeuvre);
+            this.Controls.Add(this.labelTSExtrapolationType);
+            this.Controls.Add(this.labelTSLastReport);
+            this.Controls.Add(this.label81);
+            this.Controls.Add(this.label79);
+            this.Controls.Add(this.label78);
+            this.Controls.Add(this.label76);
+            this.Controls.Add(this.label75);
+            this.Controls.Add(this.label74);
+            this.Controls.Add(this.label73);
+            this.Controls.Add(this.labelTSConfirmed);
+            this.Controls.Add(this.label14);
             this.Controls.Add(this.measuredHeigthLabel);
             this.Controls.Add(this.flFlightLevelLabel);
             this.Controls.Add(this.flGarbledLabel);
@@ -1252,14 +1497,14 @@ namespace GUI
             this.Controls.Add(this.todLabel);
             this.Controls.Add(this.tomLabel);
             this.Controls.Add(this.dsiLabel);
-            this.Controls.Add(this.label78);
-            this.Controls.Add(this.label79);
+            this.Controls.Add(this.labelppMSG);
+            this.Controls.Add(this.labelppTRB);
             this.Controls.Add(this.label80);
-            this.Controls.Add(this.label72);
-            this.Controls.Add(this.label73);
-            this.Controls.Add(this.label74);
-            this.Controls.Add(this.label75);
-            this.Controls.Add(this.label76);
+            this.Controls.Add(this.labelVehicleFleetId);
+            this.Controls.Add(this.labelM3ACode);
+            this.Controls.Add(this.labelM3ADerivation);
+            this.Controls.Add(this.labelM3AGarbled);
+            this.Controls.Add(this.labelM3AValidated);
             this.Controls.Add(this.label77);
             this.Controls.Add(this.label71);
             this.Controls.Add(this.label60);
@@ -1319,7 +1564,7 @@ namespace GUI
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label13);
-            this.Controls.Add(this.label14);
+            this.Controls.Add(this.labelTrackNumber);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
@@ -1355,7 +1600,7 @@ namespace GUI
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label labelTrackNumber;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
@@ -1413,14 +1658,14 @@ namespace GUI
         private System.Windows.Forms.Label label69;
         private System.Windows.Forms.Label label70;
         private System.Windows.Forms.Label label71;
-        private System.Windows.Forms.Label label73;
-        private System.Windows.Forms.Label label74;
-        private System.Windows.Forms.Label label75;
-        private System.Windows.Forms.Label label76;
+        private System.Windows.Forms.Label labelM3ACode;
+        private System.Windows.Forms.Label labelM3ADerivation;
+        private System.Windows.Forms.Label labelM3AGarbled;
+        private System.Windows.Forms.Label labelM3AValidated;
         private System.Windows.Forms.Label label77;
-        private System.Windows.Forms.Label label72;
-        private System.Windows.Forms.Label label78;
-        private System.Windows.Forms.Label label79;
+        private System.Windows.Forms.Label labelVehicleFleetId;
+        private System.Windows.Forms.Label labelppMSG;
+        private System.Windows.Forms.Label labelppTRB;
         private System.Windows.Forms.Label label80;
         private System.Windows.Forms.Label dsiLabel;
         private System.Windows.Forms.Label tomLabel;
@@ -1460,5 +1705,29 @@ namespace GUI
         private System.Windows.Forms.Label flGarbledLabel;
         private System.Windows.Forms.Label flFlightLevelLabel;
         private System.Windows.Forms.Label measuredHeigthLabel;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label labelTSConfirmed;
+        private System.Windows.Forms.Label label73;
+        private System.Windows.Forms.Label label74;
+        private System.Windows.Forms.Label label75;
+        private System.Windows.Forms.Label label76;
+        private System.Windows.Forms.Label label78;
+        private System.Windows.Forms.Label label79;
+        private System.Windows.Forms.Label label81;
+        private System.Windows.Forms.Label labelTSLastReport;
+        private System.Windows.Forms.Label labelTSExtrapolationType;
+        private System.Windows.Forms.Label labelTSHorizontalManoeuvre;
+        private System.Windows.Forms.Label labelTSSRC;
+        private System.Windows.Forms.Label labelTSSmoothed;
+        private System.Windows.Forms.Label labelTSTOM;
+        private System.Windows.Forms.Label labelTSDoubtful;
+        private System.Windows.Forms.Label labelMerge;
+        private System.Windows.Forms.Label labelTSGT;
+        private System.Windows.Forms.Label labelTSMOS;
+        private System.Windows.Forms.Label labelSSNOGO;
+        private System.Windows.Forms.Label labelSSOVL;
+        private System.Windows.Forms.Label labelSSTSV;
+        private System.Windows.Forms.Label labelSSDIV;
+        private System.Windows.Forms.Label labelSSTTF;
     }
 }

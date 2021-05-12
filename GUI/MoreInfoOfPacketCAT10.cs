@@ -70,6 +70,67 @@ namespace GUI
             sdpXLabel.Text = sdp["X"];
             sdpYLabel.Text = sdp["Y"];
             sdpCovarianceLabel.Text = sdp["XY"];
+            Dictionary<string, string> trackNumber = selectedPacket.GetTrackNumber();
+            labelTrackNumber.Text = (trackNumber["tracknumber"] != "-1" ? trackNumber["tracknumber"] : "-1");
+
+            Dictionary<string, string> trackStatus = selectedPacket.GetTrackStatus();
+            labelTSConfirmed.Text = (trackStatus["cnf"] != "NaN" ? trackStatus["cnf"] : "N/A");
+            labelTSLastReport.Text = (trackStatus["tre"] != "NaN" ? trackStatus["tre"] : "N/A");
+            labelTSExtrapolationType.Text = (trackStatus["cst"] != "NaN" ? trackStatus["cst"] : "N/A");
+            labelTSHorizontalManoeuvre.Text = (trackStatus["mah"] != "NaN" ? trackStatus["mah"] : "N/A");
+            labelTSSRC.Text = (trackStatus["tcc"] != "NaN" ? trackStatus["tcc"] : "N/A");
+            labelTSSmoothed.Text = (trackStatus["sth"] != "NaN" ? trackStatus["sth"] : "N/A");
+            labelTSTOM.Text = (trackStatus["tom"] != "NaN" ? trackStatus["tom"] : "N/A");
+            labelTSDoubtful.Text = (trackStatus["dou"] != "NaN" ? trackStatus["dou"] : "N/A");
+            labelTSMOS.Text = (trackStatus["mrs"] != "NaN" ? trackStatus["mrs"] : "N/A");
+            labelTSGT.Text = (trackStatus["gho"] != "NaN" ? trackStatus["gho"] : "N/A");
+
+
+            Dictionary<string, string> SystemStatus = selectedPacket.GetSystemStatus();
+            labelSSNOGO.Text = (SystemStatus["nogo"] != "NaN" ? SystemStatus["nogo"] : "N/A");
+            labelSSOVL.Text = (SystemStatus["ovl"] != "NaN" ? SystemStatus["ovl"] : "N/A");
+            labelSSTSV.Text = (SystemStatus["tsv"] != "NaN" ? SystemStatus["tsv"] : "N/A");
+            labelSSDIV.Text = (SystemStatus["div"] != "NaN" ? SystemStatus["div"] : "N/A");
+            labelSSTTF.Text = (SystemStatus["ttf"] != "NaN" ? SystemStatus["ttf"] : "N/A");
+
+
+            //M3A
+            labelM3AValidated.Text = selectedPacket.GetMode3AValidated();
+            labelM3AGarbled.Text = selectedPacket.GetMode3AGarbled();
+            labelM3ADerivation.Text = selectedPacket.GetMode3Derivation();
+            labelM3ACode.Text = selectedPacket.GetMode3ACode();
+            //vehicle fleet id
+            labelVehicleFleetId.Text = selectedPacket.GetVehicleFleetId();
+            //Pre-programmed message
+            labelppTRB.Text = selectedPacket.GetpreprogrammedTRB();
+            labelppMSG.Text = selectedPacket.GetpreprogrammedMSG();
+            //Track info
+
+        }
+
+        private void label76_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelTrackNumber_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelTSConfirmed_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelTSExtrapolationType_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
