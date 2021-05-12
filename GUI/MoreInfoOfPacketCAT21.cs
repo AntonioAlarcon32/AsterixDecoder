@@ -56,5 +56,60 @@ namespace GUI
         {
 
         }
+
+        private void label51_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label58_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MoreInfoOfPacketCAT21_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label68_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label52_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label77_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label81_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label88_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label107_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label113_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label115_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
