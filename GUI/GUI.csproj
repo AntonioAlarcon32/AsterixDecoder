@@ -83,6 +83,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MoreInfOfPacketCAT21%282%29.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MoreInfOfPacketCAT21%282%29.Designer.cs">
+      <DependentUpon>MoreInfOfPacketCAT21%282%29.cs</DependentUpon>
+    </Compile>
     <Compile Include="MoreInfoOfPacketCAT21.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +117,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MoreInfOfPacketCAT21%282%29.resx">
+      <DependentUpon>MoreInfOfPacketCAT21%282%29.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MoreInfoOfFlight.resx">
       <DependentUpon>MoreInfoOfFlight.cs</DependentUpon>
