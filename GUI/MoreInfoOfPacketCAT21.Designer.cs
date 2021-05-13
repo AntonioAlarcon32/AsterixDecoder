@@ -1660,6 +1660,7 @@ namespace GUI
             this.nextBtn.TabIndex = 259;
             this.nextBtn.Text = "NEXT";
             this.nextBtn.UseVisualStyleBackColor = true;
+            this.nextBtn.Click += new System.EventHandler(this.nextBtn_Click);
             // 
             // MoreInfoOfPacketCAT21
             // 

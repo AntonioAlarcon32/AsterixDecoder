@@ -1000,6 +1000,7 @@ namespace GUI
             this.previousBtn.TabIndex = 333;
             this.previousBtn.Text = "PREVIOUS";
             this.previousBtn.UseVisualStyleBackColor = true;
+            this.previousBtn.Click += new System.EventHandler(this.previousBtn_Click);
             // 
             // MoreInfOfPacketCAT21_2_
             // 

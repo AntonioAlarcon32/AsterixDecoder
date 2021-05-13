@@ -7,14 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms;
+using ClassLibrary;
 
 namespace GUI
 {
     public partial class MoreInfoOfPacketCAT21 : Form
     {
-        public MoreInfoOfPacketCAT21()
+        CAT21 selectedPacket;
+      
+        public MoreInfoOfPacketCAT21(CAT21 packet)
         {
             InitializeComponent();
+            this.selectedPacket = packet;
         }
 
         private void label12_Click(object sender, EventArgs e)
@@ -110,6 +115,13 @@ namespace GUI
         private void label115_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void nextBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            MoreInfOfPacketCAT21_2_ newForm = new MoreInfOfPacketCAT21_2_(this.selectedPacket);
+            newForm.Show();
         }
     }
 }

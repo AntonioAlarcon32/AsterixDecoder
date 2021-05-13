@@ -128,7 +128,11 @@ namespace GUI
                 MoreInfoOfPacketCAT10 newForm = new MoreInfoOfPacketCAT10(dataBlockList[packet].GetCAT10());
                 newForm.Show();
             }
-           
+            if (dataBlockList[packet].GetCAT21() != null)
+            {
+                MoreInfoOfPacketCAT21 newForm = new MoreInfoOfPacketCAT21(dataBlockList[packet].GetCAT21());
+                newForm.Show();
+            }
         }
 
         private void packetGridView_CellClick(object sender, DataGridViewCellEventArgs e)
