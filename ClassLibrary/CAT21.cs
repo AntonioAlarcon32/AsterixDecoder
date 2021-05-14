@@ -171,7 +171,7 @@ namespace ClassLibrary
 
         List<byte[]> ModeSMBData;
         List<byte[]> ModeSMBCodes;
-       
+
 
 
         public CAT21(int length)
@@ -1639,63 +1639,63 @@ namespace ClassLibrary
         }
         public void DecodeTrajectoryIntent(byte[] dataItem)
         {
-           /* byte tisMask = 128;
-            byte tidMask = 64;
+            /* byte tisMask = 128;
+             byte tidMask = 64;
 
-            int tis = ((tisMask & dataItem[0]) >> 7);
-            int tid = ((tidMask & dataItem[0]) >> 6);
-            switch (tis)
-            {
-                case 0:
-                    this.tiTis = "Absence of subfield #1";
-                    break;
-                case 1:
-                    this.tiTis = "Presence of subfield #1";
-                    break;
-
-
-            }
-            switch (tid)
-            {
-                case 0:
-                    this.tiTid = "Absence of subfield #2";
-                    break;
-                case 1:
-                    this.tiTid = "Presence of subfield #2";
-                    break;
+             int tis = ((tisMask & dataItem[0]) >> 7);
+             int tid = ((tidMask & dataItem[0]) >> 6);
+             switch (tis)
+             {
+                 case 0:
+                     this.tiTis = "Absence of subfield #1";
+                     break;
+                 case 1:
+                     this.tiTis = "Presence of subfield #1";
+                     break;
 
 
-            }
-            if (dataItem.Length >= 2)
-            {
-                byte navMask = 128;
-                byte nvbMask = 64;
-
-                int nav = ((navMask & dataItem[1]) >> 7);
-                int nvb = ((nvbMask & dataItem[1]) >> 6);
-                switch (nav)
-                {
-                    case 0:
-                        this.tiNav = "Trajectory Intent Data is available for this aircraft";
-                        break;
-                    case 1:
-                        this.tiNav = "Trajectory Intent Data is not available for this aircraft";
-                        break;
+             }
+             switch (tid)
+             {
+                 case 0:
+                     this.tiTid = "Absence of subfield #2";
+                     break;
+                 case 1:
+                     this.tiTid = "Presence of subfield #2";
+                     break;
 
 
-                }
-                switch (nvb)
-                {
-                    case 0:
-                        this.tiNvb = "Trajectory Intent Data is valid";
-                        break;
-                    case 1:
-                        this.tiNvb = "Trajectory Intent Data is not valid";
-                        break;
+             }
+             if (dataItem.Length >= 2)
+             {
+                 byte navMask = 128;
+                 byte nvbMask = 64;
 
-            
-                }
-            }*/
+                 int nav = ((navMask & dataItem[1]) >> 7);
+                 int nvb = ((nvbMask & dataItem[1]) >> 6);
+                 switch (nav)
+                 {
+                     case 0:
+                         this.tiNav = "Trajectory Intent Data is available for this aircraft";
+                         break;
+                     case 1:
+                         this.tiNav = "Trajectory Intent Data is not available for this aircraft";
+                         break;
+
+
+                 }
+                 switch (nvb)
+                 {
+                     case 0:
+                         this.tiNvb = "Trajectory Intent Data is valid";
+                         break;
+                     case 1:
+                         this.tiNvb = "Trajectory Intent Data is not valid";
+                         break;
+
+
+                 }
+             }*/
         }
         public void DecodeServiceManagement(byte[] dataItem)
         {
@@ -1939,22 +1939,22 @@ namespace ClassLibrary
             double resolution = 1;//dbm
             this.messageAmplitude = utilities.DecodeUnsignedByteToDouble(dataItem, resolution);
         }
-        
-            void DecodeModeSMBData(List<byte[]> ItemsList)
-            {
-                int i = 0;
-                while (i < ItemsList.Count)
-                {
-                    byte[] bytes = ItemsList[i];
-                    byte[] ModeSMBDatabytes = { bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5], bytes[6] };
-                    byte[] ModeSMBCode = { bytes[7] };
-                    ModeSMBData.Add(ModeSMBDatabytes);
-                    ModeSMBCodes.Add(ModeSMBCode);
 
-                    i++;
-                }
+        void DecodeModeSMBData(List<byte[]> ItemsList)
+        {
+            int i = 0;
+            while (i < ItemsList.Count)
+            {
+                byte[] bytes = ItemsList[i];
+                byte[] ModeSMBDatabytes = { bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5], bytes[6] };
+                byte[] ModeSMBCode = { bytes[7] };
+                ModeSMBData.Add(ModeSMBDatabytes);
+                ModeSMBCodes.Add(ModeSMBCode);
+
+                i++;
             }
-        
+        }
+
         public void DecodeACASResolutionAdvisoryReport(byte[] dataItem)
         {
             byte typMask = 240;
@@ -2403,7 +2403,457 @@ namespace ClassLibrary
                 byte[] mybytes = { dataItem[26] };
                 this.dAScc = utilities.DecodeUnsignedByteToDouble(mybytes, resolution);
             }
+            //Getters 
+            
+        }
 
+        public string GetSystemAreaCode()
+        {
+            if (systemAreaCode == -1)
+            {
+                return "N/A";
+            }
+            else
+            {
+                return systemAreaCode.ToString();
+            }
+        }
+        public string GetSystemIdentificationCode()
+        {
+            if (systemAreaCode == -1)
+            {
+                return "N/A";
+            }
+            else
+            {
+                return systemIdentificationCode.ToString();
+            }
+        }
+        public string GetTrackNumber()
+        {
+            if (trackNumber == -1)
+            {
+                return "N/A";
+            }
+            else
+            {
+                return trackNumber.ToString();
+            }
+        }
+        public string GetServiceIdentification()
+        {
+            if (serviceIdentification == -1)
+            {
+                return "N/A";
+            }
+            else
+            {
+                return serviceIdentification.ToString();
+            }
+        }
+        public string GetTimeOfApplicabilityForPosition()
+        {
+            if (timeOfAppicabilityPosition != new TimeSpan())
+                return this.timeOfAppicabilityPosition.ToString();
+            else
+                return "N/A";
+        }
+        public string GetTimeOfApplicabilityForVelocity()
+        {
+            if (timeOfApplicabilityVelocity != new TimeSpan())
+                return this.timeOfApplicabilityVelocity.ToString();
+            else
+                return "N/A";
+        }
+        public string GetRETrueAirspeed()
+        {
+            return RETrueAirspeed;
+        }
+        public string GetIM()
+        {
+            return IM;
+        }
+        public string GetTargetAddress()
+        {
+            if (targetAddress == -1)
+            {
+                return "N/A";
+            }
+            else
+            {
+                return targetAddress.ToString();
+            }
+        }
+        public string GetTimeOfMessageReceptionForPosition()
+        {
+            if (timeOfMessageReceptionPosition != new TimeSpan())
+                return this.timeOfMessageReceptionPosition.ToString();
+            else
+                return "N/A";
+        }
+        public string GetFSITTimeOfMessageReceptionPositionHigh()
+        {
+            return FSITimeofMessageReceptionPositionHighResolution;
+        }
+        public string GetFSITTimeOfMessageReceptionVelocityHigh()
+        {
+            return FSITimeofMessageReceptionVelocityhighprecision;
+        }
+
+        public string GetTimeOfMessageReceptionForPositionHighResolution()
+        {
+            if (timeOfMessageReceptionPositionHighResolution != new TimeSpan())
+                return this.timeOfMessageReceptionPositionHighResolution.ToString();
+            else
+                return "N/A";
+        }
+        public string GetTimeOfMessageReceptionForVelocity()
+        {
+            if (timeOfMessageReceptionVelocity != new TimeSpan())
+                return this.timeOfMessageReceptionVelocity.ToString();
+            else
+                return "N/A";
+        }
+        public string GetTimeOfMessageReceptionForVelocityHighResolution()
+        {
+            if (timeofmessagereceptionvelocityhighprecision != new TimeSpan())
+                return this.timeofmessagereceptionvelocityhighprecision.ToString();
+            else
+                return "N/A";
+        }
+        public string GetMOPSVN()
+        {
+            return mopsVN;
+        }
+        public string GetMOPSVNS()
+        {
+            return mopsVNS;
+        }
+        public string GetMOPSLTT()
+        {
+            return mopsLTT;
+        }
+        public string GetMode3ACode()
+        {
+            return m3ACode;
+        }
+
+
+        public string GetTSIcf()
+        {
+            return tsIcf;
+        }
+        public string GetTSLnav()
+        {
+            return tsLnav;
+        }
+        public string GetTSPs()
+        {
+            return tsPs;
+        }
+        public string GetTSSs()
+        {
+            return tsSs;
+        }
+        public string GetReBarometric()
+        {
+            return barometricRE;
+        }
+        public string GetReGeometric()
+        {
+            return geometricRE;
+        }
+        public string GetReGroundSpeed()
+        {
+            return airborneGroundVectorRE;
+        }
+
+        public string GetTimeOfReportTransmission()
+        {
+            if (timeOfAsterixReportTransmission != new TimeSpan())
+                return this.timeOfAsterixReportTransmission.ToString();
+            else
+                return "N/A";
+        }
+
+
+        public string GetTargetIdentification()
+        {
+            return targetIdentification;
+        }
+
+        public string GetTRAtp()
+        {
+            return trAtp;
+        }
+        public string GetTRArc()
+        {
+            return trArc;
+        }
+        public string GetTRRc()
+        {
+            return trRc;
+        }
+        public string GetTRRab()
+        {
+            return trRab;
+        }
+        public string GetTDcr()
+        {
+            return trDcr;
+        }
+        public string GetTRGbs()
+        {
+            return trGbs;
+        }
+
+        public string GetTRSim()
+        {
+            return trSim;
+        }
+        public string GetTRTst()
+        {
+            return trTst;
+        }
+        public string GetTRSaa()
+        {
+            return trSaa;
+        }
+        public string GetTRCl()
+        {
+            return trCl;
+        }
+        public string GetTRIpc()
+        {
+            return trIpc;
+        }
+        public string GetTRNogo()
+        {
+            return trNogo;
+        }
+        public string GetTRCpr()
+        {
+            return trCpr;
+        }
+        public string GetTRLdpj()
+        {
+            return trLdpj;
+        }
+
+        public string GetTRRcf()
+        {
+            return trRcf;
+        }
+        public string GeteCat()
+        {
+            return eCat;
+        }
+        public string GetMiws()
+        {
+            return mIws;
+        }
+        public string GetMiwd()
+        {
+            return mIwd;
+        }
+        public string GetMitmp()
+        {
+            return mItmp;
+        }
+        public string GetMiTurbulence()
+        {
+            if (mIturbulence == -1)
+            {
+                return "N/A";
+            }
+            else
+            {
+                return mIturbulence.ToString();
+            }
+        }
+
+
+
+        public string GetSAsas()
+        {
+            return sAsas;
+        }
+        public string GetSAsource()
+        {
+            return sAsource;
+        }
+        public string Getamv()
+        {
+            return fssAmv;
+        }
+
+        public string Getaah()
+        {
+            return fssAah;
+        }
+        public string Getaam()
+        {
+            return fssAam;
+        }
+
+        public string GetAosra()
+        {
+            return aoSra;
+        }
+        public string GetAostc()
+        {
+            return aoStc;
+        }
+        public string GetAosts()
+        {
+            return aoSts;
+        }
+        public string GetAosarv()
+        {
+            return aoSarv;
+        }
+        public string GetAoscdtia()
+        {
+            return aoScdtia;
+        }
+        public string GetAosnottcas()
+        {
+            return aoSnottcas;
+        }
+        public string GetAossa()
+        {
+            return aoSsa;
+        }
+
+        public string GetScpoa()
+        {
+            return sCpoa;
+        }
+        public string GetSccdtis()
+        {
+            return sCcdtis;
+        }
+        public string GetScb2low()
+        {
+            return sCb2low;
+        }
+        public string GetScras()
+        {
+            return sCras;
+        }
+        public string GetScident()
+        {
+            return sCident;
+        }
+        public string GetSclw()
+        {
+            return sClw;
+        }
+        public string GetReceiverId()
+        {
+            if (receiverId == -1)
+            {
+                return "N/A";
+            }
+            else
+            {
+                return receiverId.ToString();
+            }
+        }
+
+
+        public string GetDaaos()
+        {
+            return dAaos;
+        }
+        public string GetDatrd()
+        {
+            return dAtrd;
+        }
+        public string GetDam3a()
+        {
+            return dAm3a;
+        }
+        public string GetDaqi()
+        {
+            return dAqi;
+        }
+        public string GetDati()
+        {
+            return dAti;
+        }
+        public string GetDamam()
+        {
+            return dAmam;
+        }
+        public string GetDagh()
+        {
+            return dAgh;
+        }
+        public string GetDafl()
+        {
+            return dAfl;
+        }
+
+        public string GetDaisa()
+        {
+            return dAisa;
+        }
+        public string GetDafsa()
+        {
+            return dAfsa;
+        }
+        public string GetDaas()
+        {
+            return dAas;
+        }
+        public string GetDatas()
+        {
+            return dAtas;
+        }
+        public string GetDamh()
+        {
+            return dAmh;
+        }
+        public string GetDabvr()
+        {
+            return dAbvr;
+        }
+        public string GetDagvr()
+        {
+            return dAgvr;
+        }
+        public string GetDagv()
+        {
+            return dAgv;
+        }
+        public string GetDatar()
+        {
+            return dAtar;
+        }
+        public string GetDaTi()
+        {
+            return dATi;
+        }
+        public string GetDats()
+        {
+            return dAts;
+        }
+        public string GetDamet()
+        {
+            return dAmet;
+        }
+        public string GetDaroa()
+        {
+            return dAroa;
+        }
+        public string GetDara()
+        {
+            return dAara;
+        }
+        public string GetDascc()
+        {
+            return dAscc;
         }
 
 
@@ -2428,30 +2878,6 @@ namespace ClassLibrary
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-    
-    
-    
         public void Reservedexpansionfield(byte[] dataItem)
         {
 
