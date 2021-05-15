@@ -55,16 +55,6 @@ namespace GUI
             this.label35 = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
-            this.label40 = new System.Windows.Forms.Label();
-            this.label41 = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
-            this.label43 = new System.Windows.Forms.Label();
-            this.label44 = new System.Windows.Forms.Label();
-            this.label45 = new System.Windows.Forms.Label();
-            this.label46 = new System.Windows.Forms.Label();
-            this.label47 = new System.Windows.Forms.Label();
-            this.label48 = new System.Windows.Forms.Label();
             this.label52 = new System.Windows.Forms.Label();
             this.label53 = new System.Windows.Forms.Label();
             this.label67 = new System.Windows.Forms.Label();
@@ -76,16 +66,9 @@ namespace GUI
             this.label73 = new System.Windows.Forms.Label();
             this.label74 = new System.Windows.Forms.Label();
             this.label75 = new System.Windows.Forms.Label();
-            this.label85 = new System.Windows.Forms.Label();
             this.label94 = new System.Windows.Forms.Label();
             this.label96 = new System.Windows.Forms.Label();
             this.label103 = new System.Windows.Forms.Label();
-            this.label104 = new System.Windows.Forms.Label();
-            this.label105 = new System.Windows.Forms.Label();
-            this.label106 = new System.Windows.Forms.Label();
-            this.label107 = new System.Windows.Forms.Label();
-            this.label108 = new System.Windows.Forms.Label();
-            this.label109 = new System.Windows.Forms.Label();
             this.label110 = new System.Windows.Forms.Label();
             this.label111 = new System.Windows.Forms.Label();
             this.label112 = new System.Windows.Forms.Label();
@@ -100,8 +83,8 @@ namespace GUI
             this.label121 = new System.Windows.Forms.Label();
             this.label122 = new System.Windows.Forms.Label();
             this.label123 = new System.Windows.Forms.Label();
-            this.label124 = new System.Windows.Forms.Label();
-            this.label125 = new System.Windows.Forms.Label();
+            this.label15616 = new System.Windows.Forms.Label();
+            this.AVA = new System.Windows.Forms.Label();
             this.label126 = new System.Windows.Forms.Label();
             this.label127 = new System.Windows.Forms.Label();
             this.label128 = new System.Windows.Forms.Label();
@@ -142,30 +125,14 @@ namespace GUI
             this.labeltimeofmessagereceptionvelocityhigh = new System.Windows.Forms.Label();
             this.labeltimeofreporttransmission = new System.Windows.Forms.Label();
             this.labeltargetaddress = new System.Windows.Forms.Label();
-            this.label165 = new System.Windows.Forms.Label();
-            this.label166 = new System.Windows.Forms.Label();
-            this.label167 = new System.Windows.Forms.Label();
-            this.label168 = new System.Windows.Forms.Label();
-            this.label169 = new System.Windows.Forms.Label();
-            this.label171 = new System.Windows.Forms.Label();
-            this.label172 = new System.Windows.Forms.Label();
-            this.label173 = new System.Windows.Forms.Label();
-            this.label174 = new System.Windows.Forms.Label();
-            this.labelmode3ACode = new System.Windows.Forms.Label();
             this.labelmiws = new System.Windows.Forms.Label();
             this.labelmiwd = new System.Windows.Forms.Label();
             this.labelmitmp = new System.Windows.Forms.Label();
             this.labelmitrb = new System.Windows.Forms.Label();
-            this.label181 = new System.Windows.Forms.Label();
-            this.label182 = new System.Windows.Forms.Label();
+            this.labelmessageamplitude = new System.Windows.Forms.Label();
             this.labeldaaara = new System.Windows.Forms.Label();
             this.label209 = new System.Windows.Forms.Label();
-            this.label210 = new System.Windows.Forms.Label();
-            this.label211 = new System.Windows.Forms.Label();
-            this.label212 = new System.Windows.Forms.Label();
-            this.label213 = new System.Windows.Forms.Label();
-            this.label214 = new System.Windows.Forms.Label();
-            this.label215 = new System.Windows.Forms.Label();
+            this.labelmessagetype = new System.Windows.Forms.Label();
             this.labeldaaos = new System.Windows.Forms.Label();
             this.labeldaatrd = new System.Windows.Forms.Label();
             this.labeldam3a = new System.Windows.Forms.Label();
@@ -188,7 +155,6 @@ namespace GUI
             this.labeldaamet = new System.Windows.Forms.Label();
             this.labeldaaroa = new System.Windows.Forms.Label();
             this.labeldascc = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.nextBtn = new System.Windows.Forms.Button();
             this.FSIT = new System.Windows.Forms.Label();
             this.labelFSITPositionHigh = new System.Windows.Forms.Label();
@@ -200,6 +166,30 @@ namespace GUI
             this.labelmopsvn = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.labelMOPSLTT = new System.Windows.Forms.Label();
+            this.labelservicemanagement = new System.Windows.Forms.Label();
+            this.aos = new System.Windows.Forms.Label();
+            this.trd = new System.Windows.Forms.Label();
+            this.m3a = new System.Windows.Forms.Label();
+            this.ti = new System.Windows.Forms.Label();
+            this.qi = new System.Windows.Forms.Label();
+            this.mam = new System.Windows.Forms.Label();
+            this.gh = new System.Windows.Forms.Label();
+            this.fl = new System.Windows.Forms.Label();
+            this.isa = new System.Windows.Forms.Label();
+            this.fsa = new System.Windows.Forms.Label();
+            this.ass = new System.Windows.Forms.Label();
+            this.tas = new System.Windows.Forms.Label();
+            this.mh = new System.Windows.Forms.Label();
+            this.BVR = new System.Windows.Forms.Label();
+            this.gvr = new System.Windows.Forms.Label();
+            this.gv = new System.Windows.Forms.Label();
+            this.tar = new System.Windows.Forms.Label();
+            this.tii = new System.Windows.Forms.Label();
+            this.met = new System.Windows.Forms.Label();
+            this.ts = new System.Windows.Forms.Label();
+            this.roa = new System.Windows.Forms.Label();
+            this.ara = new System.Windows.Forms.Label();
+            this.scc = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -440,102 +430,10 @@ namespace GUI
             this.label37.TabIndex = 36;
             this.label37.Text = "Time of Message Reception of Velocity High:";
             // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(441, 122);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(144, 13);
-            this.label39.TabIndex = 38;
-            this.label39.Text = "Geometric Altitude Accuracy:";
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(441, 85);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(287, 13);
-            this.label40.TabIndex = 39;
-            this.label40.Text = "Surveillance (version 1) or Source(version 2) Integrity Level:";
-            // 
-            // label41
-            // 
-            this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(441, 135);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(130, 13);
-            this.label41.TabIndex = 40;
-            this.label41.Text = "Postion Integrity Category:";
-            // 
-            // label42
-            // 
-            this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(441, 59);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(218, 13);
-            this.label42.TabIndex = 41;
-            this.label42.Text = "Navigation Uncertainty Category for Position:";
-            // 
-            // label43
-            // 
-            this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(441, 111);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(223, 13);
-            this.label43.TabIndex = 42;
-            this.label43.Text = "Horizontal Position System Design Assurance:";
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(441, 72);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(252, 13);
-            this.label44.TabIndex = 43;
-            this.label44.Text = "Navigation Integrity Category for Barometric Altitude:";
-            // 
-            // label45
-            // 
-            this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(441, 98);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(85, 13);
-            this.label45.TabIndex = 44;
-            this.label45.Text = "SIL-Supplement:";
-            // 
-            // label46
-            // 
-            this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(441, 46);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(218, 13);
-            this.label46.TabIndex = 45;
-            this.label46.Text = "Navigation Uncertainty Category for Velocity:";
-            this.label46.Click += new System.EventHandler(this.label46_Click);
-            // 
-            // label47
-            // 
-            this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(408, 33);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(90, 13);
-            this.label47.TabIndex = 46;
-            this.label47.Text = "Quality indicators:";
-            // 
-            // label48
-            // 
-            this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(441, 153);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(86, 13);
-            this.label48.TabIndex = 47;
-            this.label48.Text = "Mode 3/A Code:";
-            this.label48.Click += new System.EventHandler(this.label48_Click);
-            // 
             // label52
             // 
             this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(442, 176);
+            this.label52.Location = new System.Drawing.Point(414, 73);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(83, 13);
             this.label52.TabIndex = 51;
@@ -545,7 +443,7 @@ namespace GUI
             // label53
             // 
             this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(442, 254);
+            this.label53.Location = new System.Drawing.Point(414, 151);
             this.label53.Name = "label53";
             this.label53.Size = new System.Drawing.Size(102, 13);
             this.label53.TabIndex = 52;
@@ -582,7 +480,7 @@ namespace GUI
             // label70
             // 
             this.label70.AutoSize = true;
-            this.label70.Location = new System.Drawing.Point(452, 189);
+            this.label70.Location = new System.Drawing.Point(424, 86);
             this.label70.Name = "label70";
             this.label70.Size = new System.Drawing.Size(69, 13);
             this.label70.TabIndex = 69;
@@ -591,7 +489,7 @@ namespace GUI
             // label71
             // 
             this.label71.AutoSize = true;
-            this.label71.Location = new System.Drawing.Point(451, 202);
+            this.label71.Location = new System.Drawing.Point(423, 99);
             this.label71.Name = "label71";
             this.label71.Size = new System.Drawing.Size(80, 13);
             this.label71.TabIndex = 70;
@@ -600,7 +498,7 @@ namespace GUI
             // label72
             // 
             this.label72.AutoSize = true;
-            this.label72.Location = new System.Drawing.Point(451, 215);
+            this.label72.Location = new System.Drawing.Point(423, 112);
             this.label72.Name = "label72";
             this.label72.Size = new System.Drawing.Size(70, 13);
             this.label72.TabIndex = 71;
@@ -609,7 +507,7 @@ namespace GUI
             // label73
             // 
             this.label73.AutoSize = true;
-            this.label73.Location = new System.Drawing.Point(452, 228);
+            this.label73.Location = new System.Drawing.Point(424, 125);
             this.label73.Name = "label73";
             this.label73.Size = new System.Drawing.Size(64, 13);
             this.label73.TabIndex = 72;
@@ -618,7 +516,7 @@ namespace GUI
             // label74
             // 
             this.label74.AutoSize = true;
-            this.label74.Location = new System.Drawing.Point(436, 299);
+            this.label74.Location = new System.Drawing.Point(408, 196);
             this.label74.Name = "label74";
             this.label74.Size = new System.Drawing.Size(169, 13);
             this.label74.TabIndex = 73;
@@ -627,20 +525,11 @@ namespace GUI
             // label75
             // 
             this.label75.AutoSize = true;
-            this.label75.Location = new System.Drawing.Point(442, 241);
+            this.label75.Location = new System.Drawing.Point(414, 138);
             this.label75.Name = "label75";
             this.label75.Size = new System.Drawing.Size(75, 13);
             this.label75.TabIndex = 74;
             this.label75.Text = "Report Period:";
-            // 
-            // label85
-            // 
-            this.label85.AutoSize = true;
-            this.label85.Location = new System.Drawing.Point(447, 407);
-            this.label85.Name = "label85";
-            this.label85.Size = new System.Drawing.Size(104, 13);
-            this.label85.TabIndex = 84;
-            this.label85.Text = "Threat Identity Data:";
             // 
             // label94
             // 
@@ -663,66 +552,11 @@ namespace GUI
             // label103
             // 
             this.label103.AutoSize = true;
-            this.label103.Location = new System.Drawing.Point(444, 316);
+            this.label103.Location = new System.Drawing.Point(416, 213);
             this.label103.Name = "label103";
             this.label103.Size = new System.Drawing.Size(80, 13);
             this.label103.TabIndex = 102;
             this.label103.Text = "Message Type:";
-            // 
-            // label104
-            // 
-            this.label104.AutoSize = true;
-            this.label104.Location = new System.Drawing.Point(444, 329);
-            this.label104.Name = "label104";
-            this.label104.Size = new System.Drawing.Size(98, 13);
-            this.label104.TabIndex = 103;
-            this.label104.Text = "Message Sub-type:";
-            // 
-            // label105
-            // 
-            this.label105.AutoSize = true;
-            this.label105.Location = new System.Drawing.Point(442, 342);
-            this.label105.Name = "label105";
-            this.label105.Size = new System.Drawing.Size(136, 13);
-            this.label105.TabIndex = 104;
-            this.label105.Text = "Active Resolution Advisory:";
-            // 
-            // label106
-            // 
-            this.label106.AutoSize = true;
-            this.label106.Location = new System.Drawing.Point(444, 355);
-            this.label106.Name = "label106";
-            this.label106.Size = new System.Drawing.Size(32, 13);
-            this.label106.TabIndex = 105;
-            this.label106.Text = "RAC:";
-            // 
-            // label107
-            // 
-            this.label107.AutoSize = true;
-            this.label107.Location = new System.Drawing.Point(444, 368);
-            this.label107.Name = "label107";
-            this.label107.Size = new System.Drawing.Size(81, 13);
-            this.label107.TabIndex = 106;
-            this.label107.Text = "RA Terminated:";
-            this.label107.Click += new System.EventHandler(this.label107_Click);
-            // 
-            // label108
-            // 
-            this.label108.AutoSize = true;
-            this.label108.Location = new System.Drawing.Point(444, 381);
-            this.label108.Name = "label108";
-            this.label108.Size = new System.Drawing.Size(132, 13);
-            this.label108.TabIndex = 107;
-            this.label108.Text = "Multiple Threat Encounter:";
-            // 
-            // label109
-            // 
-            this.label109.AutoSize = true;
-            this.label109.Location = new System.Drawing.Point(444, 394);
-            this.label109.Name = "label109";
-            this.label109.Size = new System.Drawing.Size(112, 13);
-            this.label109.TabIndex = 108;
-            this.label109.Text = "Threat Type Indicator:";
             // 
             // label110
             // 
@@ -852,23 +686,24 @@ namespace GUI
             this.label123.TabIndex = 122;
             this.label123.Text = "TAS:";
             // 
-            // label124
+            // label15616
             // 
-            this.label124.AutoSize = true;
-            this.label124.Location = new System.Drawing.Point(851, 190);
-            this.label124.Name = "label124";
-            this.label124.Size = new System.Drawing.Size(27, 13);
-            this.label124.TabIndex = 123;
-            this.label124.Text = "MH:";
+            this.label15616.AutoSize = true;
+            this.label15616.Location = new System.Drawing.Point(851, 190);
+            this.label15616.Name = "label15616";
+            this.label15616.Size = new System.Drawing.Size(27, 13);
+            this.label15616.TabIndex = 123;
+            this.label15616.Text = "MH:";
+            this.label15616.Click += new System.EventHandler(this.label15616_Click);
             // 
-            // label125
+            // AVA
             // 
-            this.label125.AutoSize = true;
-            this.label125.Location = new System.Drawing.Point(851, 203);
-            this.label125.Name = "label125";
-            this.label125.Size = new System.Drawing.Size(32, 13);
-            this.label125.TabIndex = 124;
-            this.label125.Text = "BVR:";
+            this.AVA.AutoSize = true;
+            this.AVA.Location = new System.Drawing.Point(851, 203);
+            this.AVA.Name = "AVA";
+            this.AVA.Size = new System.Drawing.Size(32, 13);
+            this.AVA.TabIndex = 124;
+            this.AVA.Text = "BVR:";
             // 
             // label126
             // 
@@ -1229,100 +1064,10 @@ namespace GUI
             this.labeltargetaddress.TabIndex = 164;
             this.labeltargetaddress.Text = "Data Source Identifier:";
             // 
-            // label165
-            // 
-            this.label165.AutoSize = true;
-            this.label165.Location = new System.Drawing.Point(508, 33);
-            this.label165.Name = "label165";
-            this.label165.Size = new System.Drawing.Size(113, 13);
-            this.label165.TabIndex = 165;
-            this.label165.Text = "Data Source Identifier:";
-            // 
-            // label166
-            // 
-            this.label166.AutoSize = true;
-            this.label166.Location = new System.Drawing.Point(627, 32);
-            this.label166.Name = "label166";
-            this.label166.Size = new System.Drawing.Size(113, 13);
-            this.label166.TabIndex = 166;
-            this.label166.Text = "Data Source Identifier:";
-            // 
-            // label167
-            // 
-            this.label167.AutoSize = true;
-            this.label167.Location = new System.Drawing.Point(665, 46);
-            this.label167.Name = "label167";
-            this.label167.Size = new System.Drawing.Size(113, 13);
-            this.label167.TabIndex = 167;
-            this.label167.Text = "Data Source Identifier:";
-            // 
-            // label168
-            // 
-            this.label168.AutoSize = true;
-            this.label168.Location = new System.Drawing.Point(665, 59);
-            this.label168.Name = "label168";
-            this.label168.Size = new System.Drawing.Size(113, 13);
-            this.label168.TabIndex = 168;
-            this.label168.Text = "Data Source Identifier:";
-            // 
-            // label169
-            // 
-            this.label169.AutoSize = true;
-            this.label169.Location = new System.Drawing.Point(699, 72);
-            this.label169.Name = "label169";
-            this.label169.Size = new System.Drawing.Size(113, 13);
-            this.label169.TabIndex = 169;
-            this.label169.Text = "Data Source Identifier:";
-            // 
-            // label171
-            // 
-            this.label171.AutoSize = true;
-            this.label171.Location = new System.Drawing.Point(518, 98);
-            this.label171.Name = "label171";
-            this.label171.Size = new System.Drawing.Size(113, 13);
-            this.label171.TabIndex = 171;
-            this.label171.Text = "Data Source Identifier:";
-            // 
-            // label172
-            // 
-            this.label172.AutoSize = true;
-            this.label172.Location = new System.Drawing.Point(580, 124);
-            this.label172.Name = "label172";
-            this.label172.Size = new System.Drawing.Size(113, 13);
-            this.label172.TabIndex = 172;
-            this.label172.Text = "Data Source Identifier:";
-            // 
-            // label173
-            // 
-            this.label173.AutoSize = true;
-            this.label173.Location = new System.Drawing.Point(665, 111);
-            this.label173.Name = "label173";
-            this.label173.Size = new System.Drawing.Size(113, 13);
-            this.label173.TabIndex = 173;
-            this.label173.Text = "Data Source Identifier:";
-            // 
-            // label174
-            // 
-            this.label174.AutoSize = true;
-            this.label174.Location = new System.Drawing.Point(570, 135);
-            this.label174.Name = "label174";
-            this.label174.Size = new System.Drawing.Size(113, 13);
-            this.label174.TabIndex = 174;
-            this.label174.Text = "Data Source Identifier:";
-            // 
-            // labelmode3ACode
-            // 
-            this.labelmode3ACode.AutoSize = true;
-            this.labelmode3ACode.Location = new System.Drawing.Point(529, 153);
-            this.labelmode3ACode.Name = "labelmode3ACode";
-            this.labelmode3ACode.Size = new System.Drawing.Size(113, 13);
-            this.labelmode3ACode.TabIndex = 175;
-            this.labelmode3ACode.Text = "Data Source Identifier:";
-            // 
             // labelmiws
             // 
             this.labelmiws.AutoSize = true;
-            this.labelmiws.Location = new System.Drawing.Point(523, 189);
+            this.labelmiws.Location = new System.Drawing.Point(495, 86);
             this.labelmiws.Name = "labelmiws";
             this.labelmiws.Size = new System.Drawing.Size(113, 13);
             this.labelmiws.TabIndex = 177;
@@ -1331,7 +1076,7 @@ namespace GUI
             // labelmiwd
             // 
             this.labelmiwd.AutoSize = true;
-            this.labelmiwd.Location = new System.Drawing.Point(527, 202);
+            this.labelmiwd.Location = new System.Drawing.Point(499, 99);
             this.labelmiwd.Name = "labelmiwd";
             this.labelmiwd.Size = new System.Drawing.Size(113, 13);
             this.labelmiwd.TabIndex = 178;
@@ -1340,7 +1085,7 @@ namespace GUI
             // labelmitmp
             // 
             this.labelmitmp.AutoSize = true;
-            this.labelmitmp.Location = new System.Drawing.Point(522, 215);
+            this.labelmitmp.Location = new System.Drawing.Point(494, 112);
             this.labelmitmp.Name = "labelmitmp";
             this.labelmitmp.Size = new System.Drawing.Size(113, 13);
             this.labelmitmp.TabIndex = 179;
@@ -1349,29 +1094,20 @@ namespace GUI
             // labelmitrb
             // 
             this.labelmitrb.AutoSize = true;
-            this.labelmitrb.Location = new System.Drawing.Point(523, 228);
+            this.labelmitrb.Location = new System.Drawing.Point(495, 125);
             this.labelmitrb.Name = "labelmitrb";
             this.labelmitrb.Size = new System.Drawing.Size(113, 13);
             this.labelmitrb.TabIndex = 180;
             this.labelmitrb.Text = "Data Source Identifier:";
             // 
-            // label181
+            // labelmessageamplitude
             // 
-            this.label181.AutoSize = true;
-            this.label181.Location = new System.Drawing.Point(523, 241);
-            this.label181.Name = "label181";
-            this.label181.Size = new System.Drawing.Size(113, 13);
-            this.label181.TabIndex = 181;
-            this.label181.Text = "Data Source Identifier:";
-            // 
-            // label182
-            // 
-            this.label182.AutoSize = true;
-            this.label182.Location = new System.Drawing.Point(538, 254);
-            this.label182.Name = "label182";
-            this.label182.Size = new System.Drawing.Size(113, 13);
-            this.label182.TabIndex = 182;
-            this.label182.Text = "Data Source Identifier:";
+            this.labelmessageamplitude.AutoSize = true;
+            this.labelmessageamplitude.Location = new System.Drawing.Point(510, 151);
+            this.labelmessageamplitude.Name = "labelmessageamplitude";
+            this.labelmessageamplitude.Size = new System.Drawing.Size(113, 13);
+            this.labelmessageamplitude.TabIndex = 182;
+            this.labelmessageamplitude.Text = "Data Source Identifier:";
             // 
             // labeldaaara
             // 
@@ -1385,65 +1121,20 @@ namespace GUI
             // label209
             // 
             this.label209.AutoSize = true;
-            this.label209.Location = new System.Drawing.Point(601, 299);
+            this.label209.Location = new System.Drawing.Point(573, 196);
             this.label209.Name = "label209";
             this.label209.Size = new System.Drawing.Size(113, 13);
             this.label209.TabIndex = 209;
             this.label209.Text = "Data Source Identifier:";
             // 
-            // label210
+            // labelmessagetype
             // 
-            this.label210.AutoSize = true;
-            this.label210.Location = new System.Drawing.Point(524, 316);
-            this.label210.Name = "label210";
-            this.label210.Size = new System.Drawing.Size(113, 13);
-            this.label210.TabIndex = 210;
-            this.label210.Text = "Data Source Identifier:";
-            // 
-            // label211
-            // 
-            this.label211.AutoSize = true;
-            this.label211.Location = new System.Drawing.Point(471, 355);
-            this.label211.Name = "label211";
-            this.label211.Size = new System.Drawing.Size(113, 13);
-            this.label211.TabIndex = 211;
-            this.label211.Text = "Data Source Identifier:";
-            // 
-            // label212
-            // 
-            this.label212.AutoSize = true;
-            this.label212.Location = new System.Drawing.Point(524, 368);
-            this.label212.Name = "label212";
-            this.label212.Size = new System.Drawing.Size(113, 13);
-            this.label212.TabIndex = 212;
-            this.label212.Text = "Data Source Identifier:";
-            // 
-            // label213
-            // 
-            this.label213.AutoSize = true;
-            this.label213.Location = new System.Drawing.Point(569, 381);
-            this.label213.Name = "label213";
-            this.label213.Size = new System.Drawing.Size(113, 13);
-            this.label213.TabIndex = 213;
-            this.label213.Text = "Data Source Identifier:";
-            // 
-            // label214
-            // 
-            this.label214.AutoSize = true;
-            this.label214.Location = new System.Drawing.Point(557, 394);
-            this.label214.Name = "label214";
-            this.label214.Size = new System.Drawing.Size(113, 13);
-            this.label214.TabIndex = 214;
-            this.label214.Text = "Data Source Identifier:";
-            // 
-            // label215
-            // 
-            this.label215.AutoSize = true;
-            this.label215.Location = new System.Drawing.Point(547, 407);
-            this.label215.Name = "label215";
-            this.label215.Size = new System.Drawing.Size(113, 13);
-            this.label215.TabIndex = 215;
-            this.label215.Text = "Data Source Identifier:";
+            this.labelmessagetype.AutoSize = true;
+            this.labelmessagetype.Location = new System.Drawing.Point(496, 213);
+            this.labelmessagetype.Name = "labelmessagetype";
+            this.labelmessagetype.Size = new System.Drawing.Size(113, 13);
+            this.labelmessagetype.TabIndex = 210;
+            this.labelmessagetype.Text = "Data Source Identifier:";
             // 
             // labeldaaos
             // 
@@ -1643,15 +1334,6 @@ namespace GUI
             this.labeldascc.TabIndex = 257;
             this.labeldascc.Text = "Data Source Identifier:";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(723, 85);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(113, 13);
-            this.label2.TabIndex = 258;
-            this.label2.Text = "Data Source Identifier:";
-            // 
             // nextBtn
             // 
             this.nextBtn.Location = new System.Drawing.Point(892, 475);
@@ -1753,11 +1435,252 @@ namespace GUI
             this.labelMOPSLTT.TabIndex = 269;
             this.labelMOPSLTT.Text = "label27";
             // 
+            // labelservicemanagement
+            // 
+            this.labelservicemanagement.AutoSize = true;
+            this.labelservicemanagement.Location = new System.Drawing.Point(494, 138);
+            this.labelservicemanagement.Name = "labelservicemanagement";
+            this.labelservicemanagement.Size = new System.Drawing.Size(41, 13);
+            this.labelservicemanagement.TabIndex = 271;
+            this.labelservicemanagement.Text = "label28";
+            // 
+            // aos
+            // 
+            this.aos.AutoSize = true;
+            this.aos.Location = new System.Drawing.Point(995, 32);
+            this.aos.Name = "aos";
+            this.aos.Size = new System.Drawing.Size(113, 13);
+            this.aos.TabIndex = 272;
+            this.aos.Text = "Data Source Identifier:";
+            // 
+            // trd
+            // 
+            this.trd.AutoSize = true;
+            this.trd.Location = new System.Drawing.Point(995, 46);
+            this.trd.Name = "trd";
+            this.trd.Size = new System.Drawing.Size(113, 13);
+            this.trd.TabIndex = 273;
+            this.trd.Text = "Data Source Identifier:";
+            // 
+            // m3a
+            // 
+            this.m3a.AutoSize = true;
+            this.m3a.Location = new System.Drawing.Point(996, 59);
+            this.m3a.Name = "m3a";
+            this.m3a.Size = new System.Drawing.Size(113, 13);
+            this.m3a.TabIndex = 274;
+            this.m3a.Text = "Data Source Identifier:";
+            // 
+            // ti
+            // 
+            this.ti.AutoSize = true;
+            this.ti.Location = new System.Drawing.Point(996, 86);
+            this.ti.Name = "ti";
+            this.ti.Size = new System.Drawing.Size(113, 13);
+            this.ti.TabIndex = 275;
+            this.ti.Text = "Data Source Identifier:";
+            // 
+            // qi
+            // 
+            this.qi.AutoSize = true;
+            this.qi.Location = new System.Drawing.Point(995, 73);
+            this.qi.Name = "qi";
+            this.qi.Size = new System.Drawing.Size(113, 13);
+            this.qi.TabIndex = 276;
+            this.qi.Text = "Data Source Identifier:";
+            // 
+            // mam
+            // 
+            this.mam.AutoSize = true;
+            this.mam.Location = new System.Drawing.Point(996, 99);
+            this.mam.Name = "mam";
+            this.mam.Size = new System.Drawing.Size(113, 13);
+            this.mam.TabIndex = 277;
+            this.mam.Text = "Data Source Identifier:";
+            // 
+            // gh
+            // 
+            this.gh.AutoSize = true;
+            this.gh.Location = new System.Drawing.Point(995, 116);
+            this.gh.Name = "gh";
+            this.gh.Size = new System.Drawing.Size(113, 13);
+            this.gh.TabIndex = 278;
+            this.gh.Text = "Data Source Identifier:";
+            // 
+            // fl
+            // 
+            this.fl.AutoSize = true;
+            this.fl.Location = new System.Drawing.Point(995, 129);
+            this.fl.Name = "fl";
+            this.fl.Size = new System.Drawing.Size(113, 13);
+            this.fl.TabIndex = 279;
+            this.fl.Text = "Data Source Identifier:";
+            // 
+            // isa
+            // 
+            this.isa.AutoSize = true;
+            this.isa.Location = new System.Drawing.Point(1000, 142);
+            this.isa.Name = "isa";
+            this.isa.Size = new System.Drawing.Size(113, 13);
+            this.isa.TabIndex = 280;
+            this.isa.Text = "Data Source Identifier:";
+            // 
+            // fsa
+            // 
+            this.fsa.AutoSize = true;
+            this.fsa.Location = new System.Drawing.Point(1000, 153);
+            this.fsa.Name = "fsa";
+            this.fsa.Size = new System.Drawing.Size(113, 13);
+            this.fsa.TabIndex = 281;
+            this.fsa.Text = "Data Source Identifier:";
+            // 
+            // ass
+            // 
+            this.ass.AutoSize = true;
+            this.ass.Location = new System.Drawing.Point(996, 164);
+            this.ass.Name = "ass";
+            this.ass.Size = new System.Drawing.Size(113, 13);
+            this.ass.TabIndex = 282;
+            this.ass.Text = "Data Source Identifier:";
+            // 
+            // tas
+            // 
+            this.tas.AutoSize = true;
+            this.tas.Location = new System.Drawing.Point(1000, 176);
+            this.tas.Name = "tas";
+            this.tas.Size = new System.Drawing.Size(113, 13);
+            this.tas.TabIndex = 283;
+            this.tas.Text = "Data Source Identifier:";
+            // 
+            // mh
+            // 
+            this.mh.AutoSize = true;
+            this.mh.Location = new System.Drawing.Point(995, 189);
+            this.mh.Name = "mh";
+            this.mh.Size = new System.Drawing.Size(113, 13);
+            this.mh.TabIndex = 284;
+            this.mh.Text = "Data Source Identifier:";
+            this.mh.Click += new System.EventHandler(this.label57_Click);
+            // 
+            // BVR
+            // 
+            this.BVR.AutoSize = true;
+            this.BVR.Location = new System.Drawing.Point(996, 202);
+            this.BVR.Name = "BVR";
+            this.BVR.Size = new System.Drawing.Size(113, 13);
+            this.BVR.TabIndex = 285;
+            this.BVR.Text = "Data Source Identifier:";
+            // 
+            // gvr
+            // 
+            this.gvr.AutoSize = true;
+            this.gvr.Location = new System.Drawing.Point(996, 215);
+            this.gvr.Name = "gvr";
+            this.gvr.Size = new System.Drawing.Size(113, 13);
+            this.gvr.TabIndex = 286;
+            this.gvr.Text = "Data Source Identifier:";
+            // 
+            // gv
+            // 
+            this.gv.AutoSize = true;
+            this.gv.Location = new System.Drawing.Point(996, 228);
+            this.gv.Name = "gv";
+            this.gv.Size = new System.Drawing.Size(113, 13);
+            this.gv.TabIndex = 287;
+            this.gv.Text = "Data Source Identifier:";
+            // 
+            // tar
+            // 
+            this.tar.AutoSize = true;
+            this.tar.Location = new System.Drawing.Point(996, 244);
+            this.tar.Name = "tar";
+            this.tar.Size = new System.Drawing.Size(113, 13);
+            this.tar.TabIndex = 288;
+            this.tar.Text = "Data Source Identifier:";
+            // 
+            // tii
+            // 
+            this.tii.AutoSize = true;
+            this.tii.Location = new System.Drawing.Point(1000, 260);
+            this.tii.Name = "tii";
+            this.tii.Size = new System.Drawing.Size(113, 13);
+            this.tii.TabIndex = 289;
+            this.tii.Text = "Data Source Identifier:";
+            // 
+            // met
+            // 
+            this.met.AutoSize = true;
+            this.met.Location = new System.Drawing.Point(995, 286);
+            this.met.Name = "met";
+            this.met.Size = new System.Drawing.Size(113, 13);
+            this.met.TabIndex = 290;
+            this.met.Text = "Data Source Identifier:";
+            // 
+            // ts
+            // 
+            this.ts.AutoSize = true;
+            this.ts.Location = new System.Drawing.Point(995, 270);
+            this.ts.Name = "ts";
+            this.ts.Size = new System.Drawing.Size(113, 13);
+            this.ts.TabIndex = 291;
+            this.ts.Text = "Data Source Identifier:";
+            // 
+            // roa
+            // 
+            this.roa.AutoSize = true;
+            this.roa.Location = new System.Drawing.Point(1000, 296);
+            this.roa.Name = "roa";
+            this.roa.Size = new System.Drawing.Size(113, 13);
+            this.roa.TabIndex = 292;
+            this.roa.Text = "Data Source Identifier:";
+            // 
+            // ara
+            // 
+            this.ara.AutoSize = true;
+            this.ara.Location = new System.Drawing.Point(1000, 309);
+            this.ara.Name = "ara";
+            this.ara.Size = new System.Drawing.Size(113, 13);
+            this.ara.TabIndex = 293;
+            this.ara.Text = "Data Source Identifier:";
+            // 
+            // scc
+            // 
+            this.scc.AutoSize = true;
+            this.scc.Location = new System.Drawing.Point(1000, 324);
+            this.scc.Name = "scc";
+            this.scc.Size = new System.Drawing.Size(113, 13);
+            this.scc.TabIndex = 294;
+            this.scc.Text = "Data Source Identifier:";
+            // 
             // MoreInfoOfPacketCAT21
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1177, 510);
+            this.Controls.Add(this.scc);
+            this.Controls.Add(this.ara);
+            this.Controls.Add(this.roa);
+            this.Controls.Add(this.ts);
+            this.Controls.Add(this.met);
+            this.Controls.Add(this.tii);
+            this.Controls.Add(this.tar);
+            this.Controls.Add(this.gv);
+            this.Controls.Add(this.gvr);
+            this.Controls.Add(this.BVR);
+            this.Controls.Add(this.mh);
+            this.Controls.Add(this.tas);
+            this.Controls.Add(this.ass);
+            this.Controls.Add(this.fsa);
+            this.Controls.Add(this.isa);
+            this.Controls.Add(this.fl);
+            this.Controls.Add(this.gh);
+            this.Controls.Add(this.mam);
+            this.Controls.Add(this.qi);
+            this.Controls.Add(this.ti);
+            this.Controls.Add(this.m3a);
+            this.Controls.Add(this.trd);
+            this.Controls.Add(this.aos);
+            this.Controls.Add(this.labelservicemanagement);
             this.Controls.Add(this.labelMOPSLTT);
             this.Controls.Add(this.label25);
             this.Controls.Add(this.labelmopsvn);
@@ -1769,7 +1692,6 @@ namespace GUI
             this.Controls.Add(this.labelFSITPositionHigh);
             this.Controls.Add(this.FSIT);
             this.Controls.Add(this.nextBtn);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.labeldascc);
             this.Controls.Add(this.labeldaaroa);
             this.Controls.Add(this.labeldaamet);
@@ -1792,30 +1714,14 @@ namespace GUI
             this.Controls.Add(this.labeldam3a);
             this.Controls.Add(this.labeldaatrd);
             this.Controls.Add(this.labeldaaos);
-            this.Controls.Add(this.label215);
-            this.Controls.Add(this.label214);
-            this.Controls.Add(this.label213);
-            this.Controls.Add(this.label212);
-            this.Controls.Add(this.label211);
-            this.Controls.Add(this.label210);
+            this.Controls.Add(this.labelmessagetype);
             this.Controls.Add(this.label209);
             this.Controls.Add(this.labeldaaara);
-            this.Controls.Add(this.label182);
-            this.Controls.Add(this.label181);
+            this.Controls.Add(this.labelmessageamplitude);
             this.Controls.Add(this.labelmitrb);
             this.Controls.Add(this.labelmitmp);
             this.Controls.Add(this.labelmiwd);
             this.Controls.Add(this.labelmiws);
-            this.Controls.Add(this.labelmode3ACode);
-            this.Controls.Add(this.label174);
-            this.Controls.Add(this.label173);
-            this.Controls.Add(this.label172);
-            this.Controls.Add(this.label171);
-            this.Controls.Add(this.label169);
-            this.Controls.Add(this.label168);
-            this.Controls.Add(this.label167);
-            this.Controls.Add(this.label166);
-            this.Controls.Add(this.label165);
             this.Controls.Add(this.labeltargetaddress);
             this.Controls.Add(this.labeltimeofreporttransmission);
             this.Controls.Add(this.labeltimeofmessagereceptionvelocityhigh);
@@ -1856,8 +1762,8 @@ namespace GUI
             this.Controls.Add(this.label128);
             this.Controls.Add(this.label127);
             this.Controls.Add(this.label126);
-            this.Controls.Add(this.label125);
-            this.Controls.Add(this.label124);
+            this.Controls.Add(this.AVA);
+            this.Controls.Add(this.label15616);
             this.Controls.Add(this.label123);
             this.Controls.Add(this.label122);
             this.Controls.Add(this.label121);
@@ -1872,16 +1778,9 @@ namespace GUI
             this.Controls.Add(this.label112);
             this.Controls.Add(this.label111);
             this.Controls.Add(this.label110);
-            this.Controls.Add(this.label109);
-            this.Controls.Add(this.label108);
-            this.Controls.Add(this.label107);
-            this.Controls.Add(this.label106);
-            this.Controls.Add(this.label105);
-            this.Controls.Add(this.label104);
             this.Controls.Add(this.label103);
             this.Controls.Add(this.label96);
             this.Controls.Add(this.label94);
-            this.Controls.Add(this.label85);
             this.Controls.Add(this.label75);
             this.Controls.Add(this.label74);
             this.Controls.Add(this.label73);
@@ -1893,16 +1792,6 @@ namespace GUI
             this.Controls.Add(this.label67);
             this.Controls.Add(this.label53);
             this.Controls.Add(this.label52);
-            this.Controls.Add(this.label48);
-            this.Controls.Add(this.label47);
-            this.Controls.Add(this.label46);
-            this.Controls.Add(this.label45);
-            this.Controls.Add(this.label44);
-            this.Controls.Add(this.label43);
-            this.Controls.Add(this.label42);
-            this.Controls.Add(this.label41);
-            this.Controls.Add(this.label40);
-            this.Controls.Add(this.label39);
             this.Controls.Add(this.label37);
             this.Controls.Add(this.label36);
             this.Controls.Add(this.label35);
@@ -1965,16 +1854,6 @@ namespace GUI
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.Label label40;
-        private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.Label label42;
-        private System.Windows.Forms.Label label43;
-        private System.Windows.Forms.Label label44;
-        private System.Windows.Forms.Label label45;
-        private System.Windows.Forms.Label label46;
-        private System.Windows.Forms.Label label47;
-        private System.Windows.Forms.Label label48;
         private System.Windows.Forms.Label label52;
         private System.Windows.Forms.Label label53;
         private System.Windows.Forms.Label label67;
@@ -1986,16 +1865,9 @@ namespace GUI
         private System.Windows.Forms.Label label73;
         private System.Windows.Forms.Label label74;
         private System.Windows.Forms.Label label75;
-        private System.Windows.Forms.Label label85;
         private System.Windows.Forms.Label label94;
         private System.Windows.Forms.Label label96;
         private System.Windows.Forms.Label label103;
-        private System.Windows.Forms.Label label104;
-        private System.Windows.Forms.Label label105;
-        private System.Windows.Forms.Label label106;
-        private System.Windows.Forms.Label label107;
-        private System.Windows.Forms.Label label108;
-        private System.Windows.Forms.Label label109;
         private System.Windows.Forms.Label label110;
         private System.Windows.Forms.Label label111;
         private System.Windows.Forms.Label label112;
@@ -2010,8 +1882,8 @@ namespace GUI
         private System.Windows.Forms.Label label121;
         private System.Windows.Forms.Label label122;
         private System.Windows.Forms.Label label123;
-        private System.Windows.Forms.Label label124;
-        private System.Windows.Forms.Label label125;
+        private System.Windows.Forms.Label label15616;
+        private System.Windows.Forms.Label AVA;
         private System.Windows.Forms.Label label126;
         private System.Windows.Forms.Label label127;
         private System.Windows.Forms.Label label128;
@@ -2052,30 +1924,14 @@ namespace GUI
         private System.Windows.Forms.Label labeltimeofmessagereceptionvelocityhigh;
         private System.Windows.Forms.Label labeltimeofreporttransmission;
         private System.Windows.Forms.Label labeltargetaddress;
-        private System.Windows.Forms.Label label165;
-        private System.Windows.Forms.Label label166;
-        private System.Windows.Forms.Label label167;
-        private System.Windows.Forms.Label label168;
-        private System.Windows.Forms.Label label169;
-        private System.Windows.Forms.Label label171;
-        private System.Windows.Forms.Label label172;
-        private System.Windows.Forms.Label label173;
-        private System.Windows.Forms.Label label174;
-        private System.Windows.Forms.Label labelmode3ACode;
         private System.Windows.Forms.Label labelmiws;
         private System.Windows.Forms.Label labelmiwd;
         private System.Windows.Forms.Label labelmitmp;
         private System.Windows.Forms.Label labelmitrb;
-        private System.Windows.Forms.Label label181;
-        private System.Windows.Forms.Label label182;
+        private System.Windows.Forms.Label labelmessageamplitude;
         private System.Windows.Forms.Label labeldaaara;
         private System.Windows.Forms.Label label209;
-        private System.Windows.Forms.Label label210;
-        private System.Windows.Forms.Label label211;
-        private System.Windows.Forms.Label label212;
-        private System.Windows.Forms.Label label213;
-        private System.Windows.Forms.Label label214;
-        private System.Windows.Forms.Label label215;
+        private System.Windows.Forms.Label labelmessagetype;
         private System.Windows.Forms.Label labeldaaos;
         private System.Windows.Forms.Label labeldaatrd;
         private System.Windows.Forms.Label labeldam3a;
@@ -2098,7 +1954,6 @@ namespace GUI
         private System.Windows.Forms.Label labeldaamet;
         private System.Windows.Forms.Label labeldaaroa;
         private System.Windows.Forms.Label labeldascc;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button nextBtn;
         private System.Windows.Forms.Label FSIT;
         private System.Windows.Forms.Label labelFSITPositionHigh;
@@ -2110,5 +1965,29 @@ namespace GUI
         private System.Windows.Forms.Label labelmopsvn;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label labelMOPSLTT;
+        private System.Windows.Forms.Label labelservicemanagement;
+        private System.Windows.Forms.Label aos;
+        private System.Windows.Forms.Label trd;
+        private System.Windows.Forms.Label m3a;
+        private System.Windows.Forms.Label ti;
+        private System.Windows.Forms.Label qi;
+        private System.Windows.Forms.Label mam;
+        private System.Windows.Forms.Label gh;
+        private System.Windows.Forms.Label fl;
+        private System.Windows.Forms.Label isa;
+        private System.Windows.Forms.Label fsa;
+        private System.Windows.Forms.Label ass;
+        private System.Windows.Forms.Label tas;
+        private System.Windows.Forms.Label mh;
+        private System.Windows.Forms.Label BVR;
+        private System.Windows.Forms.Label gvr;
+        private System.Windows.Forms.Label gv;
+        private System.Windows.Forms.Label tar;
+        private System.Windows.Forms.Label tii;
+        private System.Windows.Forms.Label met;
+        private System.Windows.Forms.Label ts;
+        private System.Windows.Forms.Label roa;
+        private System.Windows.Forms.Label ara;
+        private System.Windows.Forms.Label scc;
     }
 }

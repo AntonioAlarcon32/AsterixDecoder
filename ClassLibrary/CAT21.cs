@@ -118,6 +118,11 @@ namespace ClassLibrary
         string sCident;
         string sClw;
 
+        string tiNav;
+        string tiTis;
+        string tiTid;
+        string tiNvb;
+
         double messageAmplitude;
         int receiverId;
 
@@ -267,6 +272,12 @@ namespace ClassLibrary
             this.sAsas = "N/A";
             this.sAsource = "N/A";
             this.sAaltitude = double.NaN;
+
+            this.tiNav = "N/A";
+            this.tiTis = "N/A";
+            this.tiTid = "N/A";
+            this.tiNvb = "N/A";
+
 
             this.fssAmv = "N/A";
             this.fssAah = "N/A";
@@ -1107,6 +1118,7 @@ namespace ClassLibrary
 
 
             if (dataItem.Length >= 2) ;
+
             if (dataItem.Length >= 3) ;
             if (dataItem.Length >= 4) ;
 
@@ -1639,7 +1651,7 @@ namespace ClassLibrary
         }
         public void DecodeTrajectoryIntent(byte[] dataItem)
         {
-            /* byte tisMask = 128;
+            byte tisMask = 128;
              byte tidMask = 64;
 
              int tis = ((tisMask & dataItem[0]) >> 7);
@@ -1695,7 +1707,7 @@ namespace ClassLibrary
 
 
                  }
-             }*/
+             }
         }
         public void DecodeServiceManagement(byte[] dataItem)
         {
@@ -2855,7 +2867,22 @@ namespace ClassLibrary
         {
             return dAscc;
         }
-
+        public string GetTis()
+        {
+            return tiTis;
+        }
+        public string GetTid()
+        {
+            return tiTid;
+        }
+        public string GetNav()
+        {
+            return tiNav;
+        }
+        public string GetNvb()
+        {
+            return tiNvb;
+        }
 
 
 
@@ -2932,7 +2959,482 @@ namespace ClassLibrary
             }
 
         }
+        public string GetWGS84coordinates() 
+        {
+            if (wgs84latitude != double.NaN)
+            { if (wgs84longitude != double.NaN)
+                {
+                    return (wgs84latitude.ToString() +" "+"deg " + wgs84longitude.ToString() + " " + "deg");
+                }
+              else 
+                {
+                    return "N/A";
+                }
+            }
+            else 
+            {
+                return "N/A";
+            }
+        }
+        public string GetWGS84coordinateshigh()
+        {
+            if (wgs84latitudehigh != double.NaN)
+            {
+                if (wgs84longitudehigh != double.NaN)
+                {
+                    return (wgs84latitudehigh.ToString() + " " + "deg " + wgs84longitudehigh.ToString() + " " + "deg");
+                }
+                else
+                {
+                    return "N/A";
+                }
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetTrueAirspeed()
+        {
+            if (trueAirSpeed.ToString() != "NaN")
+            {
+               return trueAirSpeed.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetAirspeed()
+        {
+            if (airSpeed.ToString() != "NaN")
+            {
+                return airSpeed.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetGeometricHeight()
+        {
+            if (geometricHeight.ToString() != "NaN")
+            {
+                return geometricHeight.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetRollAngle()
+        {
+            if (rollAngle.ToString() != "NaN")
+            {
+                return rollAngle.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetFlightLevel()
+        {
+             if (flightLevel.ToString() != "NaN")
+                {
+                    return flightLevel.ToString();
+                }
+             else
+                {
+                    return "N/A";
+                }
+        }
+        public string GetMagneticHeading()
+        {
+            if (magneticHeading.ToString() != "NaN")
+            {
+                return magneticHeading.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetGeometricVerticalRate()
+        {
+            if (geometricVerticalRate.ToString() != "NaN")
+            {
+                return geometricVerticalRate.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetBarometricVerticalRate()
+        {
+            if (barometricVerticalRate.ToString() != "NaN")
+            {
+                return barometricVerticalRate.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetTrackAngle()
+        {
+            if (trackAngle.ToString() != "NaN")
+            {
+                return trackAngle.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetTrackAngleRate()
+        {
+            if (trackAngleRate.ToString() != "NaN")
+            {
+                return trackAngleRate.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetGroundSpeed()
+        {
+            if (groundSpeed.ToString() != "NaN")
+            {
+                return groundSpeed.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetWindspeed()
+        {
+            if (mIwindspeed.ToString() != "NaN")
+            {
+                return mIwindspeed.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetWindDirection()
+        {
+            if (mIwinddirection.ToString() != "NaN")
+            {
+                return mIwinddirection.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetTemperature()
+        {
+            if (mItemperature.ToString() != "NaN")
+            {
+                return mItemperature.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetSaAltitude()
+        {
+            if (sAaltitude.ToString() != "NaN")
+            {
+                return sAaltitude.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetFSSAltitude()
+        {
+            if (fssAaltitude.ToString() != "NaN")
+            {
+                return fssAaltitude.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetServiceManagement()
+        {
+            if (serviceManagement.ToString() != "NaN")
+            {
+                return serviceManagement.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetMessageAmplitude()
+        {
+            if (messageAmplitude.ToString() != "NaN")
+            {
+                return messageAmplitude.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
 
+        public string GetdAAos()
+        {
+            if (dAAos.ToString() != "NaN")
+            {
+                return dAAos.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetdATrd()
+        {
+            if (dATrd.ToString() != "NaN")
+            {
+                return dATrd.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetdAM3A()
+        {
+            if (dAM3a.ToString() != "NaN")
+            {
+                return dAM3a.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetdAQi()
+        {
+            if (dAQi.ToString() != "NaN")
+            {
+                return dAQi.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetdATI()
+        {
+            if (dATI.ToString() != "NaN")
+            {
+                return dATI.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetdAMam()
+        {
+            if (dAMam.ToString() != "NaN")
+            {
+                return dAMam.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetdAGH()
+        {
+            if (dAGh.ToString() != "NaN")
+            {
+                return dAGh.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetdAFl()
+        {
+            if (dAFl.ToString() != "NaN")
+            {
+                return dAFl.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetdAIsa()
+        {
+            if (dAIsa.ToString() != "NaN")
+            {
+                return dAIsa.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetdAFsa()
+        {
+            if (dAFsa.ToString() != "NaN")
+            {
+                return dAFsa.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetdAAs()
+        {
+            if (dAAs.ToString() != "NaN")
+            {
+                return dAAs.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+            public string GetdATas()
+            {
+                if (dATas.ToString() != "NaN")
+                {
+                    return dATas.ToString();
+                }
+                else
+                {
+                    return "N/A";
+                }
+            }
+        public string GetdAMh()
+        {
+            if (dAMh.ToString() != "NaN")
+            {
+                return dAMh.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetdABvr()
+        {
+            if (dABvr.ToString() != "NaN")
+            {
+                return dABvr.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetdAGv()
+        {
+            if (dAGv.ToString() != "NaN")
+            {
+                return dAGv.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetdATar()
+        {
+            if (dATar.ToString() != "NaN")
+            {
+                return dATar.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetdATTI()
+        {
+            if (dATTI.ToString() != "NaN")
+            {
+                return dATTI.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetdATs()
+        {
+            if (dATs.ToString() != "NaN")
+            {
+                return dATs.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetdAMet()
+        {
+            if (dAMet.ToString() != "NaN")
+            {
+                return dAMet.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetdARoa()
+        {
+            if (dARoa.ToString() != "NaN")
+            {
+                return dARoa.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetdAAra()
+        {
+            if (dAAra.ToString() != "NaN")
+            {
+                return dAAra.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
+        public string GetdAscc()
+        {
+            if (dAScc.ToString() != "NaN")
+            {
+                return dAScc.ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
         public string GetTargetID()
         {
             return this.targetIdentification;

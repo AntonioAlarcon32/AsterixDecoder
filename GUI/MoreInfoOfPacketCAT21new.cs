@@ -57,7 +57,25 @@ namespace GUI
             labelsCras.Text = selectedPacket.GetScras();
             labelscident.Text = selectedPacket.GetScident();
             labelsclw.Text = selectedPacket.GetSclw();
-
+            labelWGS84high.Text = selectedPacket.GetWGS84coordinateshigh();
+            labelWGS84.Text = selectedPacket.GetWGS84coordinates();
+            labeltrueairspeed.Text = selectedPacket.GetTrueAirspeed();
+            labelairspeed.Text = selectedPacket.GetAirspeed();
+            labelgeometricheight.Text = selectedPacket.GetGeometricHeight();
+            labelrollangle.Text = selectedPacket.GetRollAngle();
+            labelflightlevel.Text = selectedPacket.GetFlightLevel();
+            labelmagneticheading.Text = selectedPacket.GetMagneticHeading();
+            labelgeometricverticalrate.Text = selectedPacket.GetGeometricVerticalRate();
+            labelbarometricverticalrate.Text = selectedPacket.GetBarometricVerticalRate();
+            labeltrackangle.Text = selectedPacket.GetTrackAngle();
+            labelgroundspeed.Text = selectedPacket.GetGroundSpeed();
+            labeltrackanglerate.Text = selectedPacket.GetTrackAngleRate();
+            labelsaaltitude.Text = selectedPacket.GetSaAltitude();
+            labelfssaltitude.Text = selectedPacket.GetFSSAltitude();
+            labeltis.Text = selectedPacket.GetTis();
+            labeltid.Text = selectedPacket.GetTid();
+            labelnav.Text = selectedPacket.GetNav();
+            labelnvb.Text = selectedPacket.GetNvb();
         }
 
         private void label60_Click(object sender, EventArgs e)

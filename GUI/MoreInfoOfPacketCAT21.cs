@@ -89,7 +89,7 @@ namespace GUI
             labelmopsvn.Text = selectedPacket.GetMOPSVN();
             labelmopsvns.Text = selectedPacket.GetMOPSVNS();
             labelMOPSLTT.Text = selectedPacket.GetMOPSLTT();
-            labelmode3ACode.Text = selectedPacket.GetMode3ACode();
+            labeldam3a.Text = selectedPacket.GetMode3ACode();
             labeltimeofreporttransmission.Text = selectedPacket.GetTimeOfReportTransmission();
             labeltargetidentification.Text = selectedPacket.GetTargetIdentification();
             labelatp.Text = selectedPacket.GetTRAtp();
@@ -123,6 +123,7 @@ namespace GUI
             labeldafl.Text = selectedPacket.GetDafl();
             labeldaisa.Text = selectedPacket.GetDaisa();
             labeldafsa.Text = selectedPacket.GetDafsa();
+
             labeldaas.Text = selectedPacket.GetDaas();
             labeldatas.Text = selectedPacket.GetDatas();
             labeldaamh.Text = selectedPacket.GetDamh();
@@ -130,11 +131,42 @@ namespace GUI
             labeldaagvr.Text = selectedPacket.GetDagvr();
             labeldaagv.Text = selectedPacket.GetDagv();
             labeldaatar.Text = selectedPacket.GetDatar();
-            labeldati.Text = selectedPacket.GetDaTi();
+            labeldaati.Text = selectedPacket.GetDaTi();
             labeldaats.Text = selectedPacket.GetDats();
             labeldaamet.Text = selectedPacket.GetDamet();
             labeldaaroa.Text = selectedPacket.GetDaroa();
+            labeldaaara.Text = selectedPacket.GetDara();
             labeldascc.Text = selectedPacket.GetDascc();
+            labelmessagetype.Text = selectedPacket.GetTypeOfMessage();
+            labelmiws.Text = selectedPacket.GetWindspeed();
+            labelmiwd.Text = selectedPacket.GetWindDirection();
+            labelmitmp.Text = selectedPacket.GetTemperature();
+            labelservicemanagement.Text = selectedPacket.GetServiceManagement();
+            labelmessageamplitude.Text = selectedPacket.GetMessageAmplitude();
+            aos.Text = selectedPacket.GetdAAos();
+            trd.Text = selectedPacket.GetdATrd();
+            m3a.Text = selectedPacket.GetdAM3A();
+            qi.Text = selectedPacket.GetdAQi();
+            ti.Text = selectedPacket.GetdATI();
+            mam.Text = selectedPacket.GetdAMam();
+            gh.Text = selectedPacket.GetdAGH();
+            fl.Text = selectedPacket.GetdAFl();
+            isa.Text = selectedPacket.GetdAIsa();
+            fsa.Text = selectedPacket.GetdAFsa();
+            ass.Text = selectedPacket.GetdAAs();
+            tas.Text = selectedPacket.GetdATas();
+            mh.Text = selectedPacket.GetdAMh();
+            BVR.Text = selectedPacket.GetdABvr();
+            gvr.Text = selectedPacket.GetDagvr();
+            gv.Text = selectedPacket.GetdAGv();
+            tar.Text = selectedPacket.GetdATar();
+            tii.Text = selectedPacket.GetdATI();
+            ts.Text = selectedPacket.GetdATs();
+            met.Text = selectedPacket.GetdAMet();
+            roa.Text = selectedPacket.GetdARoa();
+            ara.Text = selectedPacket.GetDara();
+            scc.Text = selectedPacket.GetdAscc();
+
             
 
 
@@ -191,6 +223,16 @@ namespace GUI
         }
 
         private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label57_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label15616_Click(object sender, EventArgs e)
         {
 
         }
