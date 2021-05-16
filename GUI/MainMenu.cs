@@ -159,35 +159,38 @@ namespace GUI
                 TimeSpan difference = currentTime - dataBlockList[packetIndex].GetTime();
                 if (AreEqual(currentTime, dataBlockList[packetIndex].GetTime(), TimeSpan.FromSeconds(1)) && dataBlockList[packetIndex].GetCategory() == 21)
                 {
-                    CAT21 cat21 = dataBlockList[packetIndex].GetCAT21();
-                    double[] coordinates = cat21.GetWGS84Coordinates();
-                    GMapMarker marker = new GMarkerGoogle(
-                        new PointLatLng(coordinates[0], coordinates[1]),
-                        blueBmp);
-                    marker.Tag = cat21.GetTargetID();
-                    overlay.Markers.Add(marker);
+                    if (mapADSBCheck.Checked == true)
+                    {
+                        CAT21 cat21 = dataBlockList[packetIndex].GetCAT21();
+                        double[] coordinates = cat21.GetWGS84Coordinates();
+                        GMapMarker marker = new GMarkerGoogle(
+                            new PointLatLng(coordinates[0], coordinates[1]),
+                            blueBmp);
+                        marker.Tag = cat21.GetTargetID();
+                        overlay.Markers.Add(marker);
+                    }
                     packetIndex++;
+
                 }
                 else if ((AreEqual(currentTime, dataBlockList[packetIndex].GetTime(), TimeSpan.FromSeconds(1)) && dataBlockList[packetIndex].GetCategory() == 10))
                 {
                     CAT10 cat10 = dataBlockList[packetIndex].GetCAT10();
                     double[] coordinates = cat10.GetWGS84Coordinates();
-                    if (cat10.GetTypeOfMessage() == "SMR")
+                    if (cat10.GetTypeOfMessage() == "SMR" && mapSMRCheck.Checked == true)
                     {
                         GMapMarker marker = new GMarkerGoogle(
                            new PointLatLng(coordinates[0], coordinates[1]),
                            redBmp);
                         overlay.Markers.Add(marker);
-                        packetIndex++;
                     }
-                    else if (cat10.GetTypeOfMessage() == "MLAT")
+                    else if (cat10.GetTypeOfMessage() == "MLAT" && mapMLATCheck.Checked == true)
                     {
                         GMapMarker marker = new GMarkerGoogle(
                            new PointLatLng(coordinates[0], coordinates[1]),
                            yellowBmp);
                         overlay.Markers.Add(marker);
-                        packetIndex++;
                     }
+                    packetIndex++;
                 }
                 else
                     break;

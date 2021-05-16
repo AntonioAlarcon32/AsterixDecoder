@@ -46,6 +46,10 @@ namespace GUI
             this.moreInfoOfFlight = new System.Windows.Forms.Button();
             this.flightGridView = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.x16Button = new System.Windows.Forms.Button();
+            this.x4Button = new System.Windows.Forms.Button();
+            this.x1Button = new System.Windows.Forms.Button();
+            this.x2Button = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
             this.selectedMarker = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
@@ -56,10 +60,9 @@ namespace GUI
             this.playButton = new System.Windows.Forms.Button();
             this.map = new GMap.NET.WindowsForms.GMapControl();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.x2Button = new System.Windows.Forms.Button();
-            this.x1Button = new System.Windows.Forms.Button();
-            this.x4Button = new System.Windows.Forms.Button();
-            this.x16Button = new System.Windows.Forms.Button();
+            this.mapSMRCheck = new System.Windows.Forms.CheckBox();
+            this.mapMLATCheck = new System.Windows.Forms.CheckBox();
+            this.mapADSBCheck = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.tabTable.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -250,6 +253,9 @@ namespace GUI
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.mapADSBCheck);
+            this.tabPage2.Controls.Add(this.mapMLATCheck);
+            this.tabPage2.Controls.Add(this.mapSMRCheck);
             this.tabPage2.Controls.Add(this.x16Button);
             this.tabPage2.Controls.Add(this.x4Button);
             this.tabPage2.Controls.Add(this.x1Button);
@@ -269,6 +275,46 @@ namespace GUI
             this.tabPage2.TabIndex = 2;
             this.tabPage2.Text = "Map View";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // x16Button
+            // 
+            this.x16Button.Location = new System.Drawing.Point(1005, 554);
+            this.x16Button.Name = "x16Button";
+            this.x16Button.Size = new System.Drawing.Size(32, 34);
+            this.x16Button.TabIndex = 14;
+            this.x16Button.Text = "x16";
+            this.x16Button.UseVisualStyleBackColor = true;
+            this.x16Button.Click += new System.EventHandler(this.x16Button_Click);
+            // 
+            // x4Button
+            // 
+            this.x4Button.Location = new System.Drawing.Point(952, 554);
+            this.x4Button.Name = "x4Button";
+            this.x4Button.Size = new System.Drawing.Size(32, 34);
+            this.x4Button.TabIndex = 13;
+            this.x4Button.Text = "x4";
+            this.x4Button.UseVisualStyleBackColor = true;
+            this.x4Button.Click += new System.EventHandler(this.x4Button_Click);
+            // 
+            // x1Button
+            // 
+            this.x1Button.Location = new System.Drawing.Point(952, 514);
+            this.x1Button.Name = "x1Button";
+            this.x1Button.Size = new System.Drawing.Size(32, 34);
+            this.x1Button.TabIndex = 12;
+            this.x1Button.Text = "x1";
+            this.x1Button.UseVisualStyleBackColor = true;
+            this.x1Button.Click += new System.EventHandler(this.x1Button_Click);
+            // 
+            // x2Button
+            // 
+            this.x2Button.Location = new System.Drawing.Point(1005, 514);
+            this.x2Button.Name = "x2Button";
+            this.x2Button.Size = new System.Drawing.Size(32, 34);
+            this.x2Button.TabIndex = 11;
+            this.x2Button.Text = "x2";
+            this.x2Button.UseVisualStyleBackColor = true;
+            this.x2Button.Click += new System.EventHandler(this.x2Button_Click);
             // 
             // stopButton
             // 
@@ -378,45 +424,41 @@ namespace GUI
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // x2Button
+            // mapSMRCheck
             // 
-            this.x2Button.Location = new System.Drawing.Point(1005, 514);
-            this.x2Button.Name = "x2Button";
-            this.x2Button.Size = new System.Drawing.Size(32, 34);
-            this.x2Button.TabIndex = 11;
-            this.x2Button.Text = "x2";
-            this.x2Button.UseVisualStyleBackColor = true;
-            this.x2Button.Click += new System.EventHandler(this.x2Button_Click);
+            this.mapSMRCheck.AutoSize = true;
+            this.mapSMRCheck.Checked = true;
+            this.mapSMRCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.mapSMRCheck.Location = new System.Drawing.Point(949, 441);
+            this.mapSMRCheck.Name = "mapSMRCheck";
+            this.mapSMRCheck.Size = new System.Drawing.Size(80, 17);
+            this.mapSMRCheck.TabIndex = 15;
+            this.mapSMRCheck.Text = "Show SMR";
+            this.mapSMRCheck.UseVisualStyleBackColor = true;
             // 
-            // x1Button
+            // mapMLATCheck
             // 
-            this.x1Button.Location = new System.Drawing.Point(952, 514);
-            this.x1Button.Name = "x1Button";
-            this.x1Button.Size = new System.Drawing.Size(32, 34);
-            this.x1Button.TabIndex = 12;
-            this.x1Button.Text = "x1";
-            this.x1Button.UseVisualStyleBackColor = true;
-            this.x1Button.Click += new System.EventHandler(this.x1Button_Click);
+            this.mapMLATCheck.AutoSize = true;
+            this.mapMLATCheck.Checked = true;
+            this.mapMLATCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.mapMLATCheck.Location = new System.Drawing.Point(949, 464);
+            this.mapMLATCheck.Name = "mapMLATCheck";
+            this.mapMLATCheck.Size = new System.Drawing.Size(85, 17);
+            this.mapMLATCheck.TabIndex = 16;
+            this.mapMLATCheck.Text = "Show MLAT";
+            this.mapMLATCheck.UseVisualStyleBackColor = true;
             // 
-            // x4Button
+            // mapADSBCheck
             // 
-            this.x4Button.Location = new System.Drawing.Point(952, 554);
-            this.x4Button.Name = "x4Button";
-            this.x4Button.Size = new System.Drawing.Size(32, 34);
-            this.x4Button.TabIndex = 13;
-            this.x4Button.Text = "x4";
-            this.x4Button.UseVisualStyleBackColor = true;
-            this.x4Button.Click += new System.EventHandler(this.x4Button_Click);
-            // 
-            // x16Button
-            // 
-            this.x16Button.Location = new System.Drawing.Point(1005, 554);
-            this.x16Button.Name = "x16Button";
-            this.x16Button.Size = new System.Drawing.Size(32, 34);
-            this.x16Button.TabIndex = 14;
-            this.x16Button.Text = "x16";
-            this.x16Button.UseVisualStyleBackColor = true;
-            this.x16Button.Click += new System.EventHandler(this.x16Button_Click);
+            this.mapADSBCheck.AutoSize = true;
+            this.mapADSBCheck.Checked = true;
+            this.mapADSBCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.mapADSBCheck.Location = new System.Drawing.Point(949, 487);
+            this.mapADSBCheck.Name = "mapADSBCheck";
+            this.mapADSBCheck.Size = new System.Drawing.Size(88, 17);
+            this.mapADSBCheck.TabIndex = 17;
+            this.mapADSBCheck.Text = "Show ADS-B";
+            this.mapADSBCheck.UseVisualStyleBackColor = true;
             // 
             // MainMenu
             // 
@@ -477,6 +519,9 @@ namespace GUI
         private System.Windows.Forms.Button x2Button;
         private System.Windows.Forms.Button x16Button;
         private System.Windows.Forms.Button x4Button;
+        private System.Windows.Forms.CheckBox mapADSBCheck;
+        private System.Windows.Forms.CheckBox mapMLATCheck;
+        private System.Windows.Forms.CheckBox mapSMRCheck;
     }
 }
 
