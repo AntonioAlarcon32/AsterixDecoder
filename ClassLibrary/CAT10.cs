@@ -1176,7 +1176,7 @@ namespace ClassLibrary
             return targetAddress;
         }
 
-        public string GetTargetID()
+        public string GetTargetId()
         {
             return targetIdentification;
         }
@@ -1287,13 +1287,9 @@ namespace ClassLibrary
                 {"XY", (standardDeviationXY.ToString() !="NaN" ? standardDeviationXY.ToString() + " m^2" : "N/A") },
             };
         }
-        public Dictionary<string, string> GetTrackNumber()
+        public string GetTrackNumber()
         {
-            return new Dictionary<string, string>
-            {
-                {"tracknumber", trackNumber.ToString() },
-                
-            };
+            return trackNumber.ToString();
         }
         public Dictionary<string, string> GetTrackStatus()
         {

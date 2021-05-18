@@ -29,3 +29,6 @@
 \\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\obj\Release\GUI.csproj.CopyComplete
 \\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\obj\Release\GUI.exe
 \\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\obj\Release\GUI.pdb
+\\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\obj\Release\GUI.MoreInfOfPacketCAT21_2_.resources
+\\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\obj\Release\GUI.MoreInfoOfFlight.resources
+\\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\obj\Release\GUI.MoreInfoOfPacketCAT21.resources

@@ -1578,7 +1578,7 @@ namespace GUI
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "MoreInfoOfPacketCAT10";
-            this.Text = "MoreInfoOfPacket";
+            this.Text = "Selected Packet";
             this.Load += new System.EventHandler(this.MoreInfoOfPacketCAT10_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

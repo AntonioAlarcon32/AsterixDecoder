@@ -1819,7 +1819,7 @@ namespace GUI
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label1);
             this.Name = "MoreInfoOfPacketCAT21";
-            this.Text = "MoreInfoOfPacket21";
+            this.Text = "Selected Packet";
             this.Load += new System.EventHandler(this.MoreInfoOfPacketCAT21_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

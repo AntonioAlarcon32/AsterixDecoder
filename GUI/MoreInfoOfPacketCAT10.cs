@@ -26,7 +26,7 @@ namespace GUI
             tomLabel.Text = selectedPacket.GetTypeOfMessage();
             todLabel.Text = selectedPacket.GetTimeOfDay();
             taLabel.Text = selectedPacket.GetTargetAddress();
-            tidLabel.Text = selectedPacket.GetTargetID();
+            tidLabel.Text = selectedPacket.GetTargetId();
             string[] trd = selectedPacket.GetTargetReportDescriptor();
             trdTypeLabel.Text = trd[0];
             trdDcLabel.Text = trd[1];
@@ -70,8 +70,8 @@ namespace GUI
             sdpXLabel.Text = sdp["X"];
             sdpYLabel.Text = sdp["Y"];
             sdpCovarianceLabel.Text = sdp["XY"];
-            Dictionary<string, string> trackNumber = selectedPacket.GetTrackNumber();
-            labelTrackNumber.Text = (trackNumber["tracknumber"] != "-1" ? trackNumber["tracknumber"] : "-1");
+            string trackNumber = selectedPacket.GetTrackNumber();
+            labelTrackNumber.Text = trackNumber;
 
             Dictionary<string, string> trackStatus = selectedPacket.GetTrackStatus();
             labelTSConfirmed.Text = (trackStatus["cnf"] != "NaN" ? trackStatus["cnf"] : "N/A");

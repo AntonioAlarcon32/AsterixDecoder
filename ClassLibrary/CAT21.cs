@@ -3435,7 +3435,7 @@ namespace ClassLibrary
                 return "N/A";
             }
         }
-        public string GetTargetID()
+        public string GetTargetId()
         {
             return this.targetIdentification;
         }

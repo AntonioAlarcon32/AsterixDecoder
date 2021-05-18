@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClassLibrary;
 using GMap.NET;
-using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
-using MultiCAT6.Utils;
 
 namespace GUI
 {
@@ -37,6 +32,8 @@ namespace GUI
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
+            this.AutoSize = true;
+            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             map.MapProvider = GMap.NET.MapProviders.GoogleSatelliteMapProvider.Instance;
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
             map.DragButton = MouseButtons.Left;
@@ -106,9 +103,6 @@ namespace GUI
                     path = openFileDialog.FileName;
                     loadAsterixFile(path);
                     setDataTables(packetGridView);
-                    checkSMR.Enabled = true;
-                    checkMLAT.Enabled = true;
-                    checkADSB.Enabled = true;
                     Cursor.Current = Cursors.Default;
                 }
             }
@@ -161,12 +155,11 @@ namespace GUI
                 {
                     if (mapADSBCheck.Checked == true)
                     {
-                        CAT21 cat21 = dataBlockList[packetIndex].GetCAT21();
-                        double[] coordinates = cat21.GetWGS84Coordinates();
+                        double[] coordinates = dataBlockList[packetIndex].GetWGS84Coordinates();
                         GMapMarker marker = new GMarkerGoogle(
                             new PointLatLng(coordinates[0], coordinates[1]),
                             blueBmp);
-                        marker.Tag = cat21.GetTargetID();
+                        marker.Tag = dataBlockList[packetIndex].GetTargetId();
                         overlay.Markers.Add(marker);
                     }
                     packetIndex++;
@@ -174,20 +167,28 @@ namespace GUI
                 }
                 else if ((AreEqual(currentTime, dataBlockList[packetIndex].GetTime(), TimeSpan.FromSeconds(1)) && dataBlockList[packetIndex].GetCategory() == 10))
                 {
-                    CAT10 cat10 = dataBlockList[packetIndex].GetCAT10();
-                    double[] coordinates = cat10.GetWGS84Coordinates();
-                    if (cat10.GetTypeOfMessage() == "SMR" && mapSMRCheck.Checked == true)
+                    double[] coordinates = dataBlockList[packetIndex].GetWGS84Coordinates();
+                    if (dataBlockList[packetIndex].GetTypeOfMessage() == "SMR" && mapSMRCheck.Checked == true)
                     {
                         GMapMarker marker = new GMarkerGoogle(
                            new PointLatLng(coordinates[0], coordinates[1]),
                            redBmp);
+                        marker.Tag = dataBlockList[packetIndex].GetTrackNumber();
                         overlay.Markers.Add(marker);
                     }
-                    else if (cat10.GetTypeOfMessage() == "MLAT" && mapMLATCheck.Checked == true)
+                    else if (dataBlockList[packetIndex].GetTypeOfMessage() == "MLAT" && mapMLATCheck.Checked == true)
                     {
                         GMapMarker marker = new GMarkerGoogle(
                            new PointLatLng(coordinates[0], coordinates[1]),
                            yellowBmp);
+                        if (dataBlockList[packetIndex].GetTargetId() != "N/A")
+                        {
+                            marker.Tag = dataBlockList[packetIndex].GetTargetId();
+                        }
+                        else
+                        {
+                            marker.Tag = dataBlockList[packetIndex].GetTargetId();
+                        }
                         overlay.Markers.Add(marker);
                     }
                     packetIndex++;

@@ -19,8 +19,9 @@ namespace GUI
     public partial class MoreInfoOfFlight : Form
     {
         Flight selectedFlight;
-        Bitmap bmp = new Bitmap(Properties.Resources.redMarker, new Size(7,7));
-        
+        Bitmap blueBmp = new Bitmap(Properties.Resources.blueMarker, new Size(7, 7));
+        Bitmap yellowBmp = new Bitmap(Properties.Resources.yellowMarker, new Size(7, 7));
+
         public MoreInfoOfFlight(Flight flight)
         {
             InitializeComponent();
@@ -29,18 +30,28 @@ namespace GUI
 
         private void MoreInfoOfFlight_Load(object sender, EventArgs e)
         {
+            callsignLabel.Text = selectedFlight.GetID();
+            mlatLabel.Text = selectedFlight.GetAllCoordinatesCat10().Count().ToString();
+            adsbLabel.Text = selectedFlight.GetAllCoordinatesCat21().Count().ToString();
             trackMap.MapProvider = GoogleSatelliteMapProvider.Instance;
             GMaps.Instance.Mode = AccessMode.ServerOnly;
             trackMap.DragButton = MouseButtons.Left;
             trackMap.Position = new PointLatLng(41.29722, 2.083056);
             trackMap.ShowCenter = false;
             GMapOverlay markers = new GMapOverlay("markers");
-            foreach (Coordinates coordinate in selectedFlight.GetAllCoordinates())
+            foreach (Coordinates coordinate in selectedFlight.GetAllCoordinatesCat21())
             {
                GMapMarker marker = new GMarkerGoogle(
                   new PointLatLng(coordinate.GetLatitude(), coordinate.GetLongitude()),
-                  bmp);
+                  blueBmp);
                markers.Markers.Add(marker);
+            }
+            foreach (Coordinates coordinate in selectedFlight.GetAllCoordinatesCat10())
+            {
+                GMapMarker marker = new GMarkerGoogle(
+                   new PointLatLng(coordinate.GetLatitude(), coordinate.GetLongitude()),
+                   yellowBmp);
+                markers.Markers.Add(marker);
             }
             trackMap.Overlays.Add(markers);
             trackMap.Zoom = 7;

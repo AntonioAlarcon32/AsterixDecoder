@@ -20,6 +20,10 @@ namespace ClassLibrary
 
         void FullDecode();
 
+        string GetTargetId();
+
+        string GetTrackNumber();
+
         CAT10 GetCAT10();
 
         CAT21 GetCAT21();

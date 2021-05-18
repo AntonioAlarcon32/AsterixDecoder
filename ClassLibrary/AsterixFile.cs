@@ -10,15 +10,12 @@ namespace ClassLibrary
 {
     public class AsterixFile
     {
-        string path;
         BinaryReader fileReader;
         List<DataBlock> dataBlocks;
-        int otherCategories;
         List<Flight> flights;
         public AsterixFile()
         {
             this.dataBlocks = new List<DataBlock>();
-            this.otherCategories = 0;
             this.flights = new List<Flight>();
         }
         public int ReadFile(string path)
@@ -60,7 +57,6 @@ namespace ClassLibrary
                         else
                         {
                             List<byte> data = fileReader.ReadBytes(length - 3).ToList<byte>();
-                            this.otherCategories += 1;
                         }
                     }
                     Parallel.ForEach(dataBlocks, DataBlock =>
@@ -85,22 +81,20 @@ namespace ClassLibrary
         {
             foreach (DataBlock dataBlock in dataBlocks)
             {
-                if (dataBlock.GetCAT21() != null && dataBlock.GetWGS84Coordinates() != null)
+                if ((dataBlock.GetCategory() == 21 || dataBlock.GetTypeOfMessage() == "MLAT" ) && dataBlock.GetWGS84Coordinates() != null)
                 {
-                    bool found = false;
-                    int index = 0;
-                    CAT21 cat21Block = dataBlock.GetCAT21();
-                    if (cat21Block.GetTargetID() != "N/A")
+                    if (dataBlock.GetTargetId() != "N/A")
                     {
-                        Flight foundFlight = flights.FirstOrDefault(flight => flight.GetID() == cat21Block.GetTargetID());
+                        Flight foundFlight = flights.FirstOrDefault(flight => flight.GetID() == dataBlock.GetTargetId());
                         if (foundFlight != null)
                         {
-                            foundFlight.AddPosition(dataBlock.GetWGS84Coordinates(), dataBlock.GetTime());
+                            
+                            foundFlight.AddPosition(dataBlock.GetWGS84Coordinates(), dataBlock.GetTime(), dataBlock.GetCategory());
                         }
                         else
                         {
-                            Flight newFlight = new Flight(cat21Block.GetTargetID());
-                            newFlight.AddPosition(dataBlock.GetWGS84Coordinates(), dataBlock.GetTime());
+                            Flight newFlight = new Flight(dataBlock.GetTargetId());
+                            newFlight.AddPosition(dataBlock.GetWGS84Coordinates(), dataBlock.GetTime(), dataBlock.GetCategory());
                             flights.Add(newFlight);
                         }
                     }

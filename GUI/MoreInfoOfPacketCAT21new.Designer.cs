@@ -1174,7 +1174,7 @@ namespace GUI
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Name = "MoreInfOfPacketCAT21_2_";
-            this.Text = "MoreInfOfPacketCAT21_2_";
+            this.Text = "Selected Packet";
             this.Load += new System.EventHandler(this.MoreInfOfPacketCAT21_2__Load);
             this.ResumeLayout(false);
             this.PerformLayout();

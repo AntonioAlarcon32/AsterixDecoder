@@ -37,15 +37,15 @@ namespace GUI
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabTable = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.checkADSB = new System.Windows.Forms.CheckBox();
-            this.checkMLAT = new System.Windows.Forms.CheckBox();
-            this.checkSMR = new System.Windows.Forms.CheckBox();
             this.moreInfoOfPacket = new System.Windows.Forms.Button();
             this.packetGridView = new System.Windows.Forms.DataGridView();
             this.flightTable = new System.Windows.Forms.TabPage();
             this.moreInfoOfFlight = new System.Windows.Forms.Button();
             this.flightGridView = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.mapADSBCheck = new System.Windows.Forms.CheckBox();
+            this.mapMLATCheck = new System.Windows.Forms.CheckBox();
+            this.mapSMRCheck = new System.Windows.Forms.CheckBox();
             this.x16Button = new System.Windows.Forms.Button();
             this.x4Button = new System.Windows.Forms.Button();
             this.x1Button = new System.Windows.Forms.Button();
@@ -60,9 +60,6 @@ namespace GUI
             this.playButton = new System.Windows.Forms.Button();
             this.map = new GMap.NET.WindowsForms.GMapControl();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.mapSMRCheck = new System.Windows.Forms.CheckBox();
-            this.mapMLATCheck = new System.Windows.Forms.CheckBox();
-            this.mapADSBCheck = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.tabTable.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -128,9 +125,6 @@ namespace GUI
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.checkADSB);
-            this.tabPage1.Controls.Add(this.checkMLAT);
-            this.tabPage1.Controls.Add(this.checkSMR);
             this.tabPage1.Controls.Add(this.moreInfoOfPacket);
             this.tabPage1.Controls.Add(this.packetGridView);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
@@ -142,50 +136,10 @@ namespace GUI
             this.tabPage1.Text = "Packet Table";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // checkADSB
-            // 
-            this.checkADSB.AutoSize = true;
-            this.checkADSB.Checked = true;
-            this.checkADSB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkADSB.Enabled = false;
-            this.checkADSB.Location = new System.Drawing.Point(332, 477);
-            this.checkADSB.Name = "checkADSB";
-            this.checkADSB.Size = new System.Drawing.Size(130, 17);
-            this.checkADSB.TabIndex = 6;
-            this.checkADSB.Text = "Show ADS-B Packets";
-            this.checkADSB.UseVisualStyleBackColor = true;
-            this.checkADSB.CheckedChanged += new System.EventHandler(this.checkADSB_CheckedChanged);
-            // 
-            // checkMLAT
-            // 
-            this.checkMLAT.AutoSize = true;
-            this.checkMLAT.Checked = true;
-            this.checkMLAT.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkMLAT.Enabled = false;
-            this.checkMLAT.Location = new System.Drawing.Point(172, 477);
-            this.checkMLAT.Name = "checkMLAT";
-            this.checkMLAT.Size = new System.Drawing.Size(127, 17);
-            this.checkMLAT.TabIndex = 5;
-            this.checkMLAT.Text = "Show MLAT Packets";
-            this.checkMLAT.UseVisualStyleBackColor = true;
-            // 
-            // checkSMR
-            // 
-            this.checkSMR.AutoSize = true;
-            this.checkSMR.Checked = true;
-            this.checkSMR.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkSMR.Enabled = false;
-            this.checkSMR.Location = new System.Drawing.Point(30, 477);
-            this.checkSMR.Name = "checkSMR";
-            this.checkSMR.Size = new System.Drawing.Size(122, 17);
-            this.checkSMR.TabIndex = 4;
-            this.checkSMR.Text = "Show SMR Packets";
-            this.checkSMR.UseVisualStyleBackColor = true;
-            // 
             // moreInfoOfPacket
             // 
             this.moreInfoOfPacket.Enabled = false;
-            this.moreInfoOfPacket.Location = new System.Drawing.Point(600, 477);
+            this.moreInfoOfPacket.Location = new System.Drawing.Point(823, 555);
             this.moreInfoOfPacket.Name = "moreInfoOfPacket";
             this.moreInfoOfPacket.Size = new System.Drawing.Size(212, 47);
             this.moreInfoOfPacket.TabIndex = 3;
@@ -206,7 +160,7 @@ namespace GUI
             this.packetGridView.Name = "packetGridView";
             this.packetGridView.RowHeadersWidth = 82;
             this.packetGridView.RowTemplate.Height = 33;
-            this.packetGridView.Size = new System.Drawing.Size(809, 464);
+            this.packetGridView.Size = new System.Drawing.Size(1033, 547);
             this.packetGridView.TabIndex = 0;
             this.packetGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.packetGridView_CellClick);
             // 
@@ -226,7 +180,7 @@ namespace GUI
             // moreInfoOfFlight
             // 
             this.moreInfoOfFlight.Enabled = false;
-            this.moreInfoOfFlight.Location = new System.Drawing.Point(604, 473);
+            this.moreInfoOfFlight.Location = new System.Drawing.Point(823, 555);
             this.moreInfoOfFlight.Name = "moreInfoOfFlight";
             this.moreInfoOfFlight.Size = new System.Drawing.Size(212, 47);
             this.moreInfoOfFlight.TabIndex = 4;
@@ -247,7 +201,7 @@ namespace GUI
             this.flightGridView.Name = "flightGridView";
             this.flightGridView.RowHeadersWidth = 82;
             this.flightGridView.RowTemplate.Height = 33;
-            this.flightGridView.Size = new System.Drawing.Size(809, 464);
+            this.flightGridView.Size = new System.Drawing.Size(1027, 546);
             this.flightGridView.TabIndex = 1;
             this.flightGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.flightGridView_CellClick);
             // 
@@ -275,6 +229,42 @@ namespace GUI
             this.tabPage2.TabIndex = 2;
             this.tabPage2.Text = "Map View";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // mapADSBCheck
+            // 
+            this.mapADSBCheck.AutoSize = true;
+            this.mapADSBCheck.Checked = true;
+            this.mapADSBCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.mapADSBCheck.Location = new System.Drawing.Point(949, 487);
+            this.mapADSBCheck.Name = "mapADSBCheck";
+            this.mapADSBCheck.Size = new System.Drawing.Size(88, 17);
+            this.mapADSBCheck.TabIndex = 17;
+            this.mapADSBCheck.Text = "Show ADS-B";
+            this.mapADSBCheck.UseVisualStyleBackColor = true;
+            // 
+            // mapMLATCheck
+            // 
+            this.mapMLATCheck.AutoSize = true;
+            this.mapMLATCheck.Checked = true;
+            this.mapMLATCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.mapMLATCheck.Location = new System.Drawing.Point(949, 464);
+            this.mapMLATCheck.Name = "mapMLATCheck";
+            this.mapMLATCheck.Size = new System.Drawing.Size(85, 17);
+            this.mapMLATCheck.TabIndex = 16;
+            this.mapMLATCheck.Text = "Show MLAT";
+            this.mapMLATCheck.UseVisualStyleBackColor = true;
+            // 
+            // mapSMRCheck
+            // 
+            this.mapSMRCheck.AutoSize = true;
+            this.mapSMRCheck.Checked = true;
+            this.mapSMRCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.mapSMRCheck.Location = new System.Drawing.Point(949, 441);
+            this.mapSMRCheck.Name = "mapSMRCheck";
+            this.mapSMRCheck.Size = new System.Drawing.Size(80, 17);
+            this.mapSMRCheck.TabIndex = 15;
+            this.mapSMRCheck.Text = "Show SMR";
+            this.mapSMRCheck.UseVisualStyleBackColor = true;
             // 
             // x16Button
             // 
@@ -329,7 +319,7 @@ namespace GUI
             // selectedMarker
             // 
             this.selectedMarker.AutoSize = true;
-            this.selectedMarker.Location = new System.Drawing.Point(949, 379);
+            this.selectedMarker.Location = new System.Drawing.Point(949, 420);
             this.selectedMarker.Name = "selectedMarker";
             this.selectedMarker.Size = new System.Drawing.Size(0, 13);
             this.selectedMarker.TabIndex = 9;
@@ -424,42 +414,6 @@ namespace GUI
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // mapSMRCheck
-            // 
-            this.mapSMRCheck.AutoSize = true;
-            this.mapSMRCheck.Checked = true;
-            this.mapSMRCheck.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.mapSMRCheck.Location = new System.Drawing.Point(949, 441);
-            this.mapSMRCheck.Name = "mapSMRCheck";
-            this.mapSMRCheck.Size = new System.Drawing.Size(80, 17);
-            this.mapSMRCheck.TabIndex = 15;
-            this.mapSMRCheck.Text = "Show SMR";
-            this.mapSMRCheck.UseVisualStyleBackColor = true;
-            // 
-            // mapMLATCheck
-            // 
-            this.mapMLATCheck.AutoSize = true;
-            this.mapMLATCheck.Checked = true;
-            this.mapMLATCheck.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.mapMLATCheck.Location = new System.Drawing.Point(949, 464);
-            this.mapMLATCheck.Name = "mapMLATCheck";
-            this.mapMLATCheck.Size = new System.Drawing.Size(85, 17);
-            this.mapMLATCheck.TabIndex = 16;
-            this.mapMLATCheck.Text = "Show MLAT";
-            this.mapMLATCheck.UseVisualStyleBackColor = true;
-            // 
-            // mapADSBCheck
-            // 
-            this.mapADSBCheck.AutoSize = true;
-            this.mapADSBCheck.Checked = true;
-            this.mapADSBCheck.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.mapADSBCheck.Location = new System.Drawing.Point(949, 487);
-            this.mapADSBCheck.Name = "mapADSBCheck";
-            this.mapADSBCheck.Size = new System.Drawing.Size(88, 17);
-            this.mapADSBCheck.TabIndex = 17;
-            this.mapADSBCheck.Text = "Show ADS-B";
-            this.mapADSBCheck.UseVisualStyleBackColor = true;
-            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -470,13 +424,12 @@ namespace GUI
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainMenu";
-            this.Text = "Form1";
+            this.Text = "Asterix Decoder";
             this.Load += new System.EventHandler(this.MainMenu_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabTable.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.packetGridView)).EndInit();
             this.flightTable.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.flightGridView)).EndInit();
@@ -501,9 +454,6 @@ namespace GUI
         private System.Windows.Forms.Button moreInfoOfPacket;
         private System.Windows.Forms.TabPage tabPage2;
         private GMap.NET.WindowsForms.GMapControl map;
-        private System.Windows.Forms.CheckBox checkADSB;
-        private System.Windows.Forms.CheckBox checkMLAT;
-        private System.Windows.Forms.CheckBox checkSMR;
         private System.Windows.Forms.DataGridView flightGridView;
         private System.Windows.Forms.Button playButton;
         private System.Windows.Forms.Label timeLabel;
