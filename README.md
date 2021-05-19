@@ -47,5 +47,16 @@ This project was completely built using C#, using Windows Forms, thanks to Visua
 
 # Getting Started
 
+[alt text](https://github.com/AntonioAlarcon32/AsterixDecoder/blob/master/Git_images/1.png?raw=true)
+
+When opening, go to File --> Open to select the .ast file.
+
+After Loading, the packet table will open.
+
+[alt text](https://github.com/AntonioAlarcon32/AsterixDecoder/blob/master/Git_images/2.png?raw=true)
+
+To see extra info about a packet, click on it on the table and then click the Extra Info Button to open the extra info dialog
+
+[alt text](https://github.com/AntonioAlarcon32/AsterixDecoder/blob/master/Git_images/3.png?raw=true)
 
 
