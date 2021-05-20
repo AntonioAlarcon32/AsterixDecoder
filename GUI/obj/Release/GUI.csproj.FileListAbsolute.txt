@@ -32,3 +32,7 @@
 \\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\obj\Release\GUI.MoreInfOfPacketCAT21_2_.resources
 \\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\obj\Release\GUI.MoreInfoOfFlight.resources
 \\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\obj\Release\GUI.MoreInfoOfPacketCAT21.resources
+\\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\bin\Release\GUI.exe.manifest
+\\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\bin\Release\GUI.application
+\\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\obj\Release\GUI.exe.manifest
+\\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\obj\Release\GUI.application

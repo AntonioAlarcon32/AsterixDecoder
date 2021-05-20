@@ -66,3 +66,7 @@ C:\Users\Usuario\Documents\GitHub\AsterixDecoder\GUI\obj\Debug\GUI.MoreInfOfPack
 C:\Users\Usuario\Documents\GitHub\AsterixDecoder\GUI\obj\Debug\GUI.MoreInfoOfPacketCAT21.resources
 \\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\obj\Debug\GUI.MoreInfOfPacketCAT21_2_.resources
 \\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\obj\Debug\GUI.MoreInfoOfPacketCAT21.resources
+\\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\bin\Debug\GUI.exe.manifest
+\\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\bin\Debug\GUI.application
+\\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\obj\Debug\GUI.exe.manifest
+\\Mac\Home\Desktop\Windows\AsterixDecoder\GUI\obj\Debug\GUI.application

@@ -1,6 +1,5 @@
 \\Mac\Home\Desktop\Windows\AsterixDecoder\ClassLibrary\bin\Release\ClassLibrary.dll
 \\Mac\Home\Desktop\Windows\AsterixDecoder\ClassLibrary\bin\Release\ClassLibrary.pdb
-\\Mac\Home\Desktop\Windows\AsterixDecoder\ClassLibrary\obj\Release\ClassLibrary.csprojAssemblyReference.cache
 \\Mac\Home\Desktop\Windows\AsterixDecoder\ClassLibrary\obj\Release\ClassLibrary.csproj.CoreCompileInputs.cache
 \\Mac\Home\Desktop\Windows\AsterixDecoder\ClassLibrary\obj\Release\ClassLibrary.dll
 \\Mac\Home\Desktop\Windows\AsterixDecoder\ClassLibrary\obj\Release\ClassLibrary.pdb
