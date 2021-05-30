@@ -19,7 +19,7 @@ namespace GUI
         List<Flight> flightList;
         DataTable packetsTable = new DataTable();
         DataTable flightsTable = new DataTable();
-        TimeSpan currentTime = TimeSpan.FromHours(8.0);
+        TimeSpan currentTime = TimeSpan.FromHours(0.0);
         int packetIndex = 0;
         GMapOverlay overlay = new GMapOverlay();
         Bitmap redBmp = new Bitmap(Properties.Resources.redMarker, new Size(7, 7));
@@ -82,6 +82,9 @@ namespace GUI
 
             packetGridView.DataSource = packetsTable;
             flightGridView.DataSource = flightsTable;
+            currentTime = TimeSpan.FromSeconds(Math.Truncate(dataBlockList[0].GetTime().TotalSeconds));
+            timeLabel.Text = currentTime.ToString();
+
         }
         bool AreEqual(TimeSpan a, TimeSpan b, TimeSpan precision)
         {
